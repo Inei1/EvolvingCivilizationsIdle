@@ -26,7 +26,7 @@ class ResourceUpgrade extends Buyable{
 		this.resource.updatePlus();
 		this.resource.updateBarInc();
 		this.increaseCost();
-		UpdateUI.updateUpgrade(this);
+		UpdateUI.updateResourceUpgrade(this);
 	}
 	
 	public function fire(): Void{

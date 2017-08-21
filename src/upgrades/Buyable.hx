@@ -15,6 +15,14 @@ class Buyable {
 		this.metalCost = metalCost;
 		this.populationCost = populationCost;
 		this.populationMaxCost = populationMaxCost;
+		this.formalCost = formalCost;
+		this.physicalCost = physicalCost;
+		this.lifeCost = lifeCost;
+		this.appliedCost = appliedCost;
+		this.socialCost = socialCost;
+		this.electricityCost = electricityCost;
+		this.perkCost = perkCost;
+		this.skillCost = skillCost;
 	}
 	
 	private var id: Int=0;
@@ -81,6 +89,21 @@ class Buyable {
 		return Util.formatDecimal(number);
 	}
 	public function isBuyable(): Bool{
+		if (this.moneyCost == null) this.moneyCost = Decimal.zero;
+		if (this.foodCost == null) this.foodCost = Decimal.zero;
+		if (this.woodCost == null) this.woodCost = Decimal.zero;
+		if (this.metalCost == null) this.metalCost = Decimal.zero;
+		if (this.populationCost == null) this.populationCost = Decimal.zero;
+		if (this.populationMaxCost == null) this.populationMaxCost = Decimal.zero;
+		if (this.formalCost == null) this.formalCost = Decimal.zero;
+		if (this.physicalCost == null) this.physicalCost = Decimal.zero;
+		if (this.lifeCost == null) this.lifeCost = Decimal.zero;
+		if (this.appliedCost == null) this.appliedCost = Decimal.zero;
+		if (this.socialCost == null) this.socialCost = Decimal.zero;
+		if (this.electricityCost == null) this.electricityCost = Decimal.zero;
+		if (this.perkCost == null) this.perkCost = Decimal.zero;
+		if (this.skillCost == null) this.skillCost = Decimal.zero;
+		
 		return (Main.money.amount >= this.moneyCost && Main.food.amount >= this.foodCost && Main.wood.amount >= this.woodCost
 		&& Main.metal.amount >= this.metalCost && Main.population.amount >= this.populationCost && Main.populationMax.amount >= this.populationMaxCost
 		&& Main.formal.amount >= this.formalCost && Main.physical.amount >= this.physicalCost && Main.life.amount >= this.lifeCost

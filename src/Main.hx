@@ -75,36 +75,66 @@ class Main {
 	public static var socialTheory = new RebuyableUpgrade("socialTheory", 109, research, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "10");
 	public static var breakthrough = new RebuyableUpgrade("breakthroughResearch", 110, research);
 	public static var upgradeCost = new RebuyableUpgrade("upgradeCostResearch", 111, research);
+	public static var skill0 = new RebuyableUpgrade("skill0", 200, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	public static var skill1 = new RebuyableUpgrade("skill1", 201, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	//public static var skill
+	public static var perk0 = new RebuyableUpgrade("perk0", 300, perk, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "5", "0");
+	public static var perk1 = new RebuyableUpgrade("perk1", 301, perk, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "5", "0");
 	
-	//public static var evolution1 = new OneTimeUpgrade("evolution1", 0, "0", "10000000", "1000000", "1000000", "1000000", "10", "0");
-	//public static var evolution2 = new OneTimeUpgrade("evolution2", 1, "0", "15848931924", "3981071705", "3981071705", "3981071705", "100", "0", "100000", "100000", "100000", "100000", "100000");
-	//public static var evolution3 = new OneTimeUpgrade("researchLab3", 2, "0", "20892961307251382", "2290867652275221", "2290867652275221", "2290867652275221", "1000", "0", "100000000", "100000000", "100000000", "100000000", "100000000", "100000");
-	//public static var evolution4 = new OneTimeUpgrade("researchLab4", 3);
-	//public static var evolution5 = new OneTimeUpgrade("researchLab5", 4);
 	public static var house2 = new OneTimeUpgrade("house2Research", 10, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
 	public static var house3 = new OneTimeUpgrade("house3Research", 11, "0", "562341325", "31622776", "511282591", "511282591", "0", "0", "2170", "63095", "2170", "11180", "8000");
 	public static var house4 = new OneTimeUpgrade("house4Research", 12, "0", "86596432336", "371373649", "209536317447", "209536317447", "0", "0", "68851", "47862117", "68851", "1182123", "715541");
 	public static var house5 = new OneTimeUpgrade("house5Research", 13, "0", "46975888167064", "523299099124", "521959851769234", "521959851769234", "0", "0", "10350703", "1940827988668", "10350703", "1285268905", "605273674", "10000");
+	public static var house6 = new OneTimeUpgrade("house6Research", 14, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
+	public static var house7 = new OneTimeUpgrade("house7Research", 15, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
+	public static var house8 = new OneTimeUpgrade("house8Research", 16, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
+	public static var house9 = new OneTimeUpgrade("house9Research", 17, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
+	public static var house10 = new OneTimeUpgrade("house10Research", 18, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
 	public static var farm2 = new OneTimeUpgrade("farm2Research", 20, "0", "10000000", "1000000", "1000000", "1000000", "0", "0", "200", "0", "2000", "500", "0");
 	public static var farm3 = new OneTimeUpgrade("farm3Research", 21, "0", "562341325", "6309573444", "31622776", "31622776", "0", "0", "2170", "0", "191270", "11180", "0");
 	public static var farm4 = new OneTimeUpgrade("farm4Research", 22, "0", "86596432336", "52480746024977", "2371373705", "2371373705", "0", "0", "68851", "0", "282251844", "1182123", "0");
 	public static var farm5 = new OneTimeUpgrade("farm5Research", 23, "0", "46975888167064", "16143585568264862654", "523299114681", "523299114681", "0", "0", "10350703", "0", "33190887267647", "1285268905", "0", "10000");
+	public static var farm6 = new OneTimeUpgrade("farm6Research", 24, "0", "10000000", "1000000", "1000000", "1000000", "0", "0", "200", "0", "2000", "500", "0");
+	public static var farm7 = new OneTimeUpgrade("farm7Research", 25, "0", "10000000", "1000000", "1000000", "1000000", "0", "0", "200", "0", "2000", "500", "0");
+	public static var farm8 = new OneTimeUpgrade("farm8Research", 26, "0", "10000000", "1000000", "1000000", "1000000", "0", "0", "200", "0", "2000", "500", "0");
+	public static var farm9 = new OneTimeUpgrade("farm9Research", 27, "0", "10000000", "1000000", "1000000", "1000000", "0", "0", "200", "0", "2000", "500", "0");
+	public static var farm10 = new OneTimeUpgrade("farm10Research", 28, "0", "10000000", "1000000", "1000000", "1000000", "0", "0", "200", "0", "2000", "500", "0");
 	public static var lumberMill2 = new OneTimeUpgrade("lumberMill2Research", 30, "0", "10000000", "1000000", "10000000", "1000000", "0", "0", "400", "500", "400", "1000", "0");
 	public static var lumberMill3 = new OneTimeUpgrade("lumberMill3Research", 31, "0", "562341325", "31622776", "6309573444", "31622776", "0", "0", "8000", "11180", "8000", "63095", "0");
 	public static var lumberMill4 = new OneTimeUpgrade("lumberMill4Research", 32, "0", "86596432336", "2371373705", "52480746024977", "2371373705", "0", "0", "715541", "1182177", "715541", "47862117", "0");
 	public static var lumberMill5 = new OneTimeUpgrade("lumberMill5Research", 33, "0", "46975888167064", "523299114681", "16143585568264750798", "523299114681", "0", "0", "605274629", "1285356992", "605274629", "1940827988668", "0", "10000");
+	public static var lumberMill6 = new OneTimeUpgrade("lumberMill6Research", 34, "0", "10000000", "1000000", "10000000", "1000000", "0", "0", "400", "500", "400", "1000", "0");
+	public static var lumberMill7 = new OneTimeUpgrade("lumberMill7Research", 35, "0", "10000000", "1000000", "10000000", "1000000", "0", "0", "400", "500", "400", "1000", "0");
+	public static var lumberMill8 = new OneTimeUpgrade("lumberMill8Research", 36, "0", "10000000", "1000000", "10000000", "1000000", "0", "0", "400", "500", "400", "1000", "0");
+	public static var lumberMill9 = new OneTimeUpgrade("lumberMill9Research", 37, "0", "10000000", "1000000", "10000000", "1000000", "0", "0", "400", "500", "400", "1000", "0");
+	public static var lumberMill10 = new OneTimeUpgrade("lumberMill10Research", 38, "0", "10000000", "1000000", "10000000", "1000000", "0", "0", "400", "500", "400", "1000", "0");
 	public static var metalMine2 = new OneTimeUpgrade("metalMine2Research", 40, "0", "10000000", "1000000", "1000000", "10000000", "0", "0", "700", "1000", "0", "700", "0");
 	public static var metalMine3 = new OneTimeUpgrade("metalMine3Research", 41, "0", "562341325", "31622776", "31622776", "6309573444", "0", "0", "18520", "63095", "0", "18520", "0");
 	public static var metalMine4 = new OneTimeUpgrade("metalMine4Research", 42, "0", "86596432336", "2371373705", "2371373705", "52480746024977", "0", "0", "25204068", "47863009", "0", "25204068", "0");
 	public static var metalMine5 = new OneTimeUpgrade("metalMine5Research", 43, "0", "46975888167064", "523299114681", "523299114681", "16143585568264750798", "0", "0", "4001343956", "1940885877592", "0", "4001343956", "0", "10000");
+	public static var metalMine6 = new OneTimeUpgrade("metalMine6Research", 44, "0", "10000000", "1000000", "1000000", "10000000", "0", "0", "700", "1000", "0", "700", "0");
+	public static var metalMine7 = new OneTimeUpgrade("metalMine7Research", 45, "0", "10000000", "1000000", "1000000", "10000000", "0", "0", "700", "1000", "0", "700", "0");
+	public static var metalMine8 = new OneTimeUpgrade("metalMine8Research", 46, "0", "10000000", "1000000", "1000000", "10000000", "0", "0", "700", "1000", "0", "700", "0");
+	public static var metalMine9 = new OneTimeUpgrade("metalMine9Research", 47, "0", "10000000", "1000000", "1000000", "10000000", "0", "0", "700", "1000", "0", "700", "0");
+	public static var metalMine10 = new OneTimeUpgrade("metalMine10Research", 48, "0", "10000000", "1000000", "1000000", "10000000", "0", "0", "700", "1000", "0", "700", "0");
 	public static var goldMine2 = new OneTimeUpgrade("goldMine2Research", 50, "0", "100000000", "1000000", "1000000", "5000000", "0", "0", "700", "7000", "1000", "0", "0");
 	public static var goldMine3 = new OneTimeUpgrade("goldMine3Research", 51, "0", "158489319246", "31622776", "31622776", "511282591", "0", "0", "18520", "18520", "63095", "0", "0");
 	public static var goldMine4 = new OneTimeUpgrade("goldMine4Research", 52, "0", "4786300923226383", "2371373705", "2371373705", "209536317597", "0", "0", "2520406", "2520406", "47863009", "0", "0");
 	public static var goldMine5 = new OneTimeUpgrade("goldMine5Research", 53, "0", "8953647655495938230728", "523299114681", "523299114681", "521959852255398", "0", "0", "4001343956", "4001343956", "1940885877592", "0", "0", "10000");
+	public static var goldMine6 = new OneTimeUpgrade("goldMine6Research", 54, "0", "100000000", "1000000", "1000000", "5000000", "0", "0", "700", "7000", "1000", "0", "0");
+	public static var goldMine7 = new OneTimeUpgrade("goldMine7Research", 55, "0", "100000000", "1000000", "1000000", "5000000", "0", "0", "700", "7000", "1000", "0", "0");
+	public static var goldMine8 = new OneTimeUpgrade("goldMine8Research", 56, "0", "100000000", "1000000", "1000000", "5000000", "0", "0", "700", "7000", "1000", "0", "0");
+	public static var goldMine9 = new OneTimeUpgrade("goldMine9Research", 57, "0", "100000000", "1000000", "1000000", "5000000", "0", "0", "700", "7000", "1000", "0", "0");
+	public static var goldMine10 = new OneTimeUpgrade("goldMine10Research", 58, "0", "100000000", "1000000", "1000000", "5000000", "0", "0", "700", "7000", "1000", "0", "0");
 	public static var taxCollector2 = new OneTimeUpgrade("taxCollector2Research", 60, "0", "500000000", "1000000", "1000000", "1000000", "0", "0", "0", "0", "0", "0", "5000");
 	public static var taxCollector3 = new OneTimeUpgrade("taxCollector3Research", 61, "0", "1508544084136", "31622776", "31622776", "31622776", "0", "0", "0", "0", "0", "0", "828613");
 	public static var taxCollector4 = new OneTimeUpgrade("taxCollector4Research", 62, "0", "112196990670098650", "2371373705", "2371373705", "2371373705", "0", "0", "0", "0", "0", "0", "2946885155");
 	public static var taxCollector5 = new OneTimeUpgrade("taxCollector5Research", 63, "0", "741265336574877906877972", "523299114681", "523299114681", "523299114681", "0", "0", "0", "0", "0", "0", "1415732290661702");
+	public static var taxCollector6 = new OneTimeUpgrade("taxCollector6Research", 64, "0", "500000000", "1000000", "1000000", "1000000", "0", "0", "0", "0", "0", "0", "5000");
+	public static var taxCollector7 = new OneTimeUpgrade("taxCollector7Research", 65, "0", "500000000", "1000000", "1000000", "1000000", "0", "0", "0", "0", "0", "0", "5000");
+	public static var taxCollector8 = new OneTimeUpgrade("taxCollector8Research", 66, "0", "500000000", "1000000", "1000000", "1000000", "0", "0", "0", "0", "0", "0", "5000");
+	public static var taxCollector9 = new OneTimeUpgrade("taxCollector9Research", 67, "0", "500000000", "1000000", "1000000", "1000000", "0", "0", "0", "0", "0", "0", "5000");
+	public static var taxCollector10 = new OneTimeUpgrade("taxCollector10Research", 68, "0", "500000000", "1000000", "1000000", "1000000", "0", "0", "0", "0", "0", "0", "5000");
 	
 	public static var cropHarvesterResearch = new OneTimeUpgrade("cropHarvesterResearch", 70, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
 	public static var woodHarvesterResearch = new OneTimeUpgrade("woodHarvesterResearch", 71, "0", "10000000", "1000000", "5000000", "5000000", "0", "0", "200", "1000", "200", "500", "400");
@@ -117,16 +147,23 @@ class Main {
 	public static var upgradeArray = [newFarmer, farmerUpgrade1, farmerUpgrade2, newWoodcutter, woodcutterUpgrade1, woodcutterUpgrade2, newMiner, minerUpgrade1, minerUpgrade2];
 	public static var buildingArray = [house, farm, lumberMill, metalMine, taxCollector, goldMine, cropHarvester, woodHarvester, metalHarvester, gatheringSchool, toolForge, woodBurner, electrostaticGenerator, solarPanel, nuclearGenerator];
 	public static var researchArray = [newFormal, newPhysical, newLife, newApplied, newSocial, formalTheory, physicalTheory, lifeTheory, appliedTheory, socialTheory, house2, house3, house4, house5, farm2, farm3, farm4, farm5, lumberMill2, lumberMill3, lumberMill4, lumberMill5, metalMine2, metalMine3, metalMine4, metalMine5, goldMine2, goldMine3, goldMine4, goldMine5, taxCollector2, taxCollector3, taxCollector4, taxCollector5, cropHarvesterResearch, woodHarvesterResearch, metalHarvesterResearch, gatheringSchoolResearch, toolForgeResearch, electricityResearch, breakthrough, upgradeCost];
+	public static var skillArray = [skill0, skill1];
+	public static var perkArray = [perk0, perk1];
 	
 	public static var upgradeAmountMult: Decimal = 1.1;
 	public static var upgradeSpeedMult: Decimal = 1.1;
 	
+	public static inline var BUILDINGPAGEBUTTONS: Int = 12;
+	public static inline var RESEARCHPAGEBUTTONS: Int = 18;
 	public static inline var PERKPAGEBUTTONS: Int = 8;
 	
+	public static inline var RESETPAGES: Int = 4;
+	
 	static function main(){
+		
 		//uncomment to delete local storage
 		//Browser.getLocalStorage().clear();
-		food.setupBar(); wood.setupBar();
+		
 		Browser.document.getElementById("evolveButton").onclick = Util.dialogs.bind("evolve");
 		Browser.document.getElementById("evolutionButton").onclick = Main.evolve;
 		Browser.document.getElementById("saveButton").onclick = Util.saveGame;
@@ -135,8 +172,8 @@ class Main {
 		Browser.document.getElementById("achievementsButton").onclick = Util.dialogs.bind("achievements");
 		Browser.document.getElementById("optionsButton").onclick = Util.dialogs.bind("options");
 		Browser.document.getElementById("resetButton").onclick = Util.dialogs.bind("reset1");
-		Browser.document.getElementById("skillsButton").onclick = Util.dialogs.bind("skills", 900, 600);
-		Browser.document.getElementById("skillsBadge").onclick = Util.dialogs.bind("skills", 900, 600);
+		Browser.document.getElementById("skillsButton").onclick = Util.dialogs.bind("skills1", Std.int(Browser.window.innerWidth * 0.98), Std.int(Browser.window.innerHeight * 0.98));
+		Browser.document.getElementById("skillsBadge").onclick = Util.dialogs.bind("skills1", Std.int(Browser.window.innerWidth * 0.98), Std.int(Browser.window.innerHeight * 0.98));
 		Browser.document.getElementById("hire").onclick = UpdateUI.hireFire.bind("hire");
 		Browser.document.getElementById("fire").onclick = UpdateUI.hireFire.bind("fire");
 		Browser.document.getElementById("constructionButton").onclick = Util.dialogs.bind("construction1");
@@ -144,6 +181,8 @@ class Main {
 		Browser.document.getElementById("researchProductionOverview").onclick = Util.dialogs.bind("researchProd");
 		Browser.document.getElementById("manufacturingComponentsButton").onclick = Util.dialogs.bind("components1");
 		Browser.document.getElementById("manufacturingUpgradesButton").onclick = Util.dialogs.bind("upgrades1");
+		Browser.document.getElementById("resetYes").onclick = Util.reset;
+		Browser.document.getElementById("resetNo").onclick = Util.closeDialog.bind("resetConfirmation");
 		
 		for (i in resourceArray.slice(1, 4)){
 			Browser.document.getElementById(i.getName() + "ProdButton").onclick = Util.dialogs.bind(i.getName() + "Prod");
@@ -164,8 +203,28 @@ class Main {
 			Browser.document.getElementById(i.getName() + "Button").onclick = i.onClick;
 		}
 		
+		for (i in skillArray){
+			Browser.document.getElementById(i.getName() + "Button").onclick = i.onClick;
+		}
+		
+		for (i in perkArray){
+			Browser.document.getElementById(i.getName() + "Button").onclick = i.onClick;
+		}
+		
+		for (i in 2...BUILDINGPAGEBUTTONS){
+			setPageButtonOnClicks("construction", i);
+		}
+		
+		for (i in 2...RESEARCHPAGEBUTTONS){
+			setPageButtonOnClicks("research", i);
+		}
+		
 		for (i in 2...PERKPAGEBUTTONS){
-			Browser.document.getElementById("resetP" + i).onclick = (i % 2 == 0) ? Util.changePage.bind("reset", Std.int((i/2)+1), Std.int(i/2)) : Util.changePage.bind("reset", Std.int((i/2)-0.5), Std.int((i/2)+0.5));
+			setPageButtonOnClicks("reset", i);
+		}
+		
+		for (i in 0...RESETPAGES){
+			Browser.document.getElementById("reset" + i).onclick = Util.dialogs.bind("resetConfirmation");
 		}
 		
 		Browser.document.addEventListener("visibilitychange", Util.addOfflineProduction);
@@ -183,7 +242,15 @@ class Main {
 			Util.addOfflineProduction();
 			UpdateUI.updateAll();
 		}
+		populationTimer.run = addPopulation;
 		updateUITimer.run = UpdateUI.updateAll;
+	}
+	
+	private static function setPageButtonOnClicks(type: String, i: Int): Void{
+		//automatically binds the correct function to each change page button
+		Browser.document.getElementById(type + "P" + i).onclick = (i % 2 == 0) ?
+		Util.changePage.bind(type, Std.int((i / 2) + 1), Std.int(i / 2)) :
+		Util.changePage.bind(type, Std.int((i/2)-0.5), Std.int((i/2)+0.5));
 	}
 	
 	public static inline function getMoneyGain(): Decimal{
@@ -202,18 +269,36 @@ class Main {
 		}
 	}
 	
-	static function evolve(): Void{
-		if (evolution == 0 && food.amount >= 2000 && wood.amount >= 2000){
-			evolution++;
-			UpdateUI.displayUI(evolution);
-		} else if (evolution == 1 && food.amount >= "10000" && wood.amount >= "25000" && metal.amount >= "15000" && farmerUpgrade1.amount >= "2"
-			&& woodcutterUpgrade1.amount >= "2" && minerUpgrade1.amount >= "2"){
-			evolution++;
-			UpdateUI.displayUI(evolution);
+	public static function checkEvolveRequirements(): Bool{
+		if (evolution == 0 && food.amount >= "2000" && wood.amount >= "2000"){
+			return true;
+		} else if (evolution == 1 && farmerUpgrade1.amount >= "2" && woodcutterUpgrade1.amount >= "2" && minerUpgrade1.amount >= "2"){
+			return true;
 		} else if (evolution == 2 && food.amount >= "500000" && wood.amount >= "500000" && metal.amount >= "500000" && population.amount >= "20"
 			&& newFarmer.amount >= "5" && farmerUpgrade1.amount >= "5" && farmerUpgrade2.amount >= "5" && newWoodcutter.amount >= "5"
 			&& woodcutterUpgrade1.amount >= "5" && woodcutterUpgrade2.amount >= "5" && newMiner.amount >= "5" && minerUpgrade1.amount >= "5"
 			&& minerUpgrade2.amount >= "5"){
+			return true;
+		//TODO evolution
+		} else if (evolution == 3 && false){
+			return true;
+		} else if (evolution == 4 && false){
+			return true;
+		} else if (evolution == 5 && false){
+			return true;
+		} else if (evolution == 6 && false){
+			return true;
+		} else if (evolution == 7 && false){
+			return true;
+		} else if (evolution == 8 && false){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private static function evolve(): Void{
+		if (checkEvolveRequirements()){
 			evolution++;
 			UpdateUI.displayUI(evolution);
 		}

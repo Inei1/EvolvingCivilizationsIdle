@@ -15,16 +15,16 @@ class Util {
 		}
 		
 		Browser.getLocalStorage().setItem("evolution", Std.string(Main.evolution));
-		Browser.getLocalStorage().setItem("time", Std.string(Date.now().getTime()));
 		Browser.getLocalStorage().setItem("upgradeAmountMult", Main.upgradeAmountMult.toString());
 		Browser.getLocalStorage().setItem("upgradeSpeedMult", Main.upgradeSpeedMult.toString());
 		
 		//localStorage does not play nice with classes in haxe, so each Decimal must be seperate from everything else
-		//barinc, progress, buildingbonus can be determined at runtime, id and name are constant, so they do not need to be saved
+		//barinc and progress can be determined at runtime, id and name are constant, so they do not need to be saved
 		for (i in Main.resourceArray){
 			Browser.getLocalStorage().setItem(i.getName() + "Amount", i.amount.toString());
 			Browser.getLocalStorage().setItem(i.getName() + "Plus", i.plus.toString());
 			Browser.getLocalStorage().setItem(i.getName() + "AutoCost", i.autoCost.toString());
+			if (i.buildingBonus != null) Browser.getLocalStorage().setItem(i.getName() + "BuildingBonus", Std.string(i.buildingBonus));
 		}
 		for (i in Main.upgradeArray){
 			Browser.getLocalStorage().setItem(i.getName() + "Amount", i.amount.toString());
@@ -64,6 +64,7 @@ class Util {
 			i.amount = Browser.getLocalStorage().getItem(i.getName() + "Amount");
 			i.plus = Browser.getLocalStorage().getItem(i.getName() + "Plus");
 			i.autoCost = Browser.getLocalStorage().getItem(i.getName() + "AutoCost");
+			if (i.buildingBonus != null) i.buildingBonus = Std.parseInt(Browser.getLocalStorage().getItem(i.getName() + "BuildingBonus"));
 		}
 		for (i in Main.upgradeArray){
 			i.amount = Browser.getLocalStorage().getItem(i.getName() + "Amount");
@@ -115,11 +116,18 @@ class Util {
 		untyped __js__('$(function(){$("#" + dialog).dialog({closeText: "", width: width, height: height}).dialog("open").removeClass("hidden");});');
 	}
 	
+	public static function closeDialog(dialog: String): Void{
+		untyped __js__('$("#" + dialog).dialog("close")');
+	}
+	
 	public static function changePage(name: String, page: Int, prev: Int): Void{
 		untyped __js__('$("#" + name + page).removeClass("hidden");$("#" + name + page).dialog();$("#" + name + prev).dialog("close");');
 	}
 	
 	public static function formatDecimal(number: Decimal): String{
+		if (number == null){
+			return "0";
+		}
 		var suffix = 0;
 		while (number >= 1000000){
 			suffix++;
@@ -131,16 +139,21 @@ class Util {
 		return number.roundTo(2).toString() + Main.displayLookup[suffix];
 	}
 	
+	public static inline function isUndefined(value : Dynamic): Bool{
+		return untyped __js__('"undefined" === typeof value');
+	}
+
+	
 	public static function addOfflineProduction(){
 		if (Browser.document.visibilityState == VisibilityState.HIDDEN){
-			saveGame();
+			Browser.getLocalStorage().setItem("time", Std.string(Date.now().getTime()));
 			return;
 		}
 		var oldTime: Float = Std.parseFloat(Browser.getLocalStorage().getItem("time"));
 		var newTime: Float = Date.now().getTime();
 		//fun fact: this int will overflow if someone comes back to the game after 69 years
 		var secondsPassed: Int = Math.floor((newTime - oldTime) / 1000);
-		trace(secondsPassed);
+		trace("time passed: " + secondsPassed);
 		Main.money.amount += getOfflineProduction(Main.money, secondsPassed);
 		Main.food.amount += getOfflineProduction(Main.food, secondsPassed);
 		Main.wood.amount += getOfflineProduction(Main.wood, secondsPassed);
@@ -159,13 +172,33 @@ class Util {
 			return Decimal.zero;
 		}
 		if(resource == Main.money){
-			return Main.getMoneyGain().multiply(seconds).divide(10);
+			return Main.getMoneyGain().multiply(seconds);
 		} else if(resource == Main.food || resource == Main.wood || resource == Main.metal){
 			return resource.getResourceAdd().multiply(seconds).divide(10);
 		} else if (resource == Main.population || resource == Main.populationMax){
 			return Decimal.zero;
 		} else {
         return resource.plus.multiply(seconds);
+		}
+	}
+	
+	public static function reset(){
+		//TODO reset
+	}
+	
+	public static function removeResources(){
+		Main.money.amount = 0;
+		Main.food.amount = 0;
+		Main.wood.amount = 0;
+		Main.metal.amount = 0;
+		Main.population.amount = 10;
+		Main.populationMax.amount = 10;
+	}
+	
+	public static inline var MAXSKILLID = 61;
+	public static function drawSkills(){
+		for (i in 0...MAXSKILLID){
+			
 		}
 	}
 }

@@ -164,12 +164,28 @@ var{
     border-bottom: 1px solid black;
 }
 
-.downRightline{
-    
+.downRightLine{
+    -webkit-transform: translateY(25px) rotate(50deg);
+	display: inline-block;
+    width: 80px;
+    height: 20px;
+    border-bottom: 1px solid black;
 }
 
-.upRightLine{
-    
+.upRightLine1{
+    -webkit-transform: translateX(-10px) translateY(-25px) rotate(-45deg);
+	display: inline-block;
+    width: 90px;
+    height: 20px;
+    border-bottom: 1px solid black;
+}
+
+.upRightLine2{
+    -webkit-transform: translateX(-40px) translateY(-55px) rotate(-60deg);
+	display: inline-block;
+    width: 140px;
+    height: 20px;
+    border-bottom: 1px solid black;
 }
 
 .no-close .ui-dialog-titlebar-close {

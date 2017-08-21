@@ -3517,6 +3517,7 @@ Resource.prototype = {
 		this.barInc = 1;
 		this.progress = 0;
 		this.timer = new haxe_Timer(100);
+		this.buildingBonus = 10;
 		var _g = this.name;
 		switch(_g) {
 		case "food":
@@ -3551,7 +3552,7 @@ Resource.prototype = {
 		if(this.plus == null || this.upgrades[1] == null || this.upgrades[0] == null) {
 			return thx__$Decimal_Decimal_$Impl_$.zero;
 		}
-		this.plus = this.upgrades[0].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(100)).multiply(thx_bigint_Decimals.fromFloat(Math.pow(Main.upgradeAmountMult.toFloat(),this.upgrades[1].amount.toFloat())));
+		this.plus = this.upgrades[0].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(100)).multiply(thx_bigint_Decimals.fromFloat(Math.pow(Main.upgradeAmountMult.toFloat(),this.upgrades[1].amount.toFloat()))).multiply(Main.buildingArray[this.id].amount.multiply(thx_bigint_Decimals.fromFloat(this.buildingBonus / 100)).add(thx__$Decimal_Decimal_$Impl_$.fromInt(1)));
 		return this.plus;
 	}
 	,updateBarInc: function() {
@@ -3619,6 +3620,14 @@ var upgrades_Buyable = function(name,id,amount,moneyCost,foodCost,woodCost,metal
 	this.metalCost = metalCost;
 	this.populationCost = populationCost;
 	this.populationMaxCost = populationMaxCost;
+	this.formalCost = formalCost;
+	this.physicalCost = physicalCost;
+	this.lifeCost = lifeCost;
+	this.appliedCost = appliedCost;
+	this.socialCost = socialCost;
+	this.electricityCost = electricityCost;
+	this.perkCost = perkCost;
+	this.skillCost = skillCost;
 };
 upgrades_Buyable.__name__ = ["upgrades","Buyable"];
 upgrades_Buyable.prototype = {
@@ -3702,6 +3711,48 @@ upgrades_Buyable.prototype = {
 		return Util.formatDecimal(number);
 	}
 	,isBuyable: function() {
+		if(this.moneyCost == null) {
+			this.moneyCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.foodCost == null) {
+			this.foodCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.woodCost == null) {
+			this.woodCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.metalCost == null) {
+			this.metalCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.populationCost == null) {
+			this.populationCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.populationMaxCost == null) {
+			this.populationMaxCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.formalCost == null) {
+			this.formalCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.physicalCost == null) {
+			this.physicalCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.lifeCost == null) {
+			this.lifeCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.appliedCost == null) {
+			this.appliedCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.socialCost == null) {
+			this.socialCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.electricityCost == null) {
+			this.electricityCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.perkCost == null) {
+			this.perkCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
+		if(this.skillCost == null) {
+			this.skillCost = thx__$Decimal_Decimal_$Impl_$.zero;
+		}
 		if(thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.money.amount,this.moneyCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,this.foodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,this.woodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,this.metalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,this.populationCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.populationMax.amount,this.populationMaxCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.formal.amount,this.formalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.physical.amount,this.physicalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.life.amount,this.lifeCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.applied.amount,this.appliedCost)) {
 			return thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.social.amount,this.socialCost);
 		} else {
@@ -3834,6 +3885,7 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 		case 111:
 			break;
 		}
+		UpdateUI.updateUpgrade(this);
 	}
 	,increaseCost: function() {
 		var _g = this.type;
@@ -3872,7 +3924,6 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 	,__class__: upgrades_RebuyableUpgrade
 });
 var upgrades_OneTimeUpgrade = function(name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,formalCost,physicalCost,lifeCost,appliedCost,socialCost,electricityCost,perkCost,skillCost) {
-	this.visible = true;
 	this.bought = false;
 	upgrades_Buyable.call(this,name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,formalCost,physicalCost,lifeCost,appliedCost,socialCost,electricityCost,perkCost,skillCost);
 };
@@ -3880,7 +3931,6 @@ upgrades_OneTimeUpgrade.__name__ = ["upgrades","OneTimeUpgrade"];
 upgrades_OneTimeUpgrade.__super__ = upgrades_Buyable;
 upgrades_OneTimeUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 	bought: null
-	,visible: null
 	,onClick: function() {
 		if(!this.isBuyable()) {
 			return;
@@ -3914,6 +3964,17 @@ upgrades_OneTimeUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			break;
 		}
 	}
+	,isNextBuyable: function() {
+		var _g = this.id;
+		switch(_g) {
+		case 10:
+			return true;
+		case 11:
+			return false;
+		default:
+			return false;
+		}
+	}
 	,__class__: upgrades_OneTimeUpgrade
 });
 var upgrades_ResourceUpgrade = function(name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,resource) {
@@ -3937,7 +3998,7 @@ upgrades_ResourceUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 		this.resource.updatePlus();
 		this.resource.updateBarInc();
 		this.increaseCost();
-		UpdateUI.updateUpgrade(this);
+		UpdateUI.updateResourceUpgrade(this);
 	}
 	,fire: function() {
 		if(this.id == 0 && thx__$Decimal_Decimal_$Impl_$.greater(this.amount,thx__$Decimal_Decimal_$Impl_$.fromInt(1))) {
@@ -3989,8 +4050,6 @@ haxe_Timer.prototype = {
 var Main = function() { };
 Main.__name__ = ["Main"];
 Main.main = function() {
-	Main.food.setupBar();
-	Main.wood.setupBar();
 	window.document.getElementById("evolveButton").onclick = function() {
 		Util.dialogs("evolve");
 	};
@@ -4006,12 +4065,18 @@ Main.main = function() {
 	window.document.getElementById("resetButton").onclick = function() {
 		Util.dialogs("reset1");
 	};
-	window.document.getElementById("skillsButton").onclick = function() {
-		Util.dialogs("skills",900,600);
+	var a2 = window.innerWidth * 0.98 | 0;
+	var a3 = window.innerHeight * 0.98 | 0;
+	var tmp = function() {
+		Util.dialogs("skills1",a2,a3);
 	};
-	window.document.getElementById("skillsBadge").onclick = function() {
-		Util.dialogs("skills",900,600);
+	window.document.getElementById("skillsButton").onclick = tmp;
+	var a21 = window.innerWidth * 0.98 | 0;
+	var a31 = window.innerHeight * 0.98 | 0;
+	var tmp1 = function() {
+		Util.dialogs("skills1",a21,a31);
 	};
+	window.document.getElementById("skillsBadge").onclick = tmp1;
 	window.document.getElementById("hire").onclick = function() {
 		UpdateUI.hireFire("hire");
 	};
@@ -4033,19 +4098,23 @@ Main.main = function() {
 	window.document.getElementById("manufacturingUpgradesButton").onclick = function() {
 		Util.dialogs("upgrades1");
 	};
+	window.document.getElementById("resetYes").onclick = Util.reset;
+	window.document.getElementById("resetNo").onclick = function() {
+		Util.closeDialog("resetConfirmation");
+	};
 	var _g = 0;
 	var _g1 = Main.resourceArray.slice(1,4);
 	while(_g < _g1.length) {
 		var i = _g1[_g];
 		++_g;
-		var tmp = window.document;
-		var tmp1 = i.name + "ProdButton";
-		var tmp2 = (function(a1) {
+		var tmp2 = window.document;
+		var tmp3 = i.name + "ProdButton";
+		var tmp4 = (function(a1) {
 			return function() {
 				Util.dialogs(a1[0]);
 			};
 		})([i.name + "Prod"]);
-		tmp.getElementById(tmp1).onclick = tmp2;
+		tmp2.getElementById(tmp3).onclick = tmp4;
 	}
 	var _g2 = 0;
 	var _g11 = Main.upgradeArray;
@@ -4071,34 +4140,76 @@ Main.main = function() {
 		++_g4;
 		window.document.getElementById(i3.name + "Button").onclick = $bind(i3,i3.onClick);
 	}
-	var _g5 = 2;
-	while(_g5 < 8) {
-		var i4 = _g5++;
-		var tmp3 = window.document;
-		var tmp4 = i4 % 2 == 0 ? (function(a3,a2) {
-			return function() {
-				Util.changePage("reset",a2[0],a3[0]);
-			};
-		})([i4 / 2 | 0],[i4 / 2 + 1 | 0]) : (function(a31,a21) {
-			return function() {
-				Util.changePage("reset",a21[0],a31[0]);
-			};
-		})([i4 / 2 + 0.5 | 0],[i4 / 2 - 0.5 | 0]);
-		tmp3.getElementById("resetP" + i4).onclick = tmp4;
+	var _g5 = 0;
+	var _g14 = Main.skillArray;
+	while(_g5 < _g14.length) {
+		var i4 = _g14[_g5];
+		++_g5;
+		window.document.getElementById(i4.name + "Button").onclick = $bind(i4,i4.onClick);
+	}
+	var _g6 = 0;
+	var _g15 = Main.perkArray;
+	while(_g6 < _g15.length) {
+		var i5 = _g15[_g6];
+		++_g6;
+		window.document.getElementById(i5.name + "Button").onclick = $bind(i5,i5.onClick);
+	}
+	var _g7 = 2;
+	while(_g7 < 12) {
+		var i6 = _g7++;
+		Main.setPageButtonOnClicks("construction",i6);
+	}
+	var _g8 = 2;
+	while(_g8 < 18) {
+		var i7 = _g8++;
+		Main.setPageButtonOnClicks("research",i7);
+	}
+	var _g9 = 2;
+	while(_g9 < 8) {
+		var i8 = _g9++;
+		Main.setPageButtonOnClicks("reset",i8);
+	}
+	var _g10 = 0;
+	while(_g10 < 4) {
+		var i9 = _g10++;
+		window.document.getElementById("reset" + i9).onclick = function() {
+			Util.dialogs("resetConfirmation");
+		};
 	}
 	window.document.addEventListener("visibilitychange",Util.addOfflineProduction);
 	window.document.addEventListener("beforeunload",Util.saveGame);
 	if(js_Browser.getLocalStorage().getItem("foodAmount") == null) {
-		haxe_Log.trace("new game",{ fileName : "Main.hx", lineNumber : 177, className : "Main", methodName : "main"});
+		haxe_Log.trace("new game",{ fileName : "Main.hx", lineNumber : 236, className : "Main", methodName : "main"});
 		UpdateUI.updateAll();
 	} else {
-		haxe_Log.trace("load game",{ fileName : "Main.hx", lineNumber : 180, className : "Main", methodName : "main"});
+		haxe_Log.trace("load game",{ fileName : "Main.hx", lineNumber : 239, className : "Main", methodName : "main"});
 		Util.loadGame();
 		UpdateUI.displayUI(Main.evolution);
 		Util.addOfflineProduction();
 		UpdateUI.updateAll();
 	}
+	Main.populationTimer.run = Main.addPopulation;
 	Main.updateUITimer.run = UpdateUI.updateAll;
+};
+Main.setPageButtonOnClicks = function(type,i) {
+	var tmp = window.document;
+	var tmp1;
+	if(i % 2 == 0) {
+		var a1 = type;
+		var a2 = i / 2 + 1 | 0;
+		var a3 = i / 2 | 0;
+		tmp1 = function() {
+			Util.changePage(a1,a2,a3);
+		};
+	} else {
+		var a11 = type;
+		var a21 = i / 2 - 0.5 | 0;
+		var a31 = i / 2 + 0.5 | 0;
+		tmp1 = function() {
+			Util.changePage(a11,a21,a31);
+		};
+	}
+	tmp.getElementById(type + "P" + i).onclick = tmp1;
 };
 Main.getMoneyGain = function() {
 	return Main.population.amount.multiply(Main.money.plus);
@@ -4117,14 +4228,31 @@ Main.addPopulation = function() {
 		Main.food.autoCost = tmp1;
 	}
 };
-Main.evolve = function() {
-	if(Main.evolution == 0 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx__$Decimal_Decimal_$Impl_$.fromInt(2000)) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx__$Decimal_Decimal_$Impl_$.fromInt(2000))) {
-		Main.evolution++;
-		UpdateUI.displayUI(Main.evolution);
-	} else if(Main.evolution == 1 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx_bigint_Decimals.parse("10000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx_bigint_Decimals.parse("25000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,thx_bigint_Decimals.parse("15000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("2")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("2")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("2"))) {
-		Main.evolution++;
-		UpdateUI.displayUI(Main.evolution);
+Main.checkEvolveRequirements = function() {
+	if(Main.evolution == 0 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx_bigint_Decimals.parse("2000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx_bigint_Decimals.parse("2000"))) {
+		return true;
+	} else if(Main.evolution == 1 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("2")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("2")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("2"))) {
+		return true;
 	} else if(Main.evolution == 2 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,thx_bigint_Decimals.parse("20")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newFarmer.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade2.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newWoodcutter.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade2.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newMiner.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade2.amount,thx_bigint_Decimals.parse("5"))) {
+		return true;
+	} else if(Main.evolution == 3 && false) {
+		return true;
+	} else if(Main.evolution == 4 && false) {
+		return true;
+	} else if(Main.evolution == 5 && false) {
+		return true;
+	} else if(Main.evolution == 6 && false) {
+		return true;
+	} else if(Main.evolution == 7 && false) {
+		return true;
+	} else if(Main.evolution == 8 && false) {
+		return true;
+	} else {
+		return false;
+	}
+};
+Main.evolve = function() {
+	if(Main.checkEvolveRequirements()) {
 		Main.evolution++;
 		UpdateUI.displayUI(Main.evolution);
 	}
@@ -4345,6 +4473,9 @@ UpdateUI.__name__ = ["UpdateUI"];
 UpdateUI.updateAll = function() {
 	UpdateUI.updateAllResources();
 	UpdateUI.updateAllResourceUpgrades();
+	UpdateUI.updateAllBuildingUpgrades();
+	UpdateUI.updateAllResearchUpgrades();
+	UpdateUI.displayEvolveButton();
 };
 UpdateUI.updateAllResources = function() {
 	var _g = 0;
@@ -4357,7 +4488,7 @@ UpdateUI.updateAllResources = function() {
 };
 UpdateUI.updateResource = function(resource) {
 	$("#" + resource.name + "Amount").text(resource.format());
-	$("#" + resource.name + "Second").text(Util.formatDecimal(resource.plus.subtract(resource.autoCost)));
+	$("#" + resource.name + "Second").text(Util.formatDecimal(resource.plus.subtract(resource.autoCost).multiply(resource.upgrades[1] != null ? thx_bigint_Decimals.fromFloat(Math.pow(Main.upgradeAmountMult.toFloat(),resource.upgrades[2].amount.toFloat())) : thx__$Decimal_Decimal_$Impl_$.fromInt(1))));
 };
 UpdateUI.updateAllResourceUpgrades = function() {
 	var _g = 0;
@@ -4387,33 +4518,52 @@ UpdateUI.updateResourceUpgradeButton = function(upgrade) {
 		$("#" + upgrade.name).addClass("disabled");
 	}
 };
-UpdateUI.updateUpgrade = function(upgrade) {
-};
-UpdateUI.updateAllUpgradeButtons = function() {
+UpdateUI.updateAllBuildingUpgrades = function() {
 	var _g = 0;
 	var _g1 = Main.buildingArray;
 	while(_g < _g1.length) {
 		var i = _g1[_g];
 		++_g;
-		UpdateUI.updateUpgradeButton(i);
+		UpdateUI.updateUpgrade(i);
 	}
 };
+UpdateUI.updateAllResearchUpgrades = function() {
+	var _g = 0;
+	var _g1 = Main.researchArray;
+	while(_g < _g1.length) {
+		var i = _g1[_g];
+		++_g;
+		UpdateUI.updateUpgrade(i);
+	}
+};
+UpdateUI.updateUpgrade = function(upgrade) {
+	$("#" + Std.string(upgrade.getName()) + "Count").text(upgrade.amount);
+	$("#" + Std.string(upgrade.getName()) + "Money").text(upgrade.format("money"));
+	$("#" + Std.string(upgrade.getName()) + "Food").text(upgrade.format("food"));
+	$("#" + Std.string(upgrade.getName()) + "Wood").text(upgrade.format("wood"));
+	$("#" + Std.string(upgrade.getName()) + "Metal").text(upgrade.format("metal"));
+	$("#" + Std.string(upgrade.getName()) + "Formal").text(upgrade.format("formal"));
+	$("#" + Std.string(upgrade.getName()) + "Physical").text(upgrade.format("physical"));
+	$("#" + Std.string(upgrade.getName()) + "Life").text(upgrade.format("life"));
+	$("#" + Std.string(upgrade.getName()) + "Applied").text(upgrade.format("applied"));
+	$("#" + Std.string(upgrade.getName()) + "Social").text(upgrade.format("social"));
+	$("#" + Std.string(upgrade.getName()) + "Electricity").text(upgrade.format("electricity"));
+	$("#" + Std.string(upgrade.getName()) + "Perk").text(upgrade.format("perkPoint"));
+	$("#" + Std.string(upgrade.getName()) + "Skill").text(upgrade.format("skillPoint"));
+	UpdateUI.updateUpgradeButton(upgrade);
+};
 UpdateUI.updateUpgradeButton = function(upgrade) {
-	if(upgrade.bought == true && upgrade.getId() >= 10 && upgrade.getId() <= 69 && upgrade.getId() % 10 != 3) {
-		upgrade.visible = false;
-	}
-	if(upgrade.visible) {
-		$("#" + Std.string(upgrade.getName())).removeClass("hidden");
-	} else {
-		$("#" + Std.string(upgrade.getName())).addClass("hidden");
-	}
 	if(upgrade.isBuyable()) {
-		$("#" + Std.string(upgrade.getName())).removeClass("disabled");
+		$("#" + Std.string(upgrade.getName()) + "Button").removeClass("disabled");
 	} else {
-		$("#" + Std.string(upgrade.getName())).addClass("disabled");
+		$("#" + Std.string(upgrade.getName()) + "Button").addClass("disabled");
 	}
 };
 UpdateUI.displayUI = function(evolution) {
+	if(evolution >= 0) {
+		Main.food.setupBar();
+		Main.wood.setupBar();
+	}
 	if(evolution >= 1) {
 		$("#metalBlock").removeClass("hidden");
 		$("#metal").removeClass("hidden");
@@ -4435,6 +4585,7 @@ UpdateUI.displayUI = function(evolution) {
 		$("#metalUpgrade3").removeClass("hidden");
 		$("#construction").removeClass("hidden");
 		$("#house").removeClass("hidden");
+		$("#tax").removeClass("hidden");
 		$("#evolution2").addClass("hidden");
 		$("#evolution3").removeClass("hidden");
 	}
@@ -4443,8 +4594,47 @@ UpdateUI.displayUI = function(evolution) {
 		$("#lumberMill").removeClass("hidden");
 		$("#metalMine").removeClass("hidden");
 		$("#goldMine").removeClass("hidden");
-		$("#tax").removeClass("hidden");
 		$("#skills").removeClass("hidden");
+		$("#evolution3").addClass("hidden");
+		$("#evolution4").removeClass("hidden");
+	}
+	if(evolution >= 4) {
+		$("#research").removeClass("hidden");
+		$("#house2Research").removeClass("hidden");
+		$("#farm2Research").removeClass("hidden");
+		$("#lumberMill2Research").removeClass("hidden");
+		$("#metalMine2Research").removeClass("hidden");
+		$("#goldMine2Research").removeClass("hidden");
+		$("#taxCollector2Research").removeClass("hidden");
+	}
+	if(evolution >= 5) {
+		$("#reset").removeClass("hidden");
+		$("#inspectorResearch").removeClass("hidden");
+		$("#gatheringSchoolResearch").removeClass("hidden");
+		$("#toolForgeResearch").removeClass("hidden");
+		$("#cropHarvesterResearch").removeClass("hidden");
+		$("#woodHarvesterResearch").removeClass("hidden");
+		$("#metalHarvesterResearch").removeClass("hidden");
+	}
+	if(evolution >= 6) {
+		$("#manufacturingResearch").removeClass("hidden");
+	}
+	if(evolution >= 7) {
+		$("#electricityResearch").removeClass("hidden");
+		$("#upgradeCostResearch").removeClass("hidden");
+		$("#breakthroughResearch").removeClass("hidden");
+	}
+	if(evolution >= 8) {
+		$("#singularityGenerationResearch").removeClass("hidden");
+		$("#roboticsFactoryResearch").removeClass("hidden");
+		$("#internetResearch").removeClass("hidden");
+	}
+};
+UpdateUI.displayEvolveButton = function() {
+	if(Main.checkEvolveRequirements()) {
+		$("#evolutionButton").removeClass("disabled");
+	} else {
+		$("#evolutionButton").addClass("disabled");
 	}
 };
 UpdateUI.hireFire = function(action) {
@@ -4478,7 +4668,6 @@ Util.saveGame = function() {
 		haxe_Log.trace("Local Storage is not supported, please switch to a supporting browser, such as chrome, firefox, edge, or internet explorer to enable saving.",{ fileName : "Util.hx", lineNumber : 14, className : "Util", methodName : "saveGame"});
 	}
 	js_Browser.getLocalStorage().setItem("evolution",Std.string(Main.evolution));
-	js_Browser.getLocalStorage().setItem("time",Std.string(new Date().getTime()));
 	js_Browser.getLocalStorage().setItem("upgradeAmountMult",Main.upgradeAmountMult.toString());
 	js_Browser.getLocalStorage().setItem("upgradeSpeedMult",Main.upgradeSpeedMult.toString());
 	var _g = 0;
@@ -4489,6 +4678,9 @@ Util.saveGame = function() {
 		js_Browser.getLocalStorage().setItem(i.name + "Amount",i.amount.toString());
 		js_Browser.getLocalStorage().setItem(i.name + "Plus",i.plus.toString());
 		js_Browser.getLocalStorage().setItem(i.name + "AutoCost",i.autoCost.toString());
+		if(i.buildingBonus != null) {
+			js_Browser.getLocalStorage().setItem(i.name + "BuildingBonus",i.buildingBonus == null ? "null" : "" + i.buildingBonus);
+		}
 	}
 	var _g2 = 0;
 	var _g11 = Main.upgradeArray;
@@ -4577,6 +4769,9 @@ Util.loadGame = function() {
 		i.amount = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem(i.name + "Amount"));
 		i.plus = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem(i.name + "Plus"));
 		i.autoCost = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem(i.name + "AutoCost"));
+		if(i.buildingBonus != null) {
+			i.buildingBonus = Std.parseInt(js_Browser.getLocalStorage().getItem(i.name + "BuildingBonus"));
+		}
 	}
 	var _g2 = 0;
 	var _g11 = Main.upgradeArray;
@@ -4681,10 +4876,16 @@ Util.dialogs = function(dialog,width,height,buttons) {
 	}
 	$(function(){$("#" + dialog).dialog({closeText: "", width: width, height: height}).dialog("open").removeClass("hidden");});
 };
+Util.closeDialog = function(dialog) {
+	$("#" + dialog).dialog("close");
+};
 Util.changePage = function(name,page,prev) {
 	$("#" + name + page).removeClass("hidden");$("#" + name + page).dialog();$("#" + name + prev).dialog("close");
 };
 Util.formatDecimal = function(number) {
+	if(number == null) {
+		return "0";
+	}
 	var suffix = 0;
 	while(thx__$Decimal_Decimal_$Impl_$.greaterEquals(number,thx__$Decimal_Decimal_$Impl_$.fromInt(1000000))) {
 		++suffix;
@@ -4695,15 +4896,18 @@ Util.formatDecimal = function(number) {
 	}
 	return number.roundTo(2).toString() + Main.displayLookup[suffix];
 };
+Util.isUndefined = function(value) {
+	return "undefined" === typeof value;
+};
 Util.addOfflineProduction = function() {
 	if(window.document.visibilityState == "hidden") {
-		Util.saveGame();
+		js_Browser.getLocalStorage().setItem("time",Std.string(new Date().getTime()));
 		return;
 	}
 	var oldTime = parseFloat(js_Browser.getLocalStorage().getItem("time"));
 	var newTime = new Date().getTime();
 	var secondsPassed = Math.floor((newTime - oldTime) / 1000);
-	haxe_Log.trace(secondsPassed,{ fileName : "Util.hx", lineNumber : 143, className : "Util", methodName : "addOfflineProduction"});
+	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 156, className : "Util", methodName : "addOfflineProduction"});
 	var tmp = Main.money.amount.add(Util.getOfflineProduction(Main.money,secondsPassed));
 	Main.money.amount = tmp;
 	var tmp1 = Main.food.amount.add(Util.getOfflineProduction(Main.food,secondsPassed));
@@ -4730,13 +4934,29 @@ Util.getOfflineProduction = function(resource,seconds) {
 		return thx__$Decimal_Decimal_$Impl_$.zero;
 	}
 	if(resource == Main.money) {
-		return Main.population.amount.multiply(Main.money.plus).multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(seconds)).divide(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
+		return Main.population.amount.multiply(Main.money.plus).multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(seconds));
 	} else if(resource == Main.food || resource == Main.wood || resource == Main.metal) {
 		return resource.getResourceAdd().multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(seconds)).divide(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
 	} else if(resource == Main.population || resource == Main.populationMax) {
 		return thx__$Decimal_Decimal_$Impl_$.zero;
 	} else {
 		return resource.plus.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(seconds));
+	}
+};
+Util.reset = function() {
+};
+Util.removeResources = function() {
+	Main.money.amount = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
+	Main.food.amount = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
+	Main.wood.amount = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
+	Main.metal.amount = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
+	Main.population.amount = thx__$Decimal_Decimal_$Impl_$.fromInt(10);
+	Main.populationMax.amount = thx__$Decimal_Decimal_$Impl_$.fromInt(10);
+};
+Util.drawSkills = function() {
+	var _g = 0;
+	while(_g < 61) {
+		var i = _g++;
 	}
 };
 var haxe_IMap = function() { };
@@ -20407,30 +20627,64 @@ Main.appliedTheory = new upgrades_RebuyableUpgrade("appliedTheory",108,upgrades_
 Main.socialTheory = new upgrades_RebuyableUpgrade("socialTheory",109,upgrades_UpgradeType.research,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10"));
 Main.breakthrough = new upgrades_RebuyableUpgrade("breakthroughResearch",110,upgrades_UpgradeType.research);
 Main.upgradeCost = new upgrades_RebuyableUpgrade("upgradeCostResearch",111,upgrades_UpgradeType.research);
+Main.skill0 = new upgrades_RebuyableUpgrade("skill0",200,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill1 = new upgrades_RebuyableUpgrade("skill1",201,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.perk0 = new upgrades_RebuyableUpgrade("perk0",300,upgrades_UpgradeType.perk,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5"),thx_bigint_Decimals.parse("0"));
+Main.perk1 = new upgrades_RebuyableUpgrade("perk1",301,upgrades_UpgradeType.perk,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5"),thx_bigint_Decimals.parse("0"));
 Main.house2 = new upgrades_OneTimeUpgrade("house2Research",10,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
 Main.house3 = new upgrades_OneTimeUpgrade("house3Research",11,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("562341325"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("511282591"),thx_bigint_Decimals.parse("511282591"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2170"),thx_bigint_Decimals.parse("63095"),thx_bigint_Decimals.parse("2170"),thx_bigint_Decimals.parse("11180"),thx_bigint_Decimals.parse("8000"));
 Main.house4 = new upgrades_OneTimeUpgrade("house4Research",12,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("86596432336"),thx_bigint_Decimals.parse("371373649"),thx_bigint_Decimals.parse("209536317447"),thx_bigint_Decimals.parse("209536317447"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("68851"),thx_bigint_Decimals.parse("47862117"),thx_bigint_Decimals.parse("68851"),thx_bigint_Decimals.parse("1182123"),thx_bigint_Decimals.parse("715541"));
 Main.house5 = new upgrades_OneTimeUpgrade("house5Research",13,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("46975888167064"),thx_bigint_Decimals.parse("523299099124"),thx_bigint_Decimals.parse("521959851769234"),thx_bigint_Decimals.parse("521959851769234"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10350703"),thx_bigint_Decimals.parse("1940827988668"),thx_bigint_Decimals.parse("10350703"),thx_bigint_Decimals.parse("1285268905"),thx_bigint_Decimals.parse("605273674"),thx_bigint_Decimals.parse("10000"));
+Main.house6 = new upgrades_OneTimeUpgrade("house6Research",14,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
+Main.house7 = new upgrades_OneTimeUpgrade("house7Research",15,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
+Main.house8 = new upgrades_OneTimeUpgrade("house8Research",16,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
+Main.house9 = new upgrades_OneTimeUpgrade("house9Research",17,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
+Main.house10 = new upgrades_OneTimeUpgrade("house10Research",18,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
 Main.farm2 = new upgrades_OneTimeUpgrade("farm2Research",20,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("0"));
 Main.farm3 = new upgrades_OneTimeUpgrade("farm3Research",21,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("562341325"),thx_bigint_Decimals.parse("6309573444"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2170"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("191270"),thx_bigint_Decimals.parse("11180"),thx_bigint_Decimals.parse("0"));
 Main.farm4 = new upgrades_OneTimeUpgrade("farm4Research",22,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("86596432336"),thx_bigint_Decimals.parse("52480746024977"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("68851"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("282251844"),thx_bigint_Decimals.parse("1182123"),thx_bigint_Decimals.parse("0"));
 Main.farm5 = new upgrades_OneTimeUpgrade("farm5Research",23,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("46975888167064"),thx_bigint_Decimals.parse("16143585568264862654"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10350703"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("33190887267647"),thx_bigint_Decimals.parse("1285268905"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000"));
+Main.farm6 = new upgrades_OneTimeUpgrade("farm6Research",24,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("0"));
+Main.farm7 = new upgrades_OneTimeUpgrade("farm7Research",25,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("0"));
+Main.farm8 = new upgrades_OneTimeUpgrade("farm8Research",26,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("0"));
+Main.farm9 = new upgrades_OneTimeUpgrade("farm9Research",27,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("0"));
+Main.farm10 = new upgrades_OneTimeUpgrade("farm10Research",28,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("0"));
 Main.lumberMill2 = new upgrades_OneTimeUpgrade("lumberMill2Research",30,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"));
 Main.lumberMill3 = new upgrades_OneTimeUpgrade("lumberMill3Research",31,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("562341325"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("6309573444"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("8000"),thx_bigint_Decimals.parse("11180"),thx_bigint_Decimals.parse("8000"),thx_bigint_Decimals.parse("63095"),thx_bigint_Decimals.parse("0"));
 Main.lumberMill4 = new upgrades_OneTimeUpgrade("lumberMill4Research",32,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("86596432336"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("52480746024977"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("715541"),thx_bigint_Decimals.parse("1182177"),thx_bigint_Decimals.parse("715541"),thx_bigint_Decimals.parse("47862117"),thx_bigint_Decimals.parse("0"));
 Main.lumberMill5 = new upgrades_OneTimeUpgrade("lumberMill5Research",33,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("46975888167064"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("16143585568264750798"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("605274629"),thx_bigint_Decimals.parse("1285356992"),thx_bigint_Decimals.parse("605274629"),thx_bigint_Decimals.parse("1940827988668"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000"));
+Main.lumberMill6 = new upgrades_OneTimeUpgrade("lumberMill6Research",34,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"));
+Main.lumberMill7 = new upgrades_OneTimeUpgrade("lumberMill7Research",35,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"));
+Main.lumberMill8 = new upgrades_OneTimeUpgrade("lumberMill8Research",36,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"));
+Main.lumberMill9 = new upgrades_OneTimeUpgrade("lumberMill9Research",37,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"));
+Main.lumberMill10 = new upgrades_OneTimeUpgrade("lumberMill10Research",38,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"));
 Main.metalMine2 = new upgrades_OneTimeUpgrade("metalMine2Research",40,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("0"));
 Main.metalMine3 = new upgrades_OneTimeUpgrade("metalMine3Research",41,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("562341325"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("6309573444"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("18520"),thx_bigint_Decimals.parse("63095"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("18520"),thx_bigint_Decimals.parse("0"));
 Main.metalMine4 = new upgrades_OneTimeUpgrade("metalMine4Research",42,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("86596432336"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("52480746024977"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("25204068"),thx_bigint_Decimals.parse("47863009"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("25204068"),thx_bigint_Decimals.parse("0"));
 Main.metalMine5 = new upgrades_OneTimeUpgrade("metalMine5Research",43,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("46975888167064"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("16143585568264750798"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("4001343956"),thx_bigint_Decimals.parse("1940885877592"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("4001343956"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000"));
+Main.metalMine6 = new upgrades_OneTimeUpgrade("metalMine6Research",44,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("0"));
+Main.metalMine7 = new upgrades_OneTimeUpgrade("metalMine7Research",45,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("0"));
+Main.metalMine8 = new upgrades_OneTimeUpgrade("metalMine8Research",46,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("0"));
+Main.metalMine9 = new upgrades_OneTimeUpgrade("metalMine9Research",47,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("0"));
+Main.metalMine10 = new upgrades_OneTimeUpgrade("metalMine10Research",48,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("0"));
 Main.goldMine2 = new upgrades_OneTimeUpgrade("goldMine2Research",50,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("7000"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
 Main.goldMine3 = new upgrades_OneTimeUpgrade("goldMine3Research",51,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("158489319246"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("511282591"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("18520"),thx_bigint_Decimals.parse("18520"),thx_bigint_Decimals.parse("63095"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
 Main.goldMine4 = new upgrades_OneTimeUpgrade("goldMine4Research",52,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("4786300923226383"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("209536317597"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2520406"),thx_bigint_Decimals.parse("2520406"),thx_bigint_Decimals.parse("47863009"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
 Main.goldMine5 = new upgrades_OneTimeUpgrade("goldMine5Research",53,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("8953647655495938230728"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("521959852255398"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("4001343956"),thx_bigint_Decimals.parse("4001343956"),thx_bigint_Decimals.parse("1940885877592"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000"));
+Main.goldMine6 = new upgrades_OneTimeUpgrade("goldMine6Research",54,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("7000"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.goldMine7 = new upgrades_OneTimeUpgrade("goldMine7Research",55,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("7000"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.goldMine8 = new upgrades_OneTimeUpgrade("goldMine8Research",56,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("7000"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.goldMine9 = new upgrades_OneTimeUpgrade("goldMine9Research",57,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("7000"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.goldMine10 = new upgrades_OneTimeUpgrade("goldMine10Research",58,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("700"),thx_bigint_Decimals.parse("7000"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
 Main.taxCollector2 = new upgrades_OneTimeUpgrade("taxCollector2Research",60,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("500000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5000"));
 Main.taxCollector3 = new upgrades_OneTimeUpgrade("taxCollector3Research",61,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1508544084136"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("31622776"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("828613"));
 Main.taxCollector4 = new upgrades_OneTimeUpgrade("taxCollector4Research",62,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("112196990670098650"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("2371373705"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2946885155"));
 Main.taxCollector5 = new upgrades_OneTimeUpgrade("taxCollector5Research",63,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("741265336574877906877972"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("523299114681"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1415732290661702"));
+Main.taxCollector6 = new upgrades_OneTimeUpgrade("taxCollector6Research",64,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("500000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5000"));
+Main.taxCollector7 = new upgrades_OneTimeUpgrade("taxCollector7Research",65,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("500000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5000"));
+Main.taxCollector8 = new upgrades_OneTimeUpgrade("taxCollector8Research",66,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("500000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5000"));
+Main.taxCollector9 = new upgrades_OneTimeUpgrade("taxCollector9Research",67,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("500000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5000"));
+Main.taxCollector10 = new upgrades_OneTimeUpgrade("taxCollector10Research",68,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("500000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5000"));
 Main.cropHarvesterResearch = new upgrades_OneTimeUpgrade("cropHarvesterResearch",70,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
 Main.woodHarvesterResearch = new upgrades_OneTimeUpgrade("woodHarvesterResearch",71,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
 Main.metalHarvesterResearch = new upgrades_OneTimeUpgrade("metalHarvesterResearch",72,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));
@@ -20441,10 +20695,15 @@ Main.resourceArray = [Main.money,Main.food,Main.wood,Main.metal,Main.population,
 Main.upgradeArray = [Main.newFarmer,Main.farmerUpgrade1,Main.farmerUpgrade2,Main.newWoodcutter,Main.woodcutterUpgrade1,Main.woodcutterUpgrade2,Main.newMiner,Main.minerUpgrade1,Main.minerUpgrade2];
 Main.buildingArray = [Main.house,Main.farm,Main.lumberMill,Main.metalMine,Main.taxCollector,Main.goldMine,Main.cropHarvester,Main.woodHarvester,Main.metalHarvester,Main.gatheringSchool,Main.toolForge,Main.woodBurner,Main.electrostaticGenerator,Main.solarPanel,Main.nuclearGenerator];
 Main.researchArray = [Main.newFormal,Main.newPhysical,Main.newLife,Main.newApplied,Main.newSocial,Main.formalTheory,Main.physicalTheory,Main.lifeTheory,Main.appliedTheory,Main.socialTheory,Main.house2,Main.house3,Main.house4,Main.house5,Main.farm2,Main.farm3,Main.farm4,Main.farm5,Main.lumberMill2,Main.lumberMill3,Main.lumberMill4,Main.lumberMill5,Main.metalMine2,Main.metalMine3,Main.metalMine4,Main.metalMine5,Main.goldMine2,Main.goldMine3,Main.goldMine4,Main.goldMine5,Main.taxCollector2,Main.taxCollector3,Main.taxCollector4,Main.taxCollector5,Main.cropHarvesterResearch,Main.woodHarvesterResearch,Main.metalHarvesterResearch,Main.gatheringSchoolResearch,Main.toolForgeResearch,Main.electricityResearch,Main.breakthrough,Main.upgradeCost];
+Main.skillArray = [Main.skill0,Main.skill1];
+Main.perkArray = [Main.perk0,Main.perk1];
 Main.upgradeAmountMult = thx_bigint_Decimals.fromFloat(1.1);
 Main.upgradeSpeedMult = thx_bigint_Decimals.fromFloat(1.1);
+Main.BUILDINGPAGEBUTTONS = 12;
+Main.RESEARCHPAGEBUTTONS = 18;
 Main.PERKPAGEBUTTONS = 8;
-UpdateUI.MAXRESOURCERESEARCHES = 3;
+Main.RESETPAGES = 4;
+Util.MAXSKILLID = 61;
 haxe__$Int32_Int32_$Impl_$._mul = Math.imul != null ? Math.imul : function(a,b) {
 	return a * (b & 65535) + (a * (b >>> 16) << 16 | 0) | 0;
 };

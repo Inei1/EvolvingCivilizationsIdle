@@ -12,7 +12,6 @@ class OneTimeUpgrade extends Buyable {
 	}
 	
 	public var bought: Bool = false;
-	public var visible: Bool = true;
 	
 	public override function onClick(){
 		if (!this.isBuyable()){
@@ -36,6 +35,18 @@ class OneTimeUpgrade extends Buyable {
 				Main.house.populationMaxCost = -25;
 				Main.populationMax.amount = Main.populationMax.amount.add(Main.house.amount.multiply(15)); //increase capacity of existing houses
 				new JQuery("#housePopulationIncrease").text(-Main.house.populationMaxCost);
+		}
+	}
+	
+	public function isNextBuyable(): Bool{
+		switch(this.id){
+			case 10:
+				return true;
+			case 11:
+				//if(Main.evolution == )
+				return false;
+			default:
+				return false;
 		}
 	}
 }

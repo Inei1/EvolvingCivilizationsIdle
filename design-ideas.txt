@@ -4,31 +4,27 @@ On the roadmap:
 	-Implement magic system
     	--earth, fire, water, air mana
 	-Make dialog pages dynamic with upgrades changing position when others are bought, instead of having each upgrade on a given page
-    
+	-add more buildings/research/skills/perks
+	
+needed to get to where I was before:
+	-implementations of buildings and research
+	-reset
+	-skills
+	-random events
 
 Required before release:
-*****implement evolution, which has specific requirements to fulfill and unlocks new upgrades for the player (replace research lab)
+*****get to previous progress with javascript
 
 ****Add achievement system
 
 ****Implement skills system, where the user gains exp to put towards different skills that enhance gameplay
-    -1% food/wood/metal increase
-    -Flat Base food/wood/metal increase
-    -Increase effectiveness of reduce upgrade cost
-    -Increase effectiveness of Gathering School and Tool Forge
-    -Increase the frequency of random events
-    -Increase the frequency of exclusively good random events
-	-Add Market, extra levels improve resource conversion rate
-    -Come up with new ideas for more skills
-        -Equalizer: increase lowest production of money/food/wood/metal by 2% per level and decrease the highest production by 1%/level
-		
+	-allow resetting for free
+    -5% food/wood/metal increase
+    -implement everything
+	
 ***Implement random events, that pop up as a dialogue and have multiple options, which make the player gain or lose resources
 
 ***Add a tutorial
-
-***Get more ideas for unique buildings for the construction system
-    -Buildings that give bonuses to other buildings
-    -Robotics factory, to increase population over time
 	
 ***Add a new progress bar whenever the old one reaches maximum speed
     -Multiple tiers, replace bar and tool upgrade with the new bar and tool upgrade
@@ -45,5 +41,7 @@ Required before release:
 	
 *Improve research system, give the game some longevity
     -Things for manufacturing
+	
+*Implement prestige system, allow players to restart with a bonus, require a ton of singularities to unlock
 
 Last thing: Playtesting to look for bugs and set costs for upgrades

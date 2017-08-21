@@ -85,6 +85,7 @@ class RebuyableUpgrade extends Buyable {
 			case 111:
 				//TODO: upgrade cost
 		}
+		UpdateUI.updateUpgrade(this);
 	}
 	
 	private override function increaseCost(){

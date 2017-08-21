@@ -12,12 +12,9 @@ Proceed only if you are okay with spoilers.-->
         <link rel="stylesheet" href="style.css">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-        <title>Technological Revolution</title>
+        <title>Evolving Civilizations Idle</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            
-        </style>
     </head>
     <body>
         
@@ -253,17 +250,19 @@ Proceed only if you are okay with spoilers.-->
 			</div>
 			<div id="evolution2" class="hidden">
 				<img src="Resources/Neolithic.png" alt="Neolithic Period" style="display: inline-block;"><h1>Stone Age: Neolithic Period</h1><br>
-				Obtain 10000 <img src="Resources/Food.png" alt="Food:" title="Food">, 25000 <img src="Resources/Wood.png" alt="Wood:" title="Wood">,
-				and 15000 <img src="Resources/Metal.png" alt="Metal:" title="Metal">, and get level 2 of all amount multiplier upgrades
+				Get level 3 of all amount multiplier upgrades to evolve
 			</div>
 			<div id="evolution3" class="hidden">
 				<img src="Resources/BronzeAge.png" alt="Bronze Age" style="display: inline-block;"><h1>Bronze Age</h1><br>
 				Obtain 500000 <img src="Resources/Food.png" alt="Food:" title="Food">, <img src="Resources/Wood.png" alt="Wood:" title="Wood">,
-				<img src="Resources/Metal.png" alt="Metal:" title="Metal">, 20 <img src="Resources/Population.png" alt="Population:" title="Population">,
-				and level 5 of all resource upgrades
+				<img src="Resources/Metal.png" alt="Metal:" title="Metal">, 10 <img src="Resources/Population.png" alt="Population:" title="Population">,
+				and level 5 of all resource upgrades to evolve
 			</div>
 			<div id="evolution4" class="hidden">
 				<img src="Resources/IronAge.png" alt="Iron Age" style="display: inline-block;"><h1>Iron Age</h1><br>
+				Obtain 10M <img src="Resources/Food.png" alt="Food:" title="Food">, <img src="Resources/Wood.png" alt="Wood:" title="Wood">,
+				<img src="Resources/Metal.png" alt="Metal:" title="Metal">, 25 <img src="Resources/Population.png" alt="Population:" title="Population">,
+				the market <i class="fa fa-info-circle" title="You can unlock the market by buying the appropriate skill"></i>, all buildings at level 10, and all upgrades at level 15 to evolve
 			</div>
 			<div id="evolution5" class="hidden">
 				<img src="Resources/ClassicalAge.png" alt="Classical Age" style="display: inline-block;"><h1>Classical Age</h1><br>
@@ -277,20 +276,48 @@ Proceed only if you are okay with spoilers.-->
 			<div id="evolution8" class="hidden">
 				<img src="Resources/MachineAge.png" alt="Machine Age" style="display: inline-block;"><h1>Machine Age</h1><br>
 			</div>
-			<div id="evolution8" class="hidden">
+			<div id="evolution9" class="hidden">
 				<img src="Resources/InformationAge.png" alt="Information Age" style="display: inline-block;"><h1>Information Age</h1><br>
 			</div>
-			<br><br><button class="btn btn-primary" id="evolutionButton">Evolve</button> <i class="fa fa-info-circle" title="Any resources required for evolution will not be consumed in the process"></i>
+			<br><br><button class="btn btn-primary disabled" id="evolutionButton">Evolve</button> <i class="fa fa-info-circle" title="Any resources required for evolution will not be consumed in the process"></i>
 		</div>
         
         <!--skills-->
         
-        <div id="skills" hidden="" title="Skill Tree">
+        <div id="skills1" hidden="" title="Skill Tree">
             <img src="Resources/Experience.png" alt="Experience" title="Experience"> <var id="experience">0</var>/<var id="experienceMax">0</var> to next level
-            <div class="divider5w"></div><img src="SkillPoints.png" alt="Skill Points" title="Skill Points"><var id="skillPoints">0</var><br><br>
-            <button class="btn btn-primary btn-skills" id="skill0" onclick="skills(0);">5% Increased food production</button> <div class="horizontalLine"></div> 
-            <button class="btn btn-primary btn-skills" id="skill1" onclick="skills(1)">+1000 base food production</button><br>Level <var id="skill0Level">0</var>
-            <div class="dividervarw" id="divider0"></div> Level <var id="skill1Level">0</var>
+            <div class="divider5w"></div><img src="Resources/SkillPoints.png" alt="Skill Points" title="Skill Points"> <var id="skillPoints">0</var><br><br>
+				
+			<button class="btn btn-primary btn-skills" id="skill0Button">+5% Increased money production</button> <div class="horizontalLine"></div> 
+            <button class="btn btn-primary btn-skills" id="skill1Button">+10000 base money production</button><div class="downRightLine"></div> <br>Current: +<var id="skill0Level">0</var>%
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill1Level">0</var><br><br>
+				
+            <button class="btn btn-primary btn-skills" id="skill10Button">+5% Increased food production</button> <div class="horizontalLine"></div> 
+            <button class="btn btn-primary btn-skills" id="skill11Button">+1000 base food production</button> <div class="horizontalLine"></div>
+			<button class="btn btn-primary btn-skills" id="skill60Button" >Equalize production of resources</button> <i class="fa fa-info-circle" title="Increase the production of the resource with the lowest amount, and decrease the production of the resource with the highest amount"></i> <div class="horizontalLine"></div>
+            <button class="btn btn-primary btn-skills" id="skill61Button">Increase singularity gain from reset</button> <br>Current: +<var id="skill10Level">0</var>%
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill11Level">0</var>
+			Current: +<var id="skill60Level1">0</var>% and -<var id="skill60Level2">0</var>%
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill61Level">0</var><br><br>
+				
+			<button class="btn btn-primary btn-skills" id="skill20Button">+5% Increased wood production</button> <div class="horizontalLine"></div> 
+			<button class="btn btn-primary btn-skills" id="skill21Button">+1000 base wood production</button><div class="upRightLine1"></div><br>Current: +<var id="skill20Level">0</var>%
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill21Level">0</var><br><br>
+				
+			<button class="btn btn-primary btn-skills" id="skill30Button">+5% Increased metal production</button> <div class="horizontalLine"></div> 
+			<button class="btn btn-primary btn-skills" id="skill31Button">+1000 base metal production</button><div class="upRightLine2"></div><br>Current +<var id="skill30Level">0</var>%
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill31Level">0</var><br><br>
+				
+			<button class="btn btn-primary btn-skills" id="skill40Button">Unlock the Market</button>
+				<i class="fa fa-info-circle" title="The Market allows you to exchange resources for other resources."></i> <div class="horizontalLine"></div>  
+			<button class="btn btn-primary btn-skills" id="skill41Button">Increase the effectiveness of Gathering School and Tool Forge</button> <div class="horizontalLine"></div>  
+			<button class="btn btn-primary btn-skills" id="skill42Button">Increase the effectiveness of Reduce Upgrade Cost research</button><br>Current: <var id="skill40Level">0</var>% efficiency
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill41Level">0</var><div class="dividervarw"></div> Current: +<var id="skill42Level">0</var>%<br><br>
+				
+			<button class="btn btn-primary btn-skills" id="skill50Button">Increase the frequency of random events</button> <div class="horizontalLine"></div> 
+			<button class="btn btn-primary btn-skills" id="skill51Button">Increase the frequency of only good random events</button> <div class="horizontalLine"></div> 
+			<button class="btn btn-primary btn-skills" id="skill52Button">Increase the chance of getting a random building whenever a random event occurs</button><br>Current: <var id="skill50Level">0</var> Seconds
+            <div class="dividervarw" id="divider0"></div> Current: +<var id="skill51Level">0</var>%<div class="dividervarw"></div> Current: <var id="skill52Level">0</var>%<br><br>
         </div>
         
         <div id="achievements" hidden="" title="Achievements">
@@ -299,7 +326,7 @@ Proceed only if you are okay with spoilers.-->
         
         <div id="options" hidden="" title="Options">
             <button class="btn btn-primary">Delete Resources</button><br><br>
-            <button class="btn btn-primary" onclick="eventdialogs(0)">Open Currently debugged dialogue</button>
+            <button class="btn btn-primary">Open Currently debugged dialogue</button>
         </div>
         
         <!--reset-->
@@ -312,27 +339,27 @@ Proceed only if you are okay with spoilers.-->
             <button class="btn btn-primary" id="reset0">Reset</button><br><br>
             
             <div id="perk0">
-                <button id="perk0Button" class="btn btn-primary" onclick="perks(0)">Unlock this Page</button><br>
+                <button id="perk0Button" class="btn btn-primary">Unlock this Page</button><br>
                 <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> 1
             </div>
             <div id="perk1" class="hidden">
-                <button id="perk1Button" class="btn btn-primary" onclick="perks(1)">20% Increased money gain</button> Level <var id="perk1Level">0</var><br>
+                <button id="perk1Button" class="btn btn-primary">20% Increased money gain</button> Level <var id="perk1Level">0</var><br>
                 <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk1Cost">0</var><br><br>
             </div>
             <div id="perk2" class="hidden">
-                <button id="perk2Button" class="btn btn-primary" onclick="perks(2)">20% Increased food gain</button> Level <var id="perk2Level">0</var><br>
+                <button id="perk2Button" class="btn btn-primary">20% Increased food gain</button> Level <var id="perk2Level">0</var><br>
                 <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk2Cost">0</var><br><br>
             </div>
             <div id="perk3" class="hidden">
-                <button id="perk3Button" class="btn btn-primary" onclick="perks(3)">20% Increased wood gain</button> Level <var id="perk3Level">0</var><br>
+                <button id="perk3Button" class="btn btn-primary">20% Increased wood gain</button> Level <var id="perk3Level">0</var><br>
                 <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk3Cost">0</var><br><br>
             </div>
             <div id="perk4" class="hidden">
-                <button id="perk4Button" class="btn btn-primary" onclick="perks(4)">20% Increased metal gain</button> Level <var id="perk4Level">0</var><br>
+                <button id="perk4Button" class="btn btn-primary">20% Increased metal gain</button> Level <var id="perk4Level">0</var><br>
                 <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk4Cost">0</var><br><br>
             </div>
             <div id="perk5" class="hidden">
-                <button id="perk5Button" class="btn btn-primary" onclick="perks(5)">Start with more money/food/wood/metal</button> Current: <var id="perk5Level">0</var><br>
+                <button id="perk5Button" class="btn btn-primary">Start with more money/food/wood/metal</button> Current: <var id="perk5Level">0</var><br>
                 <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk5Cost">0</var><br><br>
             </div>
             
@@ -344,17 +371,17 @@ Proceed only if you are okay with spoilers.-->
             You will obtain <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="singularityResetGain1">0</var> when resetting
             <i class="fa fa-info-circle" title="The amount of singularities gained for reset is determined by your current amount of money, food, wood, and metal only"></i><br><br>
             
-            <button class="btn btn-primary" onclick="dialogs('resetConfirmation')">Reset</button><br><br>
+            <button class="btn btn-primary" id="reset1">Reset</button><br><br>
             
-            <button id="perk7Button" class="btn btn-primary" onclick="perks(7)">10% Increased formal gain</button> Level <var id="perk7Level">0</var><br>
+            <button id="perk7Button" class="btn btn-primary">10% Increased formal gain</button> Level <var id="perk7Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk7Cost">0</var><br><br>
-            <button id="perk8Button" class="btn btn-primary" onclick="perks(8)">10% Increased physical gain</button> Level <var id="perk8Level">0</var><br>
+            <button id="perk8Button" class="btn btn-primary">10% Increased physical gain</button> Level <var id="perk8Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk8Cost">0</var><br><br>
-            <button id="perk9Button" class="btn btn-primary" onclick="perks(9)">10% Increased life gain</button> Level <var id="perk9Level">0</var><br>
+            <button id="perk9Button" class="btn btn-primary">10% Increased life gain</button> Level <var id="perk9Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk9Cost">0</var><br><br>
-            <button id="perk10Button" class="btn btn-primary" onclick="perks(10)">10% Increased applied gain</button> Level <var id="perk10Level">0</var><br>
+            <button id="perk10Button" class="btn btn-primary">10% Increased applied gain</button> Level <var id="perk10Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk10Cost">0</var><br><br>
-            <button id="perk11Button" class="btn btn-primary" onclick="perks(11)">10% Increased social gain</button> Level <var id="perk11Level">0</var><br>
+            <button id="perk11Button" class="btn btn-primary">10% Increased social gain</button> Level <var id="perk11Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk11Cost">0</var><br><br>
             
             <button class="btn btn-primary" id="resetP3">←Page 1</button> <button class="btn btn-primary" id="resetP4">Page 3→</button>
@@ -365,18 +392,18 @@ Proceed only if you are okay with spoilers.-->
             You will obtain <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="singularityResetGain2">0</var> when resetting
             <i class="fa fa-info-circle" title="The amount of singularities gained for reset is determined by your current amount of money, food, wood, and metal only"></i><br><br>
             
-            <button class="btn btn-primary" onclick="dialogs('resetConfirmation')">Reset</button><br><br>
+            <button class="btn btn-primary" id="reset2">Reset</button><br><br>
             
-            <button id="perk13Button" class="btn btn-primary" onclick="perks(13)">10% Increased experience gain</button> Level <var id="perk13Level">0</var><br>
+            <button id="perk13Button" class="btn btn-primary">10% Increased experience gain</button> Level <var id="perk13Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk13Cost">0</var><br><br>
-            <button id="perk14Button" class="btn btn-primary" onclick="perks(14)">10% Increased electricity gain</button> Level <var id="perk14Level">0</var><br>
+            <button id="perk14Button" class="btn btn-primary">10% Increased electricity gain</button> Level <var id="perk14Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk14Cost">0</var><br><br>
-            <button id="perk15Button" class="btn btn-primary" onclick="perks(15)">5% Increased singularity gain</button> Level <var id="perk15Level">0</var><br>
+            <button id="perk15Button" class="btn btn-primary">5% Increased singularity gain</button> Level <var id="perk15Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk15Cost">0</var><br><br>
-            <button id="perk16Button" class="btn btn-primary" onclick="perks(16)">Improve reduce upgrade costs</button> Level <var id="perk16Level">0</var><br>
+            <button id="perk16Button" class="btn btn-primary">Improve reduce upgrade costs</button> Level <var id="perk16Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk16Cost">0</var>
             <i class="fa fa-info-circle" title="Like the upgrade itself, the improvement varies from upgrade to upgrade"></i><br><br>
-            <button id="perk17Button" class="btn btn-primary" onclick="perks(17)">Increase impact of resource harvesters</button> Current: <var id="perk17Level">0</var><br>
+            <button id="perk17Button" class="btn btn-primary">Increase impact of resource harvesters</button> Current: <var id="perk17Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk17Cost">0</var><br><br>
             
             <button class="btn btn-primary" id="resetP5">←Page 2</button> <button class="btn btn-primary" id="resetP6">Page 4→</button>
@@ -387,18 +414,18 @@ Proceed only if you are okay with spoilers.-->
             You will obtain <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="singularityResetGain2">0</var> when resetting
             <i class="fa fa-info-circle" title="The amount of singularities gained for reset is determined by your current amount of money, food, wood, and metal only"></i><br><br>
             
-            <button class="btn btn-primary" onclick="dialogs('resetConfirmation')">Reset</button><br><br>
+            <button class="btn btn-primary" id="reset3">Reset</button><br><br>
             
-            <button id="perk19Button" class="btn btn-primary" onclick="perks(19)">Increase impact of random events</button> Level <var id="perk19Level">0</var><br>
+            <button id="perk19Button" class="btn btn-primary">Increase impact of random events</button> Level <var id="perk19Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk19Cost">0</var>
             <i class="fa fa-info-circle" title="Random events now give or take a greater percent of resources"></i><br><br>
-            <button id="perk20Button" class="btn btn-primary" onclick="perks(20)">5% Increased singularity gain</button> Level <var id="perk20Level">0</var><br>
+            <button id="perk20Button" class="btn btn-primary">5% Increased singularity gain</button> Level <var id="perk20Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk20Cost">0</var><br><br>
-            <button id="perk21Button" class="btn btn-primary" onclick="perks(21)">5% Increased singularity gain</button> Level <var id="perk21Level">0</var><br>
+            <button id="perk21Button" class="btn btn-primary">5% Increased singularity gain</button> Level <var id="perk21Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk21Cost">0</var><br><br>
-            <button id="perk22Button" class="btn btn-primary" onclick="perks(22)">5% Increased singularity gain</button> Level <var id="perk22Level">0</var><br>
+            <button id="perk22Button" class="btn btn-primary">5% Increased singularity gain</button> Level <var id="perk22Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk22Cost">0</var><br><br>
-            <button id="perk23Button" class="btn btn-primary" onclick="perks(23)">5% Increased singularity gain</button> Level <var id="perk23Level">0</var><br>
+            <button id="perk23Button" class="btn btn-primary">5% Increased singularity gain</button> Level <var id="perk23Level">0</var><br>
             <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities"> <var id="perk23Cost">0</var><br><br>
             
             <button class="btn btn-primary" id="resetP7">←Page 3</button> <!--<button class="btn btn-primary" id="resetP8">Page 3→</button>-->
@@ -406,8 +433,8 @@ Proceed only if you are okay with spoilers.-->
         
         <div id="resetConfirmation" class="hidden" title="Reset Confirmation">
             Are you sure you wish to reset?<br><br>
-            <button id="resetYes" class="btn btn-primary" onclick="reset()">Yes</button>
-            <button id="resetNo" class="btn btn-primary" onclick="$('#resetConfirmation').dialog('close')">No</button>
+            <button id="resetYes" class="btn btn-primary">Yes</button>
+            <button id="resetNo" class="btn btn-primary">No</button>
         </div>
         
         <!--Production Overviews-->
@@ -470,7 +497,7 @@ Proceed only if you are okay with spoilers.-->
         <div id="construction1" class="hidden" title="Construction">
             
 			<div id="house" class="hidden">
-            <button id="houseButton" class="btn btn-primary" onclick="buildings(0)">Build New House</button>
+            <button id="houseButton" class="btn btn-primary">Build New House</button>
             <img src="Resources/House.png" alt="Houses:" title="Houses"> <var id="houseCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="houseMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="houseFood">0</var>,
@@ -480,7 +507,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
 			<div id="farm" class="hidden">
-            <button id="farmButton" class="btn btn-primary" onclick="buildings(3)">Build New Farm</button>
+            <button id="farmButton" class="btn btn-primary">Build New Farm</button>
             <img src="Resources/Farm.png" alt="Farms:" title="Farms"> <var id="farmCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farmMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farmFood">0</var>,
@@ -492,7 +519,7 @@ Proceed only if you are okay with spoilers.-->
 			</div>
             
 			<div id="lumberMill" class="hidden">
-            <button id="lumberMillButton" class="btn btn-primary" onclick="buildings(4)">Build New Lumber Mill</button>
+            <button id="lumberMillButton" class="btn btn-primary">Build New Lumber Mill</button>
             <img src="Resources/LumberMill.png" alt="Lumber Mills:" title="Lumber Mills"> <var id="lumberMillCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMillMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMillFood">0</var>,
@@ -507,7 +534,7 @@ Proceed only if you are okay with spoilers.-->
         
         <div id="construction2" class="hidden" title="Construction Page 2">
 			<div id="metalMine" class="hidden">
-            <button id="metalMineButton" class="btn btn-primary" onclick="buildings(5)">Build New Metal Mine</button>
+            <button id="metalMineButton" class="btn btn-primary">Build New Metal Mine</button>
             <img src="Resources/MetalMine.png" alt="Metal Mines:" title="Metal Mines"> <var id="metalMineCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMineMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalMineFood">0</var>,
@@ -519,7 +546,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
 				
 			<div id="tax" class="hidden">
-                <button id="taxButton" class="btn btn-primary" onclick="buildings(1)">Build New Tax Collector</button>
+                <button id="taxButton" class="btn btn-primary">Build New Tax Collector</button>
             <img src="Resources/TaxCollector.png" alt="Tax Collectors:" title="Tax Collectors"> <var id="taxCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxFood">0</var>,
@@ -529,7 +556,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
 			
 			<div id="goldMine" class="hidden">
-            <button id="goldMineButton" class="btn btn-primary" onclick="buildings(2)">Build New Gold Mine</button>
+            <button id="goldMineButton" class="btn btn-primary">Build New Gold Mine</button>
             <img src="Resources/GoldMine.png" alt="Gold Mines:" title="Gold Mines"> <var id="goldMineCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="goldMineMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="goldMineFood">0</var>,
@@ -544,7 +571,7 @@ Proceed only if you are okay with spoilers.-->
         <div id="construction3" class="hidden" title="Construction Page 3">
 			
 			<div id="cropHarvester" class="hidden">
-            <button id="cropHarvesterButton" class="btn btn-primary" onclick="buildings(25)">Build Crop Harvester</button>
+            <button id="cropHarvesterButton" class="btn btn-primary">Build Crop Harvester</button>
             <img src="Resources/CropHarvester.png" alt="Crop Harvester" title="Crop Harvester"> <var id="cropHarvesterCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="cropHarvesterMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="cropHarvesterFood">0</var>,
@@ -555,7 +582,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
             <div id="woodHarvester" class="hidden">
-            <button id="woodHarvesterButton" class="btn btn-primary" onclick="buildings(26)">Build Wood Harvester</button>
+            <button id="woodHarvesterButton" class="btn btn-primary">Build Wood Harvester</button>
             <img src="Resources/WoodHarvester.png" alt="Wood Harvester" title="Wood Harvester"> <var id="woodHarvesterCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="woodHarvesterMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="woodHarvesterFood">0</var>,
@@ -566,7 +593,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
             <div id="metalHarvester" class="hidden">
-            <button id="metalHarvesterButton" class="btn btn-primary" onclick="buildings(27)">Build Metal Harvester</button>
+            <button id="metalHarvesterButton" class="btn btn-primary">Build Metal Harvester</button>
             <img src="Resources/MetalHarvester.png" alt="Metal Harvester" title="Metal Harvester"> <var id="metalHarvesterCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalHarvesterMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalHarvesterFood">0</var>,
@@ -585,7 +612,7 @@ Proceed only if you are okay with spoilers.-->
         <div id="construction4" class="hidden" title="Construction Page 4">
 			
 			<div id="inspector" class="hidden">
-				<button id="gatheringSchoolButton" class="btn btn-primary" onclick="buildings(29)">Build Gathering School</button>
+				<button id="gatheringSchoolButton" class="btn btn-primary">Build Gathering School</button>
 				<img src="Resources/GatheringSchool.png" alt="Gathering School" title="Gathering School">
 				<p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="gatheringSchoolMoney">0</var>,
 					<img src="Resources/Food.png" alt="Food:" title="Food"> <var id="gatheringSchoolFood">0</var>,
@@ -595,7 +622,7 @@ Proceed only if you are okay with spoilers.-->
 			</div>
             
             <div id="gatheringSchool" class="hidden">
-            <button id="gatheringSchoolButton" class="btn btn-primary" onclick="buildings(29)">Build Gathering School</button>
+            <button id="gatheringSchoolButton" class="btn btn-primary">Build Gathering School</button>
             <img src="Resources/GatheringSchool.png" alt="Gathering School" title="Gathering School">
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="gatheringSchoolMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="gatheringSchoolFood">0</var>,
@@ -605,7 +632,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
             <div id="toolForge" class="hidden">
-            <button id="toolForgeButton" class="btn btn-primary" onclick="buildings(30)">Build Tool Forge</button>
+            <button id="toolForgeButton" class="btn btn-primary">Build Tool Forge</button>
             <img src="Resources/ToolForge.png" alt="Tool Forge" title="Tool Forge">
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="toolForgeMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="toolForgeFood">0</var>,
@@ -621,7 +648,7 @@ Proceed only if you are okay with spoilers.-->
         <div id="construction5" class="hidden" title="Construction Page 5">
             
 			<div id="woodBurner" class="hidden">
-            <button id="woodBurnerButton" class="btn btn-primary" onclick="buildings(15)">Build Wood Burner</button>
+            <button id="woodBurnerButton" class="btn btn-primary">Build Wood Burner</button>
             <img src="Resources/WoodBurner.png" alt="WoodBurner" title="Wood Burner"> <var id="woodBurnerCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="woodBurnerMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="woodBurnerFood">0</var>,
@@ -633,7 +660,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
             <div id="electrostaticGenerator" class="hidden">
-            <button id="electrostaticGeneratorButton" class="btn btn-primary" onclick="buildings(16)">Build Electrostatic Generator</button>
+            <button id="electrostaticGeneratorButton" class="btn btn-primary">Build Electrostatic Generator</button>
             <img src="Resources/ElectrostaticGenerator.png" alt="electrostaticGenerator" title="Electrostatic Generator"> <var id="electrostaticGeneratorCount">0</var>,
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="electrostaticGeneratorMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="electrostaticGeneratorFood">0</var>,
@@ -644,7 +671,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
             <div id="solarPanel" class="hidden">
-            <button id="solarPanelButton" class="btn btn-primary" onclick="buildings(17)">Build Solar Panel</button>
+            <button id="solarPanelButton" class="btn btn-primary">Build Solar Panel</button>
             <img src="Resources/SolarPanel.png" alt="solarPanel" title="Solar Panel"> <var id="solarPanelCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="solarPanelMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="solarPanelFood">0</var>,
@@ -654,7 +681,7 @@ Proceed only if you are okay with spoilers.-->
             </div>
             
             <div id="nuclearGenerator" class="hidden">
-            <button id="nuclearGeneratorButton" class="btn btn-primary" onclick="buildings(18)">Build Nuclear Generator</button>
+            <button id="nuclearGeneratorButton" class="btn btn-primary">Build Nuclear Generator</button>
             <img src="Resources/NuclearGenerator.png" alt="nuclearGenerator" title="Nuclear Generator"> <var id="nuclearGeneratorCount">0</var>
             <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="nuclearGeneratorMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="nuclearGeneratorFood">0</var>,
@@ -669,17 +696,8 @@ Proceed only if you are okay with spoilers.-->
         </div>
 			
 		<div id="construction6" class="hidden" title="Construction Page 6">
-			<div id="singularityGenerator" class="hidden">
-            <button id="singularityGeneratorButton" class="btn btn-primary" onclick="buildings(28)">Build Singularity Generator</button>
-            <img src="Resources/SingularityGenerator.png" alt="Singularity Generator" title="Singularity Generator"> <var id="singularityGeneratorCount">0</var>
-            <p><img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="singularityGeneratorMoney">0</var>,
-                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="singularityGeneratorFood">0</var>,
-                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="singularityGeneratorWood">0</var>,
-                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="singularityGeneratorMetal">0</var>,
-                Produces <img src="Resources/Singularity.png" alt="Singularities:" title="Singularities">1/Second<br>
-            </div>
 			
-			<button class="btn btn-primary" id="constructionP1">←Page 5</button> <!--<button class="btn btn-primary" id="constructionP12">Page 6→</button>-->
+			<button class="btn btn-primary" id="constructionP11">←Page 5</button> <!--<button class="btn btn-primary" id="constructionP12">Page 6→</button>-->
 		</div>
         
         <!--Research-->
@@ -695,40 +713,40 @@ Proceed only if you are okay with spoilers.-->
             <div class="divider5w"></div>
             <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="social1" style="display: inline-block;">0</var><br><br>
             
-            <button id="newFormalButton" class="btn btn-primary" onclick="setTimeout(research, 100, 0)">Hire Formal Scientist</button>
+            <button id="newFormalButton" class="btn btn-primary">Hire Formal Scientist</button>
             <var id="formalCount">0</var> Scientists<br>
             <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="formalMoney">0</var>,
             <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="formalFood">0</var>,
             <img src="Resources/Population.png" alt="Population:" title="Population"> <var id="formalPopulation">0</var>,
             +<var id="formalIncrease">0</var> <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science">/Second<br><br>
             
-            <button id="newPhysicalButton" class="btn btn-primary" onclick="research(1)">Hire Physical Scientist</button> <var id="physicalCount">0</var> Scientists<br>
+            <button id="newPhysicalButton" class="btn btn-primary">Hire Physical Scientist</button> <var id="physicalCount">0</var> Scientists<br>
             <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="physicalMoney">0</var>,
             <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="physicalFood">0</var>,
             <img src="Resources/Population.png" alt="Population:" title="Population"> <var id="physicalPopulation">0</var>,
             +<var id="physicalIncrease">0</var> <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science">/Second<br><br>
             
-            <button id="newLifeButton" class="btn btn-primary" onclick="research(2)">Hire Life Scientist</button> <var id="lifeCount">0</var> Scientists<br>
+            <button id="newLifeButton" class="btn btn-primary">Hire Life Scientist</button> <var id="lifeCount">0</var> Scientists<br>
             <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lifeMoney">0</var>,
             <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lifeFood">0</var>,
             <img src="Resources/Population.png" alt="Population:" title="Population"> <var id="lifePopulation">0</var>,
             +<var id="lifeIncrease">0</var> <img src="Resources/Life.png" alt="Life Science" title="Life Science">/Second<br><br>
             
-            <button id="newAppliedButton" class="btn btn-primary" onclick="research(3)">Hire Applied Scientist</button>
+            <button id="newAppliedButton" class="btn btn-primary">Hire Applied Scientist</button>
             <var id="appliedCount">0</var> Scientists<br>
             <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="appliedMoney">0</var>,
             <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="appliedFood">0</var>,
             <img src="Resources/Population.png" alt="Population:" title="Population"> <var id="appliedPopulation">0</var>,
             +<var id="appliedIncrease">0</var> <img src="Resources/Wrench.png" alt="Engineering Science" title="Engineering Science">/Second<br><br>
             
-            <button id="newSocialButton" class="btn btn-primary" onclick="research(4)">Hire Social Scientist</button>
+            <button id="newSocialButton" class="btn btn-primary">Hire Social Scientist</button>
             <var id="socialCount">0</var> Scientists<br>
             <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="socialMoney">0</var>,
             <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="socialFood">0</var>,
             <img src="Resources/Population.png" alt="Population:" title="Population"> <var id="socialPopulation">0</var>,
             +<var id="socialIncrease">0</var> <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science">/Second<br><br>
             
-            <button class="btn btn-primary" onclick="changePage('research', 2, 1);updateResearchUI();">Page 2→</button>
+            <button class="btn btn-primary" id="researchP2">Page 2→</button>
         </div>
         
         <div id="research2" class="hidden" title="Research Page 2">
@@ -743,31 +761,31 @@ Proceed only if you are okay with spoilers.-->
             <div class="divider5w"></div>
             <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="social2" style="display: inline-block;">0</var><br><br>
             
-            <button id="formalTheoryButton" class="btn btn-primary" onclick="research(5)">Research Formal Science Theory</button> Level <var id="formalTheoryCount">0</var><br>
+            <button id="formalTheoryButton" class="btn btn-primary">Research Formal Science Theory</button> Level <var id="formalTheoryCount">0</var><br>
             <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="formalTheoryFormal">0</var>,
             x<var id="formalTheoryBonus">1.1</var> Amount Multiplier<br><br>
             
-            <button id="physicalTheoryButton" class="btn btn-primary" onclick="research(6)">Research Physical Science Theory</button> Level <var id="physicalTheoryCount">0</var><br>
+            <button id="physicalTheoryButton" class="btn btn-primary">Research Physical Science Theory</button> Level <var id="physicalTheoryCount">0</var><br>
             <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="physicalTheoryFormal">0</var>,
             <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="physicalTheoryPhysical">0</var>,
             x<var id="physicalTheoryBonus">1.1</var> Amount Multiplier<br><br>
             
-            <button id="lifeTheoryButton" class="btn btn-primary" onclick="research(7)">Research Life Science Theory</button> Level <var id="lifeTheoryCount">0</var><br>
+            <button id="lifeTheoryButton" class="btn btn-primary">Research Life Science Theory</button> Level <var id="lifeTheoryCount">0</var><br>
             <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="lifeTheoryFormal">0</var>,
             <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science">,
             <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="lifeTheoryLife">0</var>,
             x<var id="lifeTheoryBonus">1.1</var> Amount Multiplier<br><br>
             
-            <button id="appliedTheoryButton" class="btn btn-primary" onclick="research(8)">Research Applied Science</button> Level <var id="appliedTheoryCount">0</var><br>
+            <button id="appliedTheoryButton" class="btn btn-primary">Research Applied Science</button> Level <var id="appliedTheoryCount">0</var><br>
             <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="appliedTheoryFormal">0</var>,
             <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="appliedTheoryApplied">0</var>,
             x<var id="appliedTheoryBonus">1.1</var> Amount Multiplier<br><br>
             
-            <button id="socialTheoryButton" class="btn btn-primary" onclick="research(9)">Research Social Science Theory</button> Level <var id="socialTheoryCount">0</var><br>
+            <button id="socialTheoryButton" class="btn btn-primary">Research Social Science Theory</button> Level <var id="socialTheoryCount">0</var><br>
             <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="socialTheorySocial">0</var>,
             x<var id="socialTheoryBonus">1.1</var> Amount Multiplier<br><br>
             
-            <button class="btn btn-primary" onclick="changePage('research', 1, 2);updateResearchUI();">←Page 1</button> <button class="btn btn-primary" onclick="changePage('research', 3, 2);updateResearchUI();">Page 3→</button>
+            <button class="btn btn-primary" id="researchP3">←Page 1</button> <button class="btn btn-primary" id="researchP4">Page 3→</button>
             
         </div>
         
@@ -783,8 +801,8 @@ Proceed only if you are okay with spoilers.-->
             <div class="divider5w"></div>
             <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="social3" style="display: inline-block;">0</var><br><br>
             
-            <div id="house2Research">
-                <button id="house2ResearchButton" class="btn btn-primary" onclick="research(30)">Research Bigger House</button><br>
+            <div id="house2Research" class="hidden">
+                <button id="house2ResearchButton" class="btn btn-primary">Research Bigger House</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house2ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house2ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house2ResearchMetal">0</var>,
@@ -797,7 +815,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="house3Research" class="hidden">
-                <button id="house3ResearchButton" class="btn btn-primary" onclick="research(31)">Research Crowded Housing</button><br>
+                <button id="house3ResearchButton" class="btn btn-primary">Research Crowded Housing</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house3ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house3ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house3ResearchMetal">0</var>,
@@ -810,7 +828,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="house4Research" class="hidden">
-                <button id="house4ResearchButton" class="btn btn-primary" onclick="research(32)">Research Apartment Housing</button><br>
+                <button id="house4ResearchButton" class="btn btn-primary">Research Apartment Housing</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house4ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house4ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house4ResearchMetal">0</var>,
@@ -823,7 +841,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="house5Research" class="hidden">
-                <button id="house5ResearchButton" class="btn btn-primary" onclick="research(33)">Add Electricity to Houses</button><br>
+                <button id="house5ResearchButton" class="btn btn-primary">Add Electricity to Houses</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house5ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house5ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house5ResearchMetal">0</var>,
@@ -835,9 +853,74 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="house5ResearchElectricity">0</var>,
                 Improves House capacity to 100 people each (from 25)
                 <br><br></div>
+				
+			<div id="house6Research" class="hidden">
+                <button id="house6ResearchButton" class="btn btn-primary">Research Bigger House</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house6ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house6ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house6ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="house6ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="house6ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house6ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house6ResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house6ResearchSocial">0</var>,
+                Improves House capacity to 5 people each (from 2)
+                <br><br></div>
+				
+			<div id="house7Research" class="hidden">
+                <button id="house7ResearchButton" class="btn btn-primary">Research Bigger House</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house7ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house7ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house7ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="house7ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="house7ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house7ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house7ResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house7ResearchSocial">0</var>,
+                Improves House capacity to 5 people each (from 2)
+                <br><br></div>
+				
+			<div id="house8Research" class="hidden">
+                <button id="house8ResearchButton" class="btn btn-primary">Research Bigger House</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house8ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house8ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house8ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="house8ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="house8ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house8ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house8ResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house8ResearchSocial">0</var>,
+                Improves House capacity to 5 people each (from 2)
+                <br><br></div>
+				
+			<div id="house9Research" class="hidden">
+                <button id="house9ResearchButton" class="btn btn-primary">Research Bigger House</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house9ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house9ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house9ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="house9ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="house9ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house9ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house9ResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house9ResearchSocial">0</var>,
+                Improves House capacity to 5 people each (from 2)
+                <br><br></div>
+				
+			<div id="house10Research" class="hidden">
+                <button id="house10ResearchButton" class="btn btn-primary">Research Bigger House</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="house10ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="house10ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="house10ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="house10ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="house10ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house10ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house10ResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house10ResearchSocial">0</var>,
+                Improves House capacity to 5 people each (from 2)
+                <br><br></div>
             
-            <div id="farm2Research">
-                <button id="farm2ResearchButton" class="btn btn-primary" onclick="research(40)">Research Advanced Farm</button><br>
+            <div id="farm2Research" class="hidden">
+                <button id="farm2ResearchButton" class="btn btn-primary">Research Advanced Farm</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm2ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm2ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm2ResearchWood">0</var>,
@@ -849,7 +932,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="farm3Research" class="hidden">
-                <button id="farm3ResearchButton" class="btn btn-primary" onclick="research(41)">Research Large Farm</button><br>
+                <button id="farm3ResearchButton" class="btn btn-primary">Research Large Farm</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm3ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm3ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm3ResearchWood">0</var>,
@@ -861,7 +944,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="farm4Research" class="hidden">
-                <button id="farm4ResearchButton" class="btn btn-primary" onclick="research(42)">Research Industrial Farm</button><br>
+                <button id="farm4ResearchButton" class="btn btn-primary">Research Industrial Farm</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm4ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm4ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm4ResearchWood">0</var>,
@@ -873,7 +956,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="farm5Research" class="hidden">
-                <button id="farm5ResearchButton" class="btn btn-primary" onclick="research(43)">Research Electric Farm</button><br>
+                <button id="farm5ResearchButton" class="btn btn-primary">Research Electric Farm</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm5ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm5ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm5ResearchWood">0</var>,
@@ -884,9 +967,69 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="farm5ResearchElectricity">0</var>,
                 Improves Farm resource gain per farmer to 200 (from 100)
                 <br><br></div>
+				
+			<div id="farm6Research" class="hidden">
+                <button id="farm6ResearchButton" class="btn btn-primary">Research Advanced Farm</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm6ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm6ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm6ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="farm6ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="farm6ResearchFormal">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="farm6ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="farm6ResearchApplied">0</var>,
+                Improves Farm resource gain per farmer to 30 (from 10)
+                <br><br></div>
+				
+			<div id="farm7Research" class="hidden">
+                <button id="farm7ResearchButton" class="btn btn-primary">Research Advanced Farm</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm7ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm7ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm7ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="farm7ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="farm7ResearchFormal">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="farm7ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="farm7ResearchApplied">0</var>,
+                Improves Farm resource gain per farmer to 30 (from 10)
+                <br><br></div>
+				
+			<div id="farm8Research" class="hidden">
+                <button id="farm8ResearchButton" class="btn btn-primary">Research Advanced Farm</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm8ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm8ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm8ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="farm8ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="farm8ResearchFormal">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="farm8ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="farm8ResearchApplied">0</var>,
+                Improves Farm resource gain per farmer to 30 (from 10)
+                <br><br></div>
+				
+			<div id="farm9Research" class="hidden">
+                <button id="farm9ResearchButton" class="btn btn-primary">Research Advanced Farm</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm9ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm9ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm9ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="farm9ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="farm9ResearchFormal">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="farm9ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="farm9ResearchApplied">0</var>,
+                Improves Farm resource gain per farmer to 30 (from 10)
+                <br><br></div>
+				
+			<div id="farm10Research" class="hidden">
+                <button id="farm10ResearchButton" class="btn btn-primary">Research Advanced Farm</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="farm10ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="farm10ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="farm10ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="farm10ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="farm10ResearchFormal">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="farm10ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="farm10ResearchApplied">0</var>,
+                Improves Farm resource gain per farmer to 30 (from 10)
+                <br><br></div>
             
-            <div id="lumberMill2Research">
-                <button id="lumberMill2ResearchButton" class="btn btn-primary" onclick="research(50)">Research Advanced Lumber Mill</button><br>
+            <div id="lumberMill2Research" class="hidden">
+                <button id="lumberMill2ResearchButton" class="btn btn-primary">Research Advanced Lumber Mill</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill2ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill2ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="lumberMill2ResearchMetal">0</var>,
@@ -898,7 +1041,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="lumberMill3Research" class="hidden">
-                <button id="lumberMill3ResearchButton" class="btn btn-primary" onclick="research(51)">Research Large Lumber Mill</button><br>
+                <button id="lumberMill3ResearchButton" class="btn btn-primary">Research Large Lumber Mill</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill3ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill3ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill3ResearchWood">0</var>,
@@ -911,7 +1054,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="lumberMill4Research" class="hidden">
-                <button id="lumberMill4ResearchButton" class="btn btn-primary" onclick="research(52)">Research Industrial Lumber Mill</button><br>
+                <button id="lumberMill4ResearchButton" class="btn btn-primary">Research Industrial Lumber Mill</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill4ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill4ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill4ResearchWood">0</var>,
@@ -924,7 +1067,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="lumberMill5Research" class="hidden">
-                <button id="lumberMill5ResearchButton" class="btn btn-primary" onclick="research(53)">Research Electric Lumber Mill</button><br>
+                <button id="lumberMill5ResearchButton" class="btn btn-primary">Research Electric Lumber Mill</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill5ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill5ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill5ResearchWood">0</var>,
@@ -937,9 +1080,77 @@ Proceed only if you are okay with spoilers.-->
                 Improves Lumber Mill resource gain per woodcutter to 200 (from 100)
                 <br><br></div>
             
-           
+            <div id="lumberMill6Research" class="hidden">
+                <button id="lumberMill6ResearchButton" class="btn btn-primary">Research Electric Lumber Mill</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill6ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill6ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill6ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="lumberMill6ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="lumberMill6ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="lumberMill6ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="lumberMill6ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="lumberMill6ResearchApplied">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="lumberMill6ResearchElectricity">0</var>,
+                Improves Lumber Mill resource gain per woodcutter to 200 (from 100)
+                <br><br></div>
+				
+			<div id="lumberMill7Research" class="hidden">
+                <button id="lumberMill7ResearchButton" class="btn btn-primary">Research Electric Lumber Mill</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill7ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill7ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill7ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="lumberMill7ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="lumberMill7ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="lumberMill7ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="lumberMill7ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="lumberMill7ResearchApplied">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="lumberMill7ResearchElectricity">0</var>,
+                Improves Lumber Mill resource gain per woodcutter to 200 (from 100)
+                <br><br></div>
+				
+			<div id="lumberMill8Research" class="hidden">
+                <button id="lumberMill8ResearchButton" class="btn btn-primary">Research Electric Lumber Mill</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill8ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill8ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill8ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="lumberMill8ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="lumberMill8ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="lumberMill8ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="lumberMill8ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="lumberMill8ResearchApplied">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="lumberMill8ResearchElectricity">0</var>,
+                Improves Lumber Mill resource gain per woodcutter to 200 (from 100)
+                <br><br></div>
+				
+			<div id="lumberMill9Research" class="hidden">
+                <button id="lumberMill9ResearchButton" class="btn btn-primary">Research Electric Lumber Mill</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill9ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill9ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill9ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="lumberMill9ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="lumberMill9ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="lumberMill9ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="lumberMill9ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="lumberMill9ResearchApplied">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="lumberMill9ResearchElectricity">0</var>,
+                Improves Lumber Mill resource gain per woodcutter to 200 (from 100)
+                <br><br></div>
+				
+			<div id="lumberMill10Research" class="hidden">
+                <button id="lumberMill10ResearchButton" class="btn btn-primary">Research Electric Lumber Mill</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="lumberMill10ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="lumberMill10ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="lumberMill10ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="lumberMill10ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="lumberMill10ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="lumberMill10ResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="lumberMill10ResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="lumberMill10ResearchApplied">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="lumberMill10ResearchElectricity">0</var>,
+                Improves Lumber Mill resource gain per woodcutter to 200 (from 100)
+                <br><br></div>
             
-            <button class="btn btn-primary" onclick="changePage('research', 2, 3);updateResearchUI();">←Page 2</button> <button class="btn btn-primary" onclick="changePage('research', 4, 3);updateResearchUI();">Page 4→</button>
+            <button class="btn btn-primary" id="researchP5">←Page 2</button> <button class="btn btn-primary" id="researchP6">Page 4→</button>
         </div>
             
         <div id="research4" class="hidden" title="Research Page 4">
@@ -953,8 +1164,8 @@ Proceed only if you are okay with spoilers.-->
             <div class="divider5w"></div>
             <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="social4" style="display: inline-block;">0</var><br><br>
             
-             <div id="metalMine2Research">
-                <button id="metalMine2ResearchButton" class="btn btn-primary" onclick="research(60)">Research Advanced Metal Mine</button><br>
+            <div id="metalMine2Research" class="hidden">
+                <button id="metalMine2ResearchButton" class="btn btn-primary">Research Advanced Metal Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine2ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine2ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalMine2ResearchMetal">0</var>,
@@ -965,7 +1176,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="metalMine3Research" class="hidden">
-                <button id="metalMine3ResearchButton" class="btn btn-primary" onclick="research(61)">Research Large Metal Mine</button><br>
+                <button id="metalMine3ResearchButton" class="btn btn-primary">Research Large Metal Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine3ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalMine3ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine3ResearchWood">0</var>,
@@ -977,7 +1188,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="metalMine4Research" class="hidden">
-                <button id="metalMine4ResearchButton" class="btn btn-primary" onclick="research(62)">Research Industrial Metal Mine</button><br>
+                <button id="metalMine4ResearchButton" class="btn btn-primary">Research Industrial Metal Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine4ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalMine4ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine4ResearchWood">0</var>,
@@ -989,7 +1200,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="metalMine5Research" class="hidden">
-                <button id="metalMine5ResearchButton" class="btn btn-primary" onclick="research(63)">Research Electric Metal Mine</button><br>
+                <button id="metalMine5ResearchButton" class="btn btn-primary">Research Electric Metal Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine5ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalMine5ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine5ResearchWood">0</var>,
@@ -998,22 +1209,77 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science">
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalMine5ResearchApplied">0</var>,
                 <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="metalMine5ResearchElectricity">0</var>,
-                Improves Metal Mine resource gain per miner to 200 (from 60)
+                Improves Metal Mine resource gain per miner to 175 (from 100)
+                <br><br></div>
+				
+			<div id="metalMine6Research" class="hidden">
+                <button id="metalMine6ResearchButton" class="btn btn-primary">Research Advanced Metal Mine</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine6ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine6ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalMine6ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalMine6ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalMine6ResearchPhysical">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalMine6ResearchApplied">0</var>,
+                Improves Metal Mine resource gain per miner to 300 (from 175)
+                <br><br></div>
+				
+			<div id="metalMine7Research" class="hidden">
+                <button id="metalMine7ResearchButton" class="btn btn-primary">Research Advanced Metal Mine</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine7ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine7ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalMine7ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalMine7ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalMine7ResearchPhysical">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalMine7ResearchApplied">0</var>,
+                Improves Metal Mine resource gain per miner to 450 (from 300)
+                <br><br></div>
+				
+			<div id="metalMine8Research" class="hidden">
+                <button id="metalMine8ResearchButton" class="btn btn-primary">Research Advanced Metal Mine</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine8ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine8ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalMine8ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalMine8ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalMine8ResearchPhysical">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalMine8ResearchApplied">0</var>,
+                Improves Metal Mine resource gain per miner to 700 (from 450)
+                <br><br></div>
+				
+			<div id="metalMine9Research" class="hidden">
+                <button id="metalMine9ResearchButton" class="btn btn-primary">Research Advanced Metal Mine</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine9ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine9ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalMine9ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalMine9ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalMine9ResearchPhysical">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalMine9ResearchApplied">0</var>,
+                Improves Metal Mine resource gain per miner to 1000 (from 700)
+                <br><br></div>
+				
+			<div id="metalMine10Research" class="hidden">
+                <button id="metalMine10ResearchButton" class="btn btn-primary">Research Advanced Metal Mine</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalMine10ResearchMoney">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalMine10ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalMine10ResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalMine10ResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalMine10ResearchPhysical">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalMine10ResearchApplied">0</var>,
+                Doubles the production of metal in addition to a Metal Mine resource gain of 1000
                 <br><br></div>
             
             <div id="goldMine2Research">
-                <button id="goldMine2ResearchButton" class="btn btn-primary" onclick="research(70)">Research Advanced Gold Mine</button><br>
+                <button id="goldMine2ResearchButton" class="btn btn-primary">Research Advanced Gold Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="goldMine2ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="goldMine2ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="goldMine2ResearchMetal">0</var>,
                 <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="goldMine2ResearchFormal">0</var>,
                 <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="goldMine2ResearchPhysical">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="goldMine2ResearchApplied">0</var>,
-                Improves Gold Mine Money gain to 1000 (from 500)
+                Improves Gold Mine Money gain to 1500 (from 500)
                 <br><br></div>
             
             <div id="goldMine3Research" class="hidden">
-                <button id="goldMine3ResearchButton" class="btn btn-primary" onclick="research(71)">Research Large Gold Mine</button><br>
+                <button id="goldMine3ResearchButton" class="btn btn-primary">Research Large Gold Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="goldMine3ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="goldMine3ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="goldMine3ResearchWood">0</var>,
@@ -1021,11 +1287,11 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="goldMine3ResearchFormal">0</var>,
                 <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science">
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="goldMine3ResearchApplied">0</var>,
-                Improves Gold Mine resource gain to 2500 (from 1000)
+                Improves Gold Mine resource gain to 3000 (from 1500)
                 <br><br></div>
             
             <div id="goldMine4Research" class="hidden">
-                <button id="goldMine4ResearchButton" class="btn btn-primary" onclick="research(72)">Research Industrial Gold Mine</button><br>
+                <button id="goldMine4ResearchButton" class="btn btn-primary">Research Industrial Gold Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="goldMine4ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="goldMine4ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="goldMine4ResearchWood">0</var>,
@@ -1033,11 +1299,11 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="goldMine4ResearchFormal">0</var>,
                 <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science">
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="goldMine4ResearchApplied">0</var>,
-                Improves Gold Mine resource gain to 5000 (from 2500)
+                Improves Gold Mine resource gain to 5000 (from 3000)
                 <br><br></div>
             
             <div id="goldMine5Research" class="hidden">
-                <button id="goldMine5ResearchButton" class="btn btn-primary" onclick="research(73)">Research Electric Gold Mine</button><br>
+                <button id="goldMine5ResearchButton" class="btn btn-primary">Research Electric Gold Mine</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="goldMine5ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="goldMine5ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="goldMine5ResearchWood">0</var>,
@@ -1046,11 +1312,11 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science">
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="goldMine5ResearchApplied">0</var>,
                 <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="goldMine5ResearchElectricity">0</var>,
-                Improves Gold Mine resource gain to 10000 (from 5000)
+                Improves Gold Mine resource gain to 50000 (from 5000)
                 <br><br></div>
             
             <div id="taxCollector2Research">
-                <button id="taxCollector2ResearchButton" class="btn btn-primary" onclick="research(80)">Research Advanced Tax Collector</button><br>
+                <button id="taxCollector2ResearchButton" class="btn btn-primary">Research Advanced Tax Collector</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector2ResearchMoney">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector2ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector2ResearchMetal">0</var>,
@@ -1059,7 +1325,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="taxCollector3Research" class="hidden">
-                <button id="taxCollector3ResearchButton" class="btn btn-primary" onclick="research(81)">Research Shady Tax Collector</button><br>
+                <button id="taxCollector3ResearchButton" class="btn btn-primary">Research Shady Tax Collector</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector3ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector3ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector3ResearchWood">0</var>,
@@ -1069,7 +1335,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="taxCollector4Research" class="hidden">
-                <button id="taxCollector4ResearchButton" class="btn btn-primary" onclick="research(82)">Research Vigilant Tax Collector</button><br>
+                <button id="taxCollector4ResearchButton" class="btn btn-primary">Research Vigilant Tax Collector</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector4ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector4ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector4ResearchWood">0</var>,
@@ -1079,19 +1345,72 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="taxCollector5Research" class="hidden">
-                <button id="taxCollector5ResearchButton" class="btn btn-primary" onclick="research(83)">Research Electric Tax Collector</button><br>
+                <button id="taxCollector5ResearchButton" class="btn btn-primary">Research Electric Tax Collector</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector5ResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector5ResearchFood">0</var>
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector5ResearchWood">0</var>,
                 <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector5ResearchMetal">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="taxCollector5ResearchSocial">0</var>,
                 <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="taxCollector5ResearchElectricity">0</var>,
-                Improves Tax Collector Money gain to 200 (from 60)
+                Improves Tax Collector Money gain to 1750 (from 100)
                 <br><br></div>
             
+            <div id="taxCollector6Research" class="hidden">
+                <button id="taxCollector6ResearchButton" class="btn btn-primary">Research Electric Tax Collector</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector6ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector6ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector6ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector6ResearchMetal">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="taxCollector6ResearchSocial">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="taxCollector6ResearchElectricity">0</var>,
+                Improves Tax Collector Money gain to 1750 (from 100)
+                <br><br></div>
+				
+			<div id="taxCollector7Research" class="hidden">
+                <button id="taxCollector7ResearchButton" class="btn btn-primary">Research Electric Tax Collector</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector7ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector7ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector7ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector7ResearchMetal">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="taxCollector7ResearchSocial">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="taxCollector7ResearchElectricity">0</var>,
+                Improves Tax Collector Money gain to 1750 (from 100)
+                <br><br></div>
+				
+			<div id="taxCollector8Research" class="hidden">
+                <button id="taxCollector8ResearchButton" class="btn btn-primary">Research Electric Tax Collector</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector8ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector8ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector8ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector8ResearchMetal">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="taxCollector8ResearchSocial">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="taxCollector8ResearchElectricity">0</var>,
+                Improves Tax Collector Money gain to 1750 (from 100)
+                <br><br></div>
+				
+			<div id="taxCollector9Research" class="hidden">
+                <button id="taxCollector9ResearchButton" class="btn btn-primary">Research Electric Tax Collector</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector9ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector9ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector9ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector9ResearchMetal">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="taxCollector9ResearchSocial">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="taxCollector9ResearchElectricity">0</var>,
+                Improves Tax Collector Money gain to 1750 (from 100)
+                <br><br></div>
+				
+			<div id="taxCollector10Research" class="hidden">
+                <button id="taxCollector10ResearchButton" class="btn btn-primary">Research Electric Tax Collector</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="taxCollector10ResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="taxCollector10ResearchFood">0</var>
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="taxCollector10ResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="taxCollector10ResearchMetal">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="taxCollector10ResearchSocial">0</var>,
+                <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="taxCollector10ResearchElectricity">0</var>,
+                Improves Tax Collector Money gain to 1750 (from 100)
+                <br><br></div>
             
-            
-            <button class="btn btn-primary" onclick="changePage('research', 3, 4);updateResearchUI();">←Page 3</button> <button class="btn btn-primary" onclick="changePage('research', 5, 4);updateResearchUI();">Page 5→</button>
+            <button class="btn btn-primary" id="researchP7">←Page 3</button> <button class="btn btn-primary" id="researchP8">Page 5→</button>
                 
         </div>
             
@@ -1105,93 +1424,23 @@ Proceed only if you are okay with spoilers.-->
             <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="applied5" style="display: inline-block;">0</var>
             <div class="divider5w"></div>
             <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="social5" style="display: inline-block;">0</var><br><br>
-            
-            <div id="breakthroughResearch" class="hidden">
-                <button id="breakthroughResearchButton" class="btn btn-primary" onclick="research(10)">Research Production Breakthrough</button>
-                Level <var id="breakthroughResearchAmount">0</var><br>
-                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="breakthroughResearchMoney">0</var>,
-                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="breakthroughResearchFood">0</var>,
-                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="breakthroughResearchWood">0</var>,
-                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="breakthroughResearchMetal">0</var>,
-                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="breakthroughResearchFormal">0</var>,
-                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="breakthroughResearchPhysical">0</var>,
-                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="breakthroughResearchLife">0</var>,
-                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="breakthroughResearchApplied">0</var>,
-                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="breakthroughResearchSocial">0</var>,
-                Double all production, including Research
-                <br><br></div>
-            
-            <div id="upgradeCostResearch">
-                <button id="upgradeCostResearchButton" class="btn btn-primary" onclick="research(11)">Research Upgrade Cost</button>
-                Level <var id="upgradeResearchAmount">0</var><br>
-                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="upgradeResearchMoney">0</var>,
-                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="upgradeResearchFood">0</var>,
-                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="upgradeResearchWood">0</var>,
-                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="upgradeResearchMetal">0</var>,
-                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="upgradeResearchFormal">0</var>,
-                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="upgradeResearchPhysical">0</var>,
-                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="upgradeResearchLife">0</var>,
-                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="upgradeResearchApplied">0</var>,
-                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="upgradeResearchSocial">0</var>,
-                Reduces the cost for all other upgrades <i class="fa fa-info-circle" title="The amount reduced varies for each upgrade"></i>
-                <br><br></div>
-            
-            <button class="btn btn-primary" onclick="changePage('research', 4, 5);updateResearchUI();">←Page 4</button> <button class="btn btn-primary" onclick="changePage('research', 6, 5);updateResearchUI();">Page 6→</button>
-            
-        </div>
-            
-            <div id="research6" class="hidden" title="Research Page 6">
-                
-                <div id="cropHarvesterResearch" class="hidden">
-                <button id="cropHarvesterResearchButton" class="btn btn-primary" onclick="research(93)">Research Crop Harvester</button><br>
-                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="cropHarvesterResearchMoney">0</var>,
-                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="cropHarvesterResearchFood">0</var>,
-                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="cropHarvesterResearchWood">0</var>,
-                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="cropHarvesterResearchMetal">0</var>,
-                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="cropHarvesterResearchFormal">0</var>,
-                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="cropHarvesterResearchPhysical">0</var>,
-                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="cropHarvesterResearchLife">0</var>,
-                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="cropHarvesterResearchApplied">0</var>,
-                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="cropHarvesterResearchSocial">0</var>,
-                Allows building of Crop Harvesters <i class="fa fa-info-circle" title="A Crop Harvester gives an additional +1% chance to obtain 100x food whenever the food progress bar fills"></i>
+				
+			<div id="inspectorResearch" class="hidden">
+                <button id="inspectorResearchButton" class="btn btn-primary">Research Gathering School</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="inspectorResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="inspectorResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="inspectorResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="inspectorResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="inspectorResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="inspectorResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="inspectorResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="inspectorResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="inspectorResearchSocial">0</var>,
+                Allows building of Gathering Schools <i class="fa fa-info-circle" title="A Gathering School gives an additional +0.01% amount bonus for each level of gathering upgrade for food, wood, and metal"></i>
                 <br><br></div>
                 
-                <div id="woodHarvesterResearch" class="hidden">
-                <button id="woodHarvesterResearchButton" class="btn btn-primary" onclick="research(94)">Research Wood Harvester</button><br>
-                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="woodHarvesterResearchMoney">0</var>,
-                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="woodHarvesterResearchFood">0</var>,
-                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="woodHarvesterResearchWood">0</var>,
-                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="woodHarvesterResearchMetal">0</var>,
-                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="woodHarvesterResearchFormal">0</var>,
-                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="woodHarvesterResearchPhysical">0</var>,
-                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="woodHarvesterResearchLife">0</var>,
-                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="woodHarvesterResearchApplied">0</var>,
-                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="woodHarvesterResearchSocial">0</var>,
-                Allows building of Wood Harvesters <i class="fa fa-info-circle" title="A Wood Harvester gives an additional +1% chance to obtain 100x wood whenever the wood progress bar fills"></i>
-                <br><br></div>
-                
-                <div id="metalHarvesterResearch" class="hidden">
-                <button id="metalHarvesterResearchButton" class="btn btn-primary" onclick="research(95)">Research Metal Harvester</button><br>
-                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalHarvesterResearchMoney">0</var>,
-                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalHarvesterResearchFood">0</var>,
-                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalHarvesterResearchWood">0</var>,
-                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalHarvesterResearchMetal">0</var>,
-                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalHarvesterResearchFormal">0</var>,
-                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalHarvesterResearchPhysical">0</var>,
-                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="metalHarvesterResearchLife">0</var>,
-                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalHarvesterResearchApplied">0</var>,
-                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="metalHarvesterResearchSocial">0</var>,
-                Allows building of Metal Harvesters <i class="fa fa-info-circle" title="A Metal Harvester gives an additional +1% chance to obtain 100x metal whenever the metal progress bar fills"></i>
-                <br><br></div>
-                
-                <button class="btn btn-primary" onclick="changePage('research', 5, 6);updateResearchUI();">←Page 5</button> <button class="btn btn-primary" onclick="changePage('research', 7, 6);updateResearchUI();">Page 7→</button>
-                
-            </div>
-            
-            <div id="research7" class="hidden" title="Research Page 7">
-                
-                <div id="gatheringSchoolResearch" class="hidden">
-                <button id="gatheringSchoolResearchButton" class="btn btn-primary" onclick="research(90)">Research Gathering School</button><br>
+            <div id="gatheringSchoolResearch" class="hidden">
+                <button id="gatheringSchoolResearchButton" class="btn btn-primary">Research Gathering School</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="gatheringSchoolResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="gatheringSchoolResearchFood">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="gatheringSchoolResearchWood">0</var>,
@@ -1205,7 +1454,7 @@ Proceed only if you are okay with spoilers.-->
                 <br><br></div>
             
             <div id="toolForgeResearch" class="hidden">
-                <button id="toolForgeResearchButton" class="btn btn-primary" onclick="research(91)">Research Tool Forge</button><br>
+                <button id="toolForgeResearchButton" class="btn btn-primary">Research Tool Forge</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="toolForgeResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="toolForgeResearchFood">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="toolForgeResearchWood">0</var>,
@@ -1218,8 +1467,126 @@ Proceed only if you are okay with spoilers.-->
                 Allows building of Tool Forges <i class="fa fa-info-circle" title="A Tool Forge gives an additional +0.01% speed bonus for each level of tool upgrade for food, wood, and metal"></i>
                 <br><br></div>
             
-            <div id="electricityResearch" class="hidden">
-                <button id="electricityResearchButton" class="btn btn-primary" onclick="research(92)">Research Electricity</button><br>
+            <button class="btn btn-primary" id="researchP9">←Page 4</button> <button class="btn btn-primary" id="researchP10">Page 6→</button>
+            
+        </div>
+            
+            <div id="research6" class="hidden" title="Research Page 6">
+                
+                <div id="cropHarvesterResearch" class="hidden">
+                <button id="cropHarvesterResearchButton" class="btn btn-primary">Research Crop Harvester</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="cropHarvesterResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="cropHarvesterResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="cropHarvesterResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="cropHarvesterResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="cropHarvesterResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="cropHarvesterResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="cropHarvesterResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="cropHarvesterResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="cropHarvesterResearchSocial">0</var>,
+                Allows building of Crop Harvesters <i class="fa fa-info-circle" title="A Crop Harvester gives an additional +1% chance to obtain 100x food whenever the food progress bar fills"></i>
+                <br><br></div>
+                
+                <div id="woodHarvesterResearch" class="hidden">
+                <button id="woodHarvesterResearchButton" class="btn btn-primary">Research Wood Harvester</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="woodHarvesterResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="woodHarvesterResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="woodHarvesterResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="woodHarvesterResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="woodHarvesterResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="woodHarvesterResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="woodHarvesterResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="woodHarvesterResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="woodHarvesterResearchSocial">0</var>,
+                Allows building of Wood Harvesters <i class="fa fa-info-circle" title="A Wood Harvester gives an additional +1% chance to obtain 100x wood whenever the wood progress bar fills"></i>
+                <br><br></div>
+                
+                <div id="metalHarvesterResearch" class="hidden">
+                <button id="metalHarvesterResearchButton" class="btn btn-primary">Research Metal Harvester</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="metalHarvesterResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="metalHarvesterResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="metalHarvesterResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="metalHarvesterResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="metalHarvesterResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="metalHarvesterResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="metalHarvesterResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="metalHarvesterResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="metalHarvesterResearchSocial">0</var>,
+                Allows building of Metal Harvesters <i class="fa fa-info-circle" title="A Metal Harvester gives an additional +1% chance to obtain 100x metal whenever the metal progress bar fills"></i>
+                <br><br></div>
+                
+                <button class="btn btn-primary" id="researchP11">←Page 5</button> <button class="btn btn-primary" id="researchP12">Page 7→</button>
+                
+            </div>
+            
+            <div id="research7" class="hidden" title="Research Page 7">
+				
+				<div id="breakthroughResearch" class="hidden">
+                <button id="breakthroughResearchButton" class="btn btn-primary">Research Production Breakthrough</button>
+                Level <var id="breakthroughResearchAmount">0</var><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="breakthroughResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="breakthroughResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="breakthroughResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="breakthroughResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="breakthroughResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="breakthroughResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="breakthroughResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="breakthroughResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="breakthroughResearchSocial">0</var>,
+                Double all production, including Research
+                <br><br></div>
+            
+            <div id="upgradeCostResearch" class="hidden">
+                <button id="upgradeCostResearchButton" class="btn btn-primary">Research Upgrade Cost</button>
+                Level <var id="upgradeResearchAmount">0</var><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="upgradeResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="upgradeResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="upgradeResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="upgradeResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="upgradeResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="upgradeResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="upgradeResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="upgradeResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="upgradeResearchSocial">0</var>,
+                Reduces the cost for all other upgrades <i class="fa fa-info-circle" title="The amount reduced varies for each upgrade"></i>
+                <br><br></div>
+				
+			<div id="singularityGenerationResearch" class="hidden">
+                <button id="singularityGenerationResearchButton" class="btn btn-primary">Research Electricity</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="singularityGenerationResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="singularityGenerationResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="singularityGenerationResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="singularityGenerationResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="singularityGenerationResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="singularityGenerationResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="singularityGenerationResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="singularityGenerationResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="singularityGenerationResearchSocial">0</var>,
+                Allows production of electricity
+                <br><br></div>
+            
+                <button class="btn btn-primary" id="researchP13">←Page 6</button> <button class="btn btn-primary" id="researchP14">Page 8→</button>
+                
+            </div>
+				
+			<div id="research8" class="hidden" title="Research Page 8">
+				
+			<div id="manufacturingResearch" class="hidden">
+                <button id="manufacturingResearchButton" class="btn btn-primary">Research Electricity</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="manufacturingResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="manufacturingResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="manufacturingResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="manufacturingResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="manufacturingResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="manufacturingResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="manufacturingResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="manufacturingResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="manufacturingResearchSocial">0</var>,
+                Allows production of electricity
+                <br><br></div>
+			
+			<div id="electricityResearch" class="hidden">
+                <button id="electricityResearchButton" class="btn btn-primary">Research Electricity</button><br>
                 <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="electricityResearchMoney">0</var>,
                 <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="electricityResearchFood">0</var>,
                 <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="electricityResearchWood">0</var>,
@@ -1231,10 +1598,74 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="electricityResearchSocial">0</var>,
                 Allows production of electricity
                 <br><br></div>
-                
-                <button class="btn btn-primary" onclick="changePage('research', 6, 7);updateResearchUI();">←Page 6</button> <button class="btn btn-primary" onclick="changePage('research', 8, 7);updateResearchUI();">Page 8→</button>
-                
-            </div>
+				
+			<div id="roboticsFactoryResearch" class="hidden">
+                <button id="roboticsFactoryResearchButton" class="btn btn-primary">Research Electricity</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="roboticsFactoryResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="roboticsFactoryResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="roboticsFactoryResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="roboticsFactoryResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="roboticsFactoryResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="roboticsFactoryResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="roboticsFactoryResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="roboticsFactoryResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="roboticsFactoryResearchSocial">0</var>,
+                Allows building robotics factories <!--robotics factories add population over time-->
+                <br><br></div>
+				
+				<button class="btn btn-primary" id="researchP15">←Page 7</button> <button class="btn btn-primary" id="researchP16">Page 9→</button>
+			</div>
+				
+			<div id="research9" class="hidden" title="Research Page 9">
+				
+			<div id="internetResearch" class="hidden">
+                <button id="internetResearchButton" class="btn btn-primary">Research The Internet</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="internetResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="internetResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="internetResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="internetResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="internetResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="internetResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="internetResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="internetResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="internetResearchSocial">0</var>,
+                Allows production of electricity
+                <br><br></div>
+				
+				<!--research internet for the following-->
+				
+			<div id="gameDevelopmentResearch" class="hidden">
+                <button id="gameDevelopmentResearchButton" class="btn btn-primary">Research Game Development</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="gameDevelopmentResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="gameDevelopmentResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="gameDevelopmentResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="gameDevelopmentResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="gameDevelopmentResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="gameDevelopmentResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="gameDevelopmentResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="gameDevelopmentResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="gameDevelopmentResearchSocial">0</var>,
+                Allows production of electricity
+                <br><br></div>
+				
+				<!--research game development for the following-->
+				
+			<div id="evolvingCivilizationsIdleResearch" class="hidden">
+                <button id="evolvingCivilizationsIdleResearchButton" class="btn btn-primary">Research The Game "Evolving Civilizations Idle"</button><br>
+                <img src="Resources/Dollar.png" alt="Money:" title="Money"> <var id="evolvingCivilizationsIdleResearchMoney">0</var>,
+                <img src="Resources/Food.png" alt="Food:" title="Food"> <var id="evolvingCivilizationsIdleResearchFood">0</var>,
+                <img src="Resources/Wood.png" alt="Wood:" title="Wood"> <var id="evolvingCivilizationsIdleResearchWood">0</var>,
+                <img src="Resources/Metal.png" alt="Metal:" title="Metal"> <var id="evolvingCivilizationsIdleResearchMetal">0</var>,
+                <img src="Resources/Infinity.png" alt="Formal Science" title="Formal Science"> <var id="evolvingCivilizationsIdleResearchFormal">0</var>,
+                <img src="Resources/TestTube.png" alt="Physical Science" title="Physical Science"> <var id="evolvingCivilizationsIdleResearchPhysical">0</var>,
+                <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="evolvingCivilizationsIdleResearchLife">0</var>,
+                <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="evolvingCivilizationsIdleResearchApplied">0</var>,
+                <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="evolvingCivilizationsIdleResearchSocial">0</var>,
+                Allows Prestiging
+                <br><br></div>
+				
+				<button class="btn btn-primary" id="researchP17">←Page 8</button>
+			</div>
         
         <!--Manufacturing-->
         
@@ -1248,13 +1679,24 @@ Proceed only if you are okay with spoilers.-->
         
         <div id="randomEvent0" class="hidden" title="Plentiful Crops!">
             Your Farms have been producing an exceptional amount of crops recently, and you wish to do something with them.<br><br>
-            <button class="btn btn-primary" id="event0Option0" onclick="eventButtons(0, 0)">Put it into storage</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.
-            <button class="btn btn-primary" id="event0Option1" onclick="eventButtons(0, 1)">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.
+            <button class="btn btn-primary" id="event0Option0" onclick="eventButtons(0, 0)">Put it into storage</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
+            <button class="btn btn-primary" id="event0Option1">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
+        </div>
+		
+		<div id="randomEvent1" class="hidden" title="Forest Discovered!">
+            Your Farms have been producing an exceptional amount of crops recently, and you wish to do something with them.<br><br>
+            <button class="btn btn-primary" id="event1Option0">Put it into storage</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
+            <button class="btn btn-primary" id="event1Option1">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
+        </div>
+		
+		<div id="randomEvent2" class="hidden" title="Ore Vein Found!">
+            Your Miners have found a massive new ore vein, and they would like to know what to do with it.<br><br>
+            <button class="btn btn-primary" id="event2Option0">Mine it all quickly</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
+            <button class="btn btn-primary" id="event2Option1">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
         </div>
                 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-
         <script src="EvolvingCivilizationsIdle.js"></script>
     </body>
 </html>
