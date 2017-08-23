@@ -91,6 +91,9 @@ class UpdateUI {
 	}
 	
 	public static function displayUI(evolution: Int){
+		if (Main.skill40.amount >= 1){
+			new JQuery("#marketButton").removeClass("hidden");
+		}
 		if (evolution >= 0){ //unlocked by default
 			Main.food.setupBar();
 			Main.wood.setupBar();
@@ -203,5 +206,13 @@ class UpdateUI {
 				new JQuery("#newWoodcutterRemove").show();
 				new JQuery("#newMinerRemove").show();
 		}
+	}
+	
+	public static function updateAllSkills(){
+		
+	}
+	
+	public static function updateSkill(){
+		
 	}
 }

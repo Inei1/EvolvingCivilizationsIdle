@@ -5,7 +5,7 @@ class Buyable {
 	
 	public function new(name: String, id: Int, ?amount: Decimal, ?moneyCost: Decimal, ?foodCost: Decimal, ?woodCost: Decimal, ?metalCost: Decimal,
 	?populationCost: Decimal, ?populationMaxCost: Decimal, ?formalCost: Decimal, ?physicalCost: Decimal, ?lifeCost: Decimal, ?appliedCost: Decimal,
-	?socialCost: Decimal, ?electricityCost: Decimal, ?perkCost: Decimal, ?skillCost: Decimal){
+	?socialCost: Decimal, ?electricityCost: Decimal, ?perkCost: Decimal, ?skillCost: Decimal, ?maxLevel: Int){
 		this.id = id;
 		this.name = name;
 		this.amount = amount;
@@ -23,6 +23,7 @@ class Buyable {
 		this.electricityCost = electricityCost;
 		this.perkCost = perkCost;
 		this.skillCost = skillCost;
+		this.maxLevel = maxLevel;
 	}
 	
 	private var id: Int=0;
@@ -39,9 +40,10 @@ class Buyable {
 	public var lifeCost: Decimal=0;
 	public var appliedCost: Decimal=0;
 	public var socialCost: Decimal=0;
-	public var electricityCost: Decimal = 0;
+	public var electricityCost: Decimal=0;
 	public var perkCost: Decimal=0;
 	public var skillCost: Decimal=0;
+	public var maxLevel: Int=2147483647; //max int value
 	
 	public inline function getId(): Int{
 		return this.id;
@@ -107,7 +109,7 @@ class Buyable {
 		return (Main.money.amount >= this.moneyCost && Main.food.amount >= this.foodCost && Main.wood.amount >= this.woodCost
 		&& Main.metal.amount >= this.metalCost && Main.population.amount >= this.populationCost && Main.populationMax.amount >= this.populationMaxCost
 		&& Main.formal.amount >= this.formalCost && Main.physical.amount >= this.physicalCost && Main.life.amount >= this.lifeCost
-		&& Main.applied.amount >= this.appliedCost && Main.social.amount >= this.socialCost);
+		&& Main.applied.amount >= this.appliedCost && Main.social.amount >= this.socialCost && this.amount != this.maxLevel);
 	}
 	
 	private function takeResources(): Void{

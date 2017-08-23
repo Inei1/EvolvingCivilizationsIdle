@@ -17,6 +17,8 @@ class Util {
 		Browser.getLocalStorage().setItem("evolution", Std.string(Main.evolution));
 		Browser.getLocalStorage().setItem("upgradeAmountMult", Main.upgradeAmountMult.toString());
 		Browser.getLocalStorage().setItem("upgradeSpeedMult", Main.upgradeSpeedMult.toString());
+		Browser.getLocalStorage().setItem("marketBuy", Std.string(Main.marketBuy));
+		Browser.getLocalStorage().setItem("marketSell", Std.string(Main.marketSell));
 		
 		//localStorage does not play nice with classes in haxe, so each Decimal must be seperate from everything else
 		//barinc and progress can be determined at runtime, id and name are constant, so they do not need to be saved
@@ -60,6 +62,8 @@ class Util {
 		Main.evolution = Std.parseInt(Browser.getLocalStorage().getItem("evolution"));
 		Main.upgradeAmountMult = Decimal.fromString(Browser.getLocalStorage().getItem("upgradeAmountMult"));
 		Main.upgradeSpeedMult = Decimal.fromString(Browser.getLocalStorage().getItem("upgradeSpeedMult"));
+		Main.marketBuy = Std.parseFloat(Browser.getLocalStorage().getItem("marketBuy"));
+		Main.marketSell = Std.parseFloat(Browser.getLocalStorage().getItem("marketSell"));
 		for (i in Main.resourceArray){
 			i.amount = Browser.getLocalStorage().getItem(i.getName() + "Amount");
 			i.plus = Browser.getLocalStorage().getItem(i.getName() + "Plus");

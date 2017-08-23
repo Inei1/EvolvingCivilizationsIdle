@@ -11,6 +11,7 @@ needed to get to where I was before:
 	-reset
 	-skills
 	-random events
+	-production overviews
 
 Required before release:
 *****get to previous progress with javascript

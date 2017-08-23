@@ -20,8 +20,11 @@ class Main {
 	public static var moneyTimer = new Timer(1000);
 	static var populationTimer = new Timer(10000);
 	static var updateUITimer = new Timer(250);
+	static var equalizerTimer = new Timer(10000);
 	
 	public static var evolution: Int = 0;
+	public static var marketBuy: Float = 1.3;
+	public static var marketSell: Float = 0.7;
 
 	public static var money = new Resource("money", 0, "0", "100", "0");
 	public static var food = new Resource("food", 1, "0", "100", "0");
@@ -52,8 +55,8 @@ class Main {
 	public static var farm = new RebuyableUpgrade("farm", 1, building, "0", "20000", "8000", "5000", "2000");
 	public static var lumberMill = new RebuyableUpgrade("lumberMill", 2, building, "0", "20000", "2000", "8000", "5000");
 	public static var metalMine = new RebuyableUpgrade("metalMine", 3, building, "0", "20000", "2000", "5000", "8000");
-	public static var taxCollector = new RebuyableUpgrade("tax", 4, building, "0", "2500", "100", "1500", "1500");
-	public static var goldMine = new RebuyableUpgrade("goldMine", 5, building, "0", "10000", "500", "5000", "5000");
+	public static var goldMine = new RebuyableUpgrade("goldMine", 4, building, "0", "10000", "500", "5000", "5000");
+	public static var taxCollector = new RebuyableUpgrade("tax", 5, building, "0", "2500", "100", "1500", "1500");
 	public static var cropHarvester = new RebuyableUpgrade("cropHarvester", 6, building);
 	public static var woodHarvester = new RebuyableUpgrade("woodHarvester", 7, building);
 	public static var metalHarvester = new RebuyableUpgrade("metalHarvester", 8, building);
@@ -76,8 +79,21 @@ class Main {
 	public static var breakthrough = new RebuyableUpgrade("breakthroughResearch", 110, research);
 	public static var upgradeCost = new RebuyableUpgrade("upgradeCostResearch", 111, research);
 	public static var skill0 = new RebuyableUpgrade("skill0", 200, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
-	public static var skill1 = new RebuyableUpgrade("skill1", 201, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
-	//public static var skill
+	public static var skill1 = new RebuyableUpgrade("skill1", 201, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "3");
+	public static var skill10 = new RebuyableUpgrade("skill10", 210, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	public static var skill11 = new RebuyableUpgrade("skill11", 211, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "3");
+	public static var skill20 = new RebuyableUpgrade("skill20", 220, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	public static var skill21 = new RebuyableUpgrade("skill21", 221, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "3");
+	public static var skill30 = new RebuyableUpgrade("skill30", 230, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	public static var skill31 = new RebuyableUpgrade("skill31", 231, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "3");
+	public static var skill40 = new RebuyableUpgrade("skill40", 240, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	public static var skill41 = new RebuyableUpgrade("skill41", 241, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "5");
+	public static var skill42 = new RebuyableUpgrade("skill42", 242, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "10");
+	public static var skill50 = new RebuyableUpgrade("skill50", 250, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "3");
+	public static var skill51 = new RebuyableUpgrade("skill51", 251, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "3");
+	public static var skill52 = new RebuyableUpgrade("skill52", 252, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
+	public static var skill60 = new RebuyableUpgrade("skill60", 260, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "5");
+	public static var skill61 = new RebuyableUpgrade("skill61", 261, skill, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1");
 	public static var perk0 = new RebuyableUpgrade("perk0", 300, perk, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "5", "0");
 	public static var perk1 = new RebuyableUpgrade("perk1", 301, perk, "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "5", "0");
 	
@@ -144,9 +160,18 @@ class Main {
 	public static var electricityResearch = new OneTimeUpgrade("electricityResearch", 75, "0", "100000000000000", "10000000000000", "10000000000000", "10000000000000", "0", "0", "1000000", "5000000", "0", "3000000", "0");
 	
 	public static var resourceArray = [money, food, wood, metal, population, populationMax];
-	public static var upgradeArray = [newFarmer, farmerUpgrade1, farmerUpgrade2, newWoodcutter, woodcutterUpgrade1, woodcutterUpgrade2, newMiner, minerUpgrade1, minerUpgrade2];
-	public static var buildingArray = [house, farm, lumberMill, metalMine, taxCollector, goldMine, cropHarvester, woodHarvester, metalHarvester, gatheringSchool, toolForge, woodBurner, electrostaticGenerator, solarPanel, nuclearGenerator];
-	public static var researchArray = [newFormal, newPhysical, newLife, newApplied, newSocial, formalTheory, physicalTheory, lifeTheory, appliedTheory, socialTheory, house2, house3, house4, house5, farm2, farm3, farm4, farm5, lumberMill2, lumberMill3, lumberMill4, lumberMill5, metalMine2, metalMine3, metalMine4, metalMine5, goldMine2, goldMine3, goldMine4, goldMine5, taxCollector2, taxCollector3, taxCollector4, taxCollector5, cropHarvesterResearch, woodHarvesterResearch, metalHarvesterResearch, gatheringSchoolResearch, toolForgeResearch, electricityResearch, breakthrough, upgradeCost];
+	public static var upgradeArray = [newFarmer, farmerUpgrade1, farmerUpgrade2, newWoodcutter,
+	woodcutterUpgrade1, woodcutterUpgrade2,newMiner, minerUpgrade1, minerUpgrade2];
+	public static var buildingArray = [house, farm, lumberMill, metalMine, taxCollector, goldMine,
+	cropHarvester, woodHarvester, metalHarvester, gatheringSchool, toolForge, woodBurner, electrostaticGenerator, solarPanel, nuclearGenerator];
+	public static var researchArray = [newFormal, newPhysical, newLife, newApplied, newSocial, formalTheory,
+	physicalTheory, lifeTheory, appliedTheory, socialTheory, house2, house3, house4, house5, house6, house7,
+	house8, house9, house10, farm2, farm3, farm4, farm5, farm6, farm7, farm8, farm9, farm10, lumberMill2, lumberMill3,
+	lumberMill4, lumberMill5, lumberMill6, lumberMill7, lumberMill8, lumberMill9, lumberMill10, metalMine2, metalMine3,
+	metalMine4, metalMine5, metalMine6, metalMine7, metalMine8, metalMine9, metalMine10, goldMine2, goldMine3, goldMine4,
+	goldMine5, goldMine6, goldMine7, goldMine8, goldMine9, goldMine10, taxCollector2, taxCollector3, taxCollector4, taxCollector5,
+	taxCollector6, taxCollector7, taxCollector8, taxCollector9, taxCollector10, cropHarvesterResearch, woodHarvesterResearch,
+	metalHarvesterResearch, gatheringSchoolResearch, toolForgeResearch, electricityResearch, breakthrough, upgradeCost];
 	public static var skillArray = [skill0, skill1];
 	public static var perkArray = [perk0, perk1];
 	
@@ -183,6 +208,7 @@ class Main {
 		Browser.document.getElementById("manufacturingUpgradesButton").onclick = Util.dialogs.bind("upgrades1");
 		Browser.document.getElementById("resetYes").onclick = Util.reset;
 		Browser.document.getElementById("resetNo").onclick = Util.closeDialog.bind("resetConfirmation");
+		Browser.document.getElementById("marketButton").onclick = Util.dialogs.bind("market");
 		
 		for (i in resourceArray.slice(1, 4)){
 			Browser.document.getElementById(i.getName() + "ProdButton").onclick = Util.dialogs.bind(i.getName() + "Prod");

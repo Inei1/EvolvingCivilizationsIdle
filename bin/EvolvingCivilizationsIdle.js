@@ -3500,6 +3500,7 @@ var Resource = function(name,id,amount,plus,autoCost) {
 	this.amount = amount;
 	this.plus = plus;
 	this.autoCost = autoCost;
+	this.otherBonus = 1.0;
 };
 Resource.__name__ = ["Resource"];
 Resource.prototype = {
@@ -3510,6 +3511,8 @@ Resource.prototype = {
 	,plus: null
 	,autoCost: null
 	,buildingBonus: null
+	,otherBonus: null
+	,baseBonus: null
 	,barInc: null
 	,progress: null
 	,timer: null
@@ -3552,7 +3555,7 @@ Resource.prototype = {
 		if(this.plus == null || this.upgrades[1] == null || this.upgrades[0] == null) {
 			return thx__$Decimal_Decimal_$Impl_$.zero;
 		}
-		this.plus = this.upgrades[0].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(100)).multiply(thx_bigint_Decimals.fromFloat(Math.pow(Main.upgradeAmountMult.toFloat(),this.upgrades[1].amount.toFloat()))).multiply(Main.buildingArray[this.id].amount.multiply(thx_bigint_Decimals.fromFloat(this.buildingBonus / 100)).add(thx__$Decimal_Decimal_$Impl_$.fromInt(1)));
+		this.plus = Main.buildingArray[this.id].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(this.buildingBonus)).add(this.baseBonus).add(this.upgrades[0].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(100))).multiply(thx_bigint_Decimals.fromFloat(this.otherBonus)).multiply(thx_bigint_Decimals.fromFloat(Math.pow(Main.upgradeAmountMult.toFloat(),this.upgrades[1].amount.toFloat())));
 		return this.plus;
 	}
 	,updateBarInc: function() {
@@ -3593,7 +3596,8 @@ upgrades_UpgradeType.skill = ["skill",2];
 upgrades_UpgradeType.skill.__enum__ = upgrades_UpgradeType;
 upgrades_UpgradeType.perk = ["perk",3];
 upgrades_UpgradeType.perk.__enum__ = upgrades_UpgradeType;
-var upgrades_Buyable = function(name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,formalCost,physicalCost,lifeCost,appliedCost,socialCost,electricityCost,perkCost,skillCost) {
+var upgrades_Buyable = function(name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,formalCost,physicalCost,lifeCost,appliedCost,socialCost,electricityCost,perkCost,skillCost,maxLevel) {
+	this.maxLevel = 2147483647;
 	this.skillCost = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
 	this.perkCost = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
 	this.electricityCost = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
@@ -3628,6 +3632,7 @@ var upgrades_Buyable = function(name,id,amount,moneyCost,foodCost,woodCost,metal
 	this.electricityCost = electricityCost;
 	this.perkCost = perkCost;
 	this.skillCost = skillCost;
+	this.maxLevel = maxLevel;
 };
 upgrades_Buyable.__name__ = ["upgrades","Buyable"];
 upgrades_Buyable.prototype = {
@@ -3648,6 +3653,7 @@ upgrades_Buyable.prototype = {
 	,electricityCost: null
 	,perkCost: null
 	,skillCost: null
+	,maxLevel: null
 	,getId: function() {
 		return this.id;
 	}
@@ -3753,8 +3759,8 @@ upgrades_Buyable.prototype = {
 		if(this.skillCost == null) {
 			this.skillCost = thx__$Decimal_Decimal_$Impl_$.zero;
 		}
-		if(thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.money.amount,this.moneyCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,this.foodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,this.woodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,this.metalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,this.populationCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.populationMax.amount,this.populationMaxCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.formal.amount,this.formalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.physical.amount,this.physicalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.life.amount,this.lifeCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.applied.amount,this.appliedCost)) {
-			return thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.social.amount,this.socialCost);
+		if(thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.money.amount,this.moneyCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,this.foodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,this.woodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,this.metalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,this.populationCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.populationMax.amount,this.populationMaxCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.formal.amount,this.formalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.physical.amount,this.physicalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.life.amount,this.lifeCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.applied.amount,this.appliedCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.social.amount,this.socialCost)) {
+			return thx__$Decimal_Decimal_$Impl_$.notEquals(this.amount,thx__$Decimal_Decimal_$Impl_$.fromInt(this.maxLevel));
 		} else {
 			return false;
 		}
@@ -3809,6 +3815,7 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 		var v = this.amount;
 		this.amount = this.amount.add(thx__$Decimal_Decimal_$Impl_$.one);
 		this.increaseCost();
+		var tmp = this.id >= 5;
 		var _g = this.id;
 		switch(_g) {
 		case 0:
@@ -3823,8 +3830,8 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			Main.metal.updatePlus();
 			break;
 		case 4:
-			var tmp = Main.money.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
-			Main.money.plus = tmp;
+			var tmp1 = Main.money.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
+			Main.money.plus = tmp1;
 			break;
 		case 5:
 			break;
@@ -3841,24 +3848,24 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			Main.upgradeSpeedMult = Main.upgradeSpeedMult.add(thx_bigint_Decimals.fromFloat(0.01));
 			break;
 		case 11:
-			var tmp1 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(3));
-			Main.electricity.plus = tmp1;
-			var tmp2 = Main.wood.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
-			Main.wood.autoCost = tmp2;
+			var tmp2 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(3));
+			Main.electricity.plus = tmp2;
+			var tmp3 = Main.wood.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.wood.autoCost = tmp3;
 			break;
 		case 12:
-			var tmp3 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1));
-			Main.electricity.plus = tmp3;
-			break;
-		case 13:
-			var tmp4 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
+			var tmp4 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1));
 			Main.electricity.plus = tmp4;
 			break;
-		case 14:
-			var tmp5 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100));
+		case 13:
+			var tmp5 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
 			Main.electricity.plus = tmp5;
-			var tmp6 = Main.metal.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100000));
-			Main.metal.autoCost = tmp6;
+			break;
+		case 14:
+			var tmp6 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100));
+			Main.electricity.plus = tmp6;
+			var tmp7 = Main.metal.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100000));
+			Main.metal.autoCost = tmp7;
 			break;
 		case 100:
 			break;
@@ -3883,6 +3890,52 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 		case 110:
 			break;
 		case 111:
+			break;
+		case 200:
+			Main.money.otherBonus += 0.05;
+			break;
+		case 201:
+			var tmp8 = Main.money.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.money.baseBonus = tmp8;
+			break;
+		case 210:
+			Main.food.otherBonus += 0.05;
+			break;
+		case 211:
+			var tmp9 = Main.food.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.food.baseBonus = tmp9;
+			break;
+		case 221:
+			Main.wood.otherBonus += 0.05;
+			break;
+		case 222:
+			var tmp10 = Main.wood.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.wood.baseBonus = tmp10;
+			break;
+		case 230:
+			Main.metal.otherBonus += 0.05;
+			break;
+		case 231:
+			var tmp11 = Main.metal.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.metal.baseBonus = tmp11;
+			break;
+		case 240:
+			Main.marketBuy -= 0.05;
+			Main.marketSell += 0.05;
+			break;
+		case 241:
+			break;
+		case 242:
+			break;
+		case 250:
+			break;
+		case 251:
+			break;
+		case 252:
+			break;
+		case 260:
+			break;
+		case 261:
 			break;
 		}
 		UpdateUI.updateUpgrade(this);
@@ -3915,6 +3968,7 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			this.electricityCost = thx_bigint_Decimals.fromFloat(Math.pow(this.electricityCost.toFloat(),1.04));
 			break;
 		case 2:
+			this.skillCost = thx_bigint_Decimals.fromFloat(Math.pow(this.skillCost.toFloat(),1.04) + 1);
 			break;
 		case 3:
 			this.perkCost = thx_bigint_Decimals.fromFloat(Math.pow(this.perkCost.toFloat(),1.2) + 1);
@@ -3931,6 +3985,12 @@ upgrades_OneTimeUpgrade.__name__ = ["upgrades","OneTimeUpgrade"];
 upgrades_OneTimeUpgrade.__super__ = upgrades_Buyable;
 upgrades_OneTimeUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 	bought: null
+	,modifyHouse: function(newMax,prevMax) {
+		Main.house.populationMaxCost = thx__$Decimal_Decimal_$Impl_$.fromInt(-newMax);
+		var tmp = Main.populationMax.amount.add(Main.house.amount.multiply(prevMax));
+		Main.populationMax.amount = tmp;
+		$("#housePopulationIncrease").text(Main.house.populationMaxCost.negate().toFloat());
+	}
 	,onClick: function() {
 		if(!this.isBuyable()) {
 			return;
@@ -3942,25 +4002,60 @@ upgrades_OneTimeUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 		this.bought = true;
 		var _g = this.id;
 		switch(_g) {
-		case 0:
-			break;
 		case 10:
-			Main.house.populationMaxCost = thx__$Decimal_Decimal_$Impl_$.fromInt(-5);
-			var tmp = Main.populationMax.amount.add(Main.house.amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(3)));
-			Main.populationMax.amount = tmp;
-			$("#housePopulationIncrease").text(Main.house.populationMaxCost.negate().toFloat());
+			this.modifyHouse(4,thx__$Decimal_Decimal_$Impl_$.fromInt(2));
 			break;
 		case 11:
-			Main.house.populationMaxCost = thx__$Decimal_Decimal_$Impl_$.fromInt(-10);
-			var tmp1 = Main.populationMax.amount.add(Main.house.amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(5)));
-			Main.populationMax.amount = tmp1;
-			$("#housePopulationIncrease").text(Main.house.populationMaxCost.negate().toFloat());
+			this.modifyHouse(8,thx__$Decimal_Decimal_$Impl_$.fromInt(4));
 			break;
 		case 12:
-			Main.house.populationMaxCost = thx__$Decimal_Decimal_$Impl_$.fromInt(-25);
-			var tmp2 = Main.populationMax.amount.add(Main.house.amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(15)));
-			Main.populationMax.amount = tmp2;
-			$("#housePopulationIncrease").text(Main.house.populationMaxCost.negate().toFloat());
+			this.modifyHouse(16,thx__$Decimal_Decimal_$Impl_$.fromInt(8));
+			break;
+		case 13:
+			this.modifyHouse(32,thx__$Decimal_Decimal_$Impl_$.fromInt(16));
+			break;
+		case 14:
+			this.modifyHouse(64,thx__$Decimal_Decimal_$Impl_$.fromInt(32));
+			break;
+		case 15:
+			this.modifyHouse(128,thx__$Decimal_Decimal_$Impl_$.fromInt(64));
+			break;
+		case 16:
+			this.modifyHouse(256,thx__$Decimal_Decimal_$Impl_$.fromInt(128));
+			break;
+		case 17:
+			this.modifyHouse(512,thx__$Decimal_Decimal_$Impl_$.fromInt(256));
+			break;
+		case 18:
+			this.modifyHouse(1024,thx__$Decimal_Decimal_$Impl_$.fromInt(512));
+			break;
+		case 20:
+			Main.food.buildingBonus = 30;
+			break;
+		case 21:
+			Main.food.buildingBonus = 60;
+			break;
+		case 22:
+			Main.food.buildingBonus = 100;
+			break;
+		case 23:
+			Main.food.buildingBonus = 175;
+			break;
+		case 24:
+			Main.food.buildingBonus = 300;
+			break;
+		case 25:
+			Main.food.buildingBonus = 450;
+			break;
+		case 26:
+			Main.food.buildingBonus = 700;
+			break;
+		case 27:
+			Main.food.buildingBonus = 1000;
+			break;
+		case 28:
+			Main.food.buildingBonus = 1000;
+			Main.food.otherBonus *= Math.pow(2,Main.farm.amount.toFloat());
 			break;
 		}
 	}
@@ -3977,6 +4072,19 @@ upgrades_OneTimeUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 	}
 	,__class__: upgrades_OneTimeUpgrade
 });
+var haxe_Timer = function(time_ms) {
+	var me = this;
+	this.id = setInterval(function() {
+		me.run();
+	},time_ms);
+};
+haxe_Timer.__name__ = ["haxe","Timer"];
+haxe_Timer.prototype = {
+	id: null
+	,run: function() {
+	}
+	,__class__: haxe_Timer
+};
 var upgrades_ResourceUpgrade = function(name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,resource) {
 	upgrades_Buyable.call(this,name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost);
 	this.resource = resource;
@@ -4034,19 +4142,6 @@ upgrades_ResourceUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 	}
 	,__class__: upgrades_ResourceUpgrade
 });
-var haxe_Timer = function(time_ms) {
-	var me = this;
-	this.id = setInterval(function() {
-		me.run();
-	},time_ms);
-};
-haxe_Timer.__name__ = ["haxe","Timer"];
-haxe_Timer.prototype = {
-	id: null
-	,run: function() {
-	}
-	,__class__: haxe_Timer
-};
 var Main = function() { };
 Main.__name__ = ["Main"];
 Main.main = function() {
@@ -4101,6 +4196,9 @@ Main.main = function() {
 	window.document.getElementById("resetYes").onclick = Util.reset;
 	window.document.getElementById("resetNo").onclick = function() {
 		Util.closeDialog("resetConfirmation");
+	};
+	window.document.getElementById("marketButton").onclick = function() {
+		Util.dialogs("market");
 	};
 	var _g = 0;
 	var _g1 = Main.resourceArray.slice(1,4);
@@ -4179,10 +4277,10 @@ Main.main = function() {
 	window.document.addEventListener("visibilitychange",Util.addOfflineProduction);
 	window.document.addEventListener("beforeunload",Util.saveGame);
 	if(js_Browser.getLocalStorage().getItem("foodAmount") == null) {
-		haxe_Log.trace("new game",{ fileName : "Main.hx", lineNumber : 236, className : "Main", methodName : "main"});
+		haxe_Log.trace("new game",{ fileName : "Main.hx", lineNumber : 253, className : "Main", methodName : "main"});
 		UpdateUI.updateAll();
 	} else {
-		haxe_Log.trace("load game",{ fileName : "Main.hx", lineNumber : 239, className : "Main", methodName : "main"});
+		haxe_Log.trace("load game",{ fileName : "Main.hx", lineNumber : 256, className : "Main", methodName : "main"});
 		Util.loadGame();
 		UpdateUI.displayUI(Main.evolution);
 		Util.addOfflineProduction();
@@ -4560,6 +4658,9 @@ UpdateUI.updateUpgradeButton = function(upgrade) {
 	}
 };
 UpdateUI.displayUI = function(evolution) {
+	if(thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.skill40.amount,thx__$Decimal_Decimal_$Impl_$.fromInt(1))) {
+		$("#marketButton").removeClass("hidden");
+	}
 	if(evolution >= 0) {
 		Main.food.setupBar();
 		Main.wood.setupBar();
@@ -4661,6 +4762,10 @@ UpdateUI.hireFire = function(action) {
 		break;
 	}
 };
+UpdateUI.updateAllSkills = function() {
+};
+UpdateUI.updateSkill = function() {
+};
 var Util = function() { };
 Util.__name__ = ["Util"];
 Util.saveGame = function() {
@@ -4670,6 +4775,8 @@ Util.saveGame = function() {
 	js_Browser.getLocalStorage().setItem("evolution",Std.string(Main.evolution));
 	js_Browser.getLocalStorage().setItem("upgradeAmountMult",Main.upgradeAmountMult.toString());
 	js_Browser.getLocalStorage().setItem("upgradeSpeedMult",Main.upgradeSpeedMult.toString());
+	js_Browser.getLocalStorage().setItem("marketBuy",Std.string(Main.marketBuy));
+	js_Browser.getLocalStorage().setItem("marketSell",Std.string(Main.marketSell));
 	var _g = 0;
 	var _g1 = Main.resourceArray;
 	while(_g < _g1.length) {
@@ -4761,6 +4868,8 @@ Util.loadGame = function() {
 	Main.evolution = Std.parseInt(js_Browser.getLocalStorage().getItem("evolution"));
 	Main.upgradeAmountMult = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem("upgradeAmountMult"));
 	Main.upgradeSpeedMult = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem("upgradeSpeedMult"));
+	Main.marketBuy = parseFloat(js_Browser.getLocalStorage().getItem("marketBuy"));
+	Main.marketSell = parseFloat(js_Browser.getLocalStorage().getItem("marketSell"));
 	var _g = 0;
 	var _g1 = Main.resourceArray;
 	while(_g < _g1.length) {
@@ -4907,7 +5016,7 @@ Util.addOfflineProduction = function() {
 	var oldTime = parseFloat(js_Browser.getLocalStorage().getItem("time"));
 	var newTime = new Date().getTime();
 	var secondsPassed = Math.floor((newTime - oldTime) / 1000);
-	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 156, className : "Util", methodName : "addOfflineProduction"});
+	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 160, className : "Util", methodName : "addOfflineProduction"});
 	var tmp = Main.money.amount.add(Util.getOfflineProduction(Main.money,secondsPassed));
 	Main.money.amount = tmp;
 	var tmp1 = Main.food.amount.add(Util.getOfflineProduction(Main.food,secondsPassed));
@@ -20576,7 +20685,10 @@ Main.displayLookup = ["","M","T","Qt","Sp","No","Un","Td","Qd","Sd","Nd","Uvg","
 Main.moneyTimer = new haxe_Timer(1000);
 Main.populationTimer = new haxe_Timer(10000);
 Main.updateUITimer = new haxe_Timer(250);
+Main.equalizerTimer = new haxe_Timer(10000);
 Main.evolution = 0;
+Main.marketBuy = 1.3;
+Main.marketSell = 0.7;
 Main.money = new Resource("money",0,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100"),thx_bigint_Decimals.parse("0"));
 Main.food = new Resource("food",1,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100"),thx_bigint_Decimals.parse("0"));
 Main.wood = new Resource("wood",2,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("100"),thx_bigint_Decimals.parse("0"));
@@ -20628,7 +20740,21 @@ Main.socialTheory = new upgrades_RebuyableUpgrade("socialTheory",109,upgrades_Up
 Main.breakthrough = new upgrades_RebuyableUpgrade("breakthroughResearch",110,upgrades_UpgradeType.research);
 Main.upgradeCost = new upgrades_RebuyableUpgrade("upgradeCostResearch",111,upgrades_UpgradeType.research);
 Main.skill0 = new upgrades_RebuyableUpgrade("skill0",200,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
-Main.skill1 = new upgrades_RebuyableUpgrade("skill1",201,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill1 = new upgrades_RebuyableUpgrade("skill1",201,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("3"));
+Main.skill10 = new upgrades_RebuyableUpgrade("skill10",210,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill11 = new upgrades_RebuyableUpgrade("skill11",211,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("3"));
+Main.skill20 = new upgrades_RebuyableUpgrade("skill20",220,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill21 = new upgrades_RebuyableUpgrade("skill21",221,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("3"));
+Main.skill30 = new upgrades_RebuyableUpgrade("skill30",230,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill31 = new upgrades_RebuyableUpgrade("skill31",231,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("3"));
+Main.skill40 = new upgrades_RebuyableUpgrade("skill40",240,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill41 = new upgrades_RebuyableUpgrade("skill41",241,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5"));
+Main.skill42 = new upgrades_RebuyableUpgrade("skill42",242,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10"));
+Main.skill50 = new upgrades_RebuyableUpgrade("skill50",250,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("3"));
+Main.skill51 = new upgrades_RebuyableUpgrade("skill51",251,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("3"));
+Main.skill52 = new upgrades_RebuyableUpgrade("skill52",252,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
+Main.skill60 = new upgrades_RebuyableUpgrade("skill60",260,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5"));
+Main.skill61 = new upgrades_RebuyableUpgrade("skill61",261,upgrades_UpgradeType.skill,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("1"));
 Main.perk0 = new upgrades_RebuyableUpgrade("perk0",300,upgrades_UpgradeType.perk,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5"),thx_bigint_Decimals.parse("0"));
 Main.perk1 = new upgrades_RebuyableUpgrade("perk1",301,upgrades_UpgradeType.perk,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("5"),thx_bigint_Decimals.parse("0"));
 Main.house2 = new upgrades_OneTimeUpgrade("house2Research",10,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000000"),thx_bigint_Decimals.parse("1000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("5000000"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("1000"),thx_bigint_Decimals.parse("200"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("400"));

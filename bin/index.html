@@ -232,6 +232,7 @@ Proceed only if you are okay with spoilers.-->
         
         <div class="miscButtons">
 			<span role="button" title="Evolve"><img src="Resources/Evolution.png" alt="Evolution" id="evolveButton"></span><div class="divider5w"></div>
+			<span role="button" title="Market"><img src="Resources/Market.png" alt="Market" id="marketButton"></span><div class="divider5w"></div>
             <span role="button" title="Skills" id="skills" class="hidden"><img src="Resources/SkillTree.png" alt="Skill Tree" id="skillsButton"><span class="badge" id="skillsBadge">0</span><div class="divider5w"></div></span>
 			<span role="button" title="Reset" id="reset" class="hidden"><img src="Resources/Reset.png" alt="Reset" id="resetButton"><div class="divider5w"></div></span>
             <span role="button" title="Acheivements"><img src="Resources/Achievements.png" alt="Achievements" id="achievementsButton"></span><div class="divider5w"></div>
@@ -281,6 +282,12 @@ Proceed only if you are okay with spoilers.-->
 			</div>
 			<br><br><button class="btn btn-primary disabled" id="evolutionButton">Evolve</button> <i class="fa fa-info-circle" title="Any resources required for evolution will not be consumed in the process"></i>
 		</div>
+		
+		<!--market-->
+		
+		<div id="market" hidden="" title="Market">
+			<!--TODO market-->
+		</div>
         
         <!--skills-->
         
@@ -294,7 +301,7 @@ Proceed only if you are okay with spoilers.-->
 				
             <button class="btn btn-primary btn-skills" id="skill10Button">+5% Increased food production</button> <div class="horizontalLine"></div> 
             <button class="btn btn-primary btn-skills" id="skill11Button">+1000 base food production</button> <div class="horizontalLine"></div>
-			<button class="btn btn-primary btn-skills" id="skill60Button" >Equalize production of resources</button> <i class="fa fa-info-circle" title="Increase the production of the resource with the lowest amount, and decrease the production of the resource with the highest amount"></i> <div class="horizontalLine"></div>
+			<button class="btn btn-primary btn-skills" id="skill60Button" >Equalize production of resources</button> <i class="fa fa-info-circle" title="Increase the production of the resource with the lowest adjusted amount, and decrease the production of the resource with the highest adjusted amount"></i> <div class="horizontalLine"></div>
             <button class="btn btn-primary btn-skills" id="skill61Button">Increase singularity gain from reset</button> <br>Current: +<var id="skill10Level">0</var>%
             <div class="dividervarw" id="divider0"></div> Current: +<var id="skill11Level">0</var>
 			Current: +<var id="skill60Level1">0</var>% and -<var id="skill60Level2">0</var>%
@@ -811,7 +818,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house2ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house2ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house2ResearchSocial">0</var>,
-                Improves House capacity to 5 people each (from 2)
+                Improves House capacity to 4 people each (from 2)
                 <br><br></div>
             
             <div id="house3Research" class="hidden">
@@ -824,7 +831,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house3ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house3ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house3ResearchSocial">0</var>,
-                Improves House capacity to 10 people each (from 5)
+                Improves House capacity to 8 people each (from 4)
                 <br><br></div>
             
             <div id="house4Research" class="hidden">
@@ -837,7 +844,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house4ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house4ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house4ResearchSocial">0</var>,
-                Improves House capacity to 25 people each (from 10)
+                Improves House capacity to 16 people each (from 8)
                 <br><br></div>
             
             <div id="house5Research" class="hidden">
@@ -851,7 +858,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house5ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house5ResearchSocial">0</var>,
                 <img src="Resources/Electricity.png" alt="Electricity" title="Electricity"> <var id="house5ResearchElectricity">0</var>,
-                Improves House capacity to 100 people each (from 25)
+                Improves House capacity to 32 people each (from 16)
                 <br><br></div>
 				
 			<div id="house6Research" class="hidden">
@@ -864,7 +871,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house6ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house6ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house6ResearchSocial">0</var>,
-                Improves House capacity to 5 people each (from 2)
+                Improves House capacity to 64 people each (from 32)
                 <br><br></div>
 				
 			<div id="house7Research" class="hidden">
@@ -877,7 +884,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house7ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house7ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house7ResearchSocial">0</var>,
-                Improves House capacity to 5 people each (from 2)
+                Improves House capacity to 128 people each (from 64)
                 <br><br></div>
 				
 			<div id="house8Research" class="hidden">
@@ -890,7 +897,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house8ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house8ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house8ResearchSocial">0</var>,
-                Improves House capacity to 5 people each (from 2)
+                Improves House capacity to 258 people each (from 128)
                 <br><br></div>
 				
 			<div id="house9Research" class="hidden">
@@ -903,7 +910,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house9ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house9ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house9ResearchSocial">0</var>,
-                Improves House capacity to 5 people each (from 2)
+                Improves House capacity to 512 people each (from 258)
                 <br><br></div>
 				
 			<div id="house10Research" class="hidden">
@@ -916,7 +923,7 @@ Proceed only if you are okay with spoilers.-->
                 <img src="Resources/Life.png" alt="Life Science" title="Life Science"> <var id="house10ResearchLife">0</var>,
                 <img src="Resources/Wrench.png" alt="Applied Science" title="Applied Science"> <var id="house10ResearchApplied">0</var>,
                 <img src="Resources/SpeechBubble.png" alt="Social Science" title="Social Science"> <var id="house10ResearchSocial">0</var>,
-                Improves House capacity to 5 people each (from 2)
+                Improves House capacity to 1024 people each (from 512)
                 <br><br></div>
             
             <div id="farm2Research" class="hidden">
@@ -1679,20 +1686,20 @@ Proceed only if you are okay with spoilers.-->
         
         <div id="randomEvent0" class="hidden" title="Plentiful Crops!">
             Your Farms have been producing an exceptional amount of crops recently, and you wish to do something with them.<br><br>
-            <button class="btn btn-primary" id="event0Option0" onclick="eventButtons(0, 0)">Put it into storage</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
+            <button class="btn btn-primary" id="event0Option0">Put it into storage</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
             <button class="btn btn-primary" id="event0Option1">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
         </div>
 		
 		<div id="randomEvent1" class="hidden" title="Forest Discovered!">
-            Your Farms have been producing an exceptional amount of crops recently, and you wish to do something with them.<br><br>
-            <button class="btn btn-primary" id="event1Option0">Put it into storage</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
-            <button class="btn btn-primary" id="event1Option1">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
+            Your woodcutters have found an untouched forest, and they need to know what to do with it<br><br>
+            <button class="btn btn-primary" id="event1Option0">Cut it all down immediately</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
+            <button class="btn btn-primary" id="event1Option1">Cut it down only when you need to</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
         </div>
 		
 		<div id="randomEvent2" class="hidden" title="Ore Vein Found!">
             Your Miners have found a massive new ore vein, and they would like to know what to do with it.<br><br>
             <button class="btn btn-primary" id="event2Option0">Mine it all quickly</button> Gives <var id="event0Option0Result">0</var> <img src="Resources/Food.png" alt="Food:" title="Food"> instantly.<br><br>
-            <button class="btn btn-primary" id="event2Option1">Hold a Feast</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
+            <button class="btn btn-primary" id="event2Option1">Mine it slowly</button> Gives <var id="event0Option1Result">0</var> <img src="Resources/Experience.png" alt="Experience" title="Experience"> instantly.<br><br>
         </div>
                 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

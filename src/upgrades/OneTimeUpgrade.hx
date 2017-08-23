@@ -13,7 +13,13 @@ class OneTimeUpgrade extends Buyable {
 	
 	public var bought: Bool = false;
 	
-	public override function onClick(){
+	private function modifyHouse(newMax, prevMax){
+		Main.house.populationMaxCost = -newMax;
+		Main.populationMax.amount = Main.populationMax.amount.add(Main.house.amount.multiply(prevMax)); //increase capacity of existing houses
+		new JQuery("#housePopulationIncrease").text(-Main.house.populationMaxCost);
+	}
+	
+	public override function onClick(): Void{
 		if (!this.isBuyable()){
 			return;
 		}
@@ -22,19 +28,43 @@ class OneTimeUpgrade extends Buyable {
 		this.increaseCost();
 		this.bought = true;
 		switch(this.id){
-			case 0:
 			case 10:
-				Main.house.populationMaxCost = -5;
-				Main.populationMax.amount = Main.populationMax.amount.add(Main.house.amount.multiply(3)); //increase capacity of existing houses
-				new JQuery("#housePopulationIncrease").text(-Main.house.populationMaxCost);
+				modifyHouse(4, 2);
 			case 11:
-				Main.house.populationMaxCost = -10;
-				Main.populationMax.amount = Main.populationMax.amount.add(Main.house.amount.multiply(5)); //increase capacity of existing houses
-				new JQuery("#housePopulationIncrease").text(-Main.house.populationMaxCost);
+				modifyHouse(8, 4);
 			case 12:
-				Main.house.populationMaxCost = -25;
-				Main.populationMax.amount = Main.populationMax.amount.add(Main.house.amount.multiply(15)); //increase capacity of existing houses
-				new JQuery("#housePopulationIncrease").text(-Main.house.populationMaxCost);
+				modifyHouse(16, 8);
+			case 13:
+				modifyHouse(32, 16);
+			case 14:
+				modifyHouse(64, 32);
+			case 15:
+				modifyHouse(128, 64);
+			case 16:
+				modifyHouse(256, 128);
+			case 17:
+				modifyHouse(512, 256);
+			case 18:
+				modifyHouse(1024, 512);
+			case 20:
+				Main.food.buildingBonus = 30;
+			case 21:
+				Main.food.buildingBonus = 60;
+			case 22:
+				Main.food.buildingBonus = 100;
+			case 23:
+				Main.food.buildingBonus = 175;
+			case 24:
+				Main.food.buildingBonus = 300;
+			case 25:
+				Main.food.buildingBonus = 450;
+			case 26:
+				Main.food.buildingBonus = 700;
+			case 27:
+				Main.food.buildingBonus = 1000;
+			case 28:
+				Main.food.buildingBonus = 1000;
+				Main.food.otherBonus *= Math.pow(2, Main.farm.amount);
 		}
 	}
 	

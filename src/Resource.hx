@@ -16,7 +16,8 @@ class Resource {
 	public var plus: Decimal;
 	public var autoCost: Decimal;
 	public var buildingBonus: Int;
-	public var randomEventBonus: Float;
+	public var otherBonus: Float;
+	public var baseBonus: Decimal;
 	@optional private var barInc: Float;
 	@optional private var progress: Float;
 	@optional private var timer: Timer;
@@ -27,7 +28,7 @@ class Resource {
 		this.amount = amount;
 		this.plus = plus;
 		this.autoCost = autoCost;
-		this.randomEventBonus = 1.0;
+		this.otherBonus = 1.0;
 	}
 	
 	public function setupBar(): Resource{
@@ -69,8 +70,9 @@ class Resource {
 		if (this.plus == null || this.upgrades[1] == null || this.upgrades[0] == null){
 			return Decimal.zero;
 		}
-		this.plus = (this.upgrades[0].amount * 100 * Math.pow(Main.upgradeAmountMult, this.upgrades[1].amount))
-			* ((Main.buildingArray[this.id].amount * (this.buildingBonus / 100)) + 1);
+		this.plus = (((Main.buildingArray[this.id].amount * this.buildingBonus)
+			+ this.baseBonus + this.upgrades[0].amount * 100)  * this.otherBonus
+			* Math.pow(Main.upgradeAmountMult, this.upgrades[1].amount));
 		return this.plus;
 	}
 	
