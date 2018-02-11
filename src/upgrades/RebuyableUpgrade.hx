@@ -27,7 +27,7 @@ class RebuyableUpgrade extends Buyable {
 		this.takeResources();
 		this.amount++;
 		this.increaseCost();
-		if (this.id >= 5 && researchArr[((this.id + 1) * 9) + 7]){
+		if (this.id >= 5 && Main.researchArray[((this.id + 1) * 10) + 7].isBuyable()){
 			Main.resourceArray[this.id].otherBonus *= 2;
 		}
 		switch(this.id){
@@ -106,25 +106,27 @@ class RebuyableUpgrade extends Buyable {
 			case 240:
 				Main.marketBuy -= 0.05;
 				Main.marketSell += 0.05;
-			case 241:
+			//TODO more upgrades
+			//case 241:
 				//TODO Increase the effectiveness of Gathering School and Tool Forge
-			case 242:
+			//case 242:
 				//TODO Increase the effectiveness of Reduce Upgrade Cost research
-			case 250:
+			//case 250:
 				//TODO Increase all random events
-			case 251:
+			//case 251:
 				//TODO Increase good random events
-			case 252:
+			//case 252:
 				//TODO Free building on random event
-			case 260:
+			//case 260:
 				//TODO equalizer: check the highest and lowest amounts of money/food/wood/metal, and modify them
-			case 261:
+			//case 261:
 				//TODO increase singularity gain
 		}
 		UpdateUI.updateUpgrade(this);
 	}
 	
 	private override function increaseCost(){
+		//Math.pow() returns a double, so there is some degree of precision loss here
 		//the precision loss will just have to do for now, I guess. It doesn't even have any noticeable affect, it really only matters for OCD reasons
 		switch(this.type){
 			case building:

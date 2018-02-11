@@ -3501,6 +3501,7 @@ var Resource = function(name,id,amount,plus,autoCost) {
 	this.plus = plus;
 	this.autoCost = autoCost;
 	this.otherBonus = 1.0;
+	this.baseBonus = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
 };
 Resource.__name__ = ["Resource"];
 Resource.prototype = {
@@ -3597,7 +3598,7 @@ upgrades_UpgradeType.skill.__enum__ = upgrades_UpgradeType;
 upgrades_UpgradeType.perk = ["perk",3];
 upgrades_UpgradeType.perk.__enum__ = upgrades_UpgradeType;
 var upgrades_Buyable = function(name,id,amount,moneyCost,foodCost,woodCost,metalCost,populationCost,populationMaxCost,formalCost,physicalCost,lifeCost,appliedCost,socialCost,electricityCost,perkCost,skillCost,maxLevel) {
-	this.maxLevel = 2147483647;
+	this.maxLevel = thx__$Decimal_Decimal_$Impl_$.fromInt(2147483647);
 	this.skillCost = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
 	this.perkCost = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
 	this.electricityCost = thx__$Decimal_Decimal_$Impl_$.fromInt(0);
@@ -3759,8 +3760,8 @@ upgrades_Buyable.prototype = {
 		if(this.skillCost == null) {
 			this.skillCost = thx__$Decimal_Decimal_$Impl_$.zero;
 		}
-		if(thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.money.amount,this.moneyCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,this.foodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,this.woodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,this.metalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,this.populationCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.populationMax.amount,this.populationMaxCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.formal.amount,this.formalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.physical.amount,this.physicalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.life.amount,this.lifeCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.applied.amount,this.appliedCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.social.amount,this.socialCost)) {
-			return thx__$Decimal_Decimal_$Impl_$.notEquals(this.amount,thx__$Decimal_Decimal_$Impl_$.fromInt(this.maxLevel));
+		if(thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.money.amount,this.moneyCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,this.foodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,this.woodCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,this.metalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,this.populationCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.populationMax.amount,this.populationMaxCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.formal.amount,this.formalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.physical.amount,this.physicalCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.life.amount,this.lifeCost) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.applied.amount,this.appliedCost)) {
+			return thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.social.amount,this.socialCost);
 		} else {
 			return false;
 		}
@@ -3815,7 +3816,9 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 		var v = this.amount;
 		this.amount = this.amount.add(thx__$Decimal_Decimal_$Impl_$.one);
 		this.increaseCost();
-		var tmp = this.id >= 5;
+		if(this.id >= 5 && Main.researchArray[(this.id + 1) * 10 + 7].isBuyable()) {
+			Main.resourceArray[this.id].otherBonus *= 2;
+		}
 		var _g = this.id;
 		switch(_g) {
 		case 0:
@@ -3830,8 +3833,8 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			Main.metal.updatePlus();
 			break;
 		case 4:
-			var tmp1 = Main.money.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
-			Main.money.plus = tmp1;
+			var tmp = Main.money.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
+			Main.money.plus = tmp;
 			break;
 		case 5:
 			break;
@@ -3848,24 +3851,24 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			Main.upgradeSpeedMult = Main.upgradeSpeedMult.add(thx_bigint_Decimals.fromFloat(0.01));
 			break;
 		case 11:
-			var tmp2 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(3));
-			Main.electricity.plus = tmp2;
-			var tmp3 = Main.wood.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
-			Main.wood.autoCost = tmp3;
+			var tmp1 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(3));
+			Main.electricity.plus = tmp1;
+			var tmp2 = Main.wood.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.wood.autoCost = tmp2;
 			break;
 		case 12:
-			var tmp4 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1));
-			Main.electricity.plus = tmp4;
+			var tmp3 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1));
+			Main.electricity.plus = tmp3;
 			break;
 		case 13:
-			var tmp5 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
-			Main.electricity.plus = tmp5;
+			var tmp4 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(10));
+			Main.electricity.plus = tmp4;
 			break;
 		case 14:
-			var tmp6 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100));
-			Main.electricity.plus = tmp6;
-			var tmp7 = Main.metal.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100000));
-			Main.metal.autoCost = tmp7;
+			var tmp5 = Main.electricity.plus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100));
+			Main.electricity.plus = tmp5;
+			var tmp6 = Main.metal.autoCost.add(thx__$Decimal_Decimal_$Impl_$.fromInt(100000));
+			Main.metal.autoCost = tmp6;
 			break;
 		case 100:
 			break;
@@ -3895,47 +3898,33 @@ upgrades_RebuyableUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 			Main.money.otherBonus += 0.05;
 			break;
 		case 201:
-			var tmp8 = Main.money.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
-			Main.money.baseBonus = tmp8;
+			var tmp7 = Main.money.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.money.baseBonus = tmp7;
 			break;
 		case 210:
 			Main.food.otherBonus += 0.05;
 			break;
 		case 211:
-			var tmp9 = Main.food.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
-			Main.food.baseBonus = tmp9;
+			var tmp8 = Main.food.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.food.baseBonus = tmp8;
 			break;
 		case 221:
 			Main.wood.otherBonus += 0.05;
 			break;
 		case 222:
-			var tmp10 = Main.wood.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
-			Main.wood.baseBonus = tmp10;
+			var tmp9 = Main.wood.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.wood.baseBonus = tmp9;
 			break;
 		case 230:
 			Main.metal.otherBonus += 0.05;
 			break;
 		case 231:
-			var tmp11 = Main.metal.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
-			Main.metal.baseBonus = tmp11;
+			var tmp10 = Main.metal.baseBonus.add(thx__$Decimal_Decimal_$Impl_$.fromInt(1000));
+			Main.metal.baseBonus = tmp10;
 			break;
 		case 240:
 			Main.marketBuy -= 0.05;
 			Main.marketSell += 0.05;
-			break;
-		case 241:
-			break;
-		case 242:
-			break;
-		case 250:
-			break;
-		case 251:
-			break;
-		case 252:
-			break;
-		case 260:
-			break;
-		case 261:
 			break;
 		}
 		UpdateUI.updateUpgrade(this);
@@ -4145,15 +4134,13 @@ upgrades_ResourceUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 var Main = function() { };
 Main.__name__ = ["Main"];
 Main.main = function() {
+	js_Browser.getLocalStorage().clear();
 	window.document.getElementById("evolveButton").onclick = function() {
 		Util.dialogs("evolve");
 	};
 	window.document.getElementById("evolutionButton").onclick = Main.evolve;
 	window.document.getElementById("saveButton").onclick = Util.saveGame;
 	window.document.getElementById("resourcesButton").onclick = Util.getResources;
-	window.document.getElementById("achievementsButton").onclick = function() {
-		Util.dialogs("achievements");
-	};
 	window.document.getElementById("optionsButton").onclick = function() {
 		Util.dialogs("options");
 	};
@@ -4277,15 +4264,15 @@ Main.main = function() {
 	window.document.addEventListener("visibilitychange",Util.addOfflineProduction);
 	window.document.addEventListener("beforeunload",Util.saveGame);
 	if(js_Browser.getLocalStorage().getItem("foodAmount") == null) {
-		haxe_Log.trace("new game",{ fileName : "Main.hx", lineNumber : 253, className : "Main", methodName : "main"});
+		haxe_Log.trace("new game",{ fileName : "Main.hx", lineNumber : 262, className : "Main", methodName : "main"});
 		UpdateUI.updateAll();
 	} else {
-		haxe_Log.trace("load game",{ fileName : "Main.hx", lineNumber : 256, className : "Main", methodName : "main"});
+		haxe_Log.trace("load game",{ fileName : "Main.hx", lineNumber : 265, className : "Main", methodName : "main"});
 		Util.loadGame();
-		UpdateUI.displayUI(Main.evolution);
 		Util.addOfflineProduction();
 		UpdateUI.updateAll();
 	}
+	UpdateUI.displayUI(Main.evolution);
 	Main.populationTimer.run = Main.addPopulation;
 	Main.updateUITimer.run = UpdateUI.updateAll;
 };
@@ -4331,19 +4318,13 @@ Main.checkEvolveRequirements = function() {
 		return true;
 	} else if(Main.evolution == 1 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("2")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("2")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("2"))) {
 		return true;
-	} else if(Main.evolution == 2 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,thx_bigint_Decimals.parse("20")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newFarmer.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade2.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newWoodcutter.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade2.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newMiner.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade2.amount,thx_bigint_Decimals.parse("5"))) {
+	} else if(Main.evolution == 2 && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,thx_bigint_Decimals.parse("500000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newFarmer.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade2.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newWoodcutter.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade2.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newMiner.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("5")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade2.amount,thx_bigint_Decimals.parse("5"))) {
 		return true;
-	} else if(Main.evolution == 3 && false) {
+	} else if(Main.evolution == 3 && false && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.food.amount,thx_bigint_Decimals.parse("10000000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.wood.amount,thx_bigint_Decimals.parse("10000000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metal.amount,thx_bigint_Decimals.parse("10000000")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.population.amount,thx_bigint_Decimals.parse("25")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newFarmer.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade1.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farmerUpgrade2.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newWoodcutter.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade1.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.woodcutterUpgrade2.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.newMiner.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade1.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.minerUpgrade2.amount,thx_bigint_Decimals.parse("10")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.house.amount,thx_bigint_Decimals.parse("7")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.farm.amount,thx_bigint_Decimals.parse("7")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.lumberMill.amount,thx_bigint_Decimals.parse("7")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.metalMine.amount,thx_bigint_Decimals.parse("7")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.goldMine.amount,thx_bigint_Decimals.parse("7")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.taxCollector.amount,thx_bigint_Decimals.parse("7")) && thx__$Decimal_Decimal_$Impl_$.greaterEquals(Main.skill40.amount,thx_bigint_Decimals.parse("1"))) {
 		return true;
 	} else if(Main.evolution == 4 && false) {
 		return true;
 	} else if(Main.evolution == 5 && false) {
-		return true;
-	} else if(Main.evolution == 6 && false) {
-		return true;
-	} else if(Main.evolution == 7 && false) {
-		return true;
-	} else if(Main.evolution == 8 && false) {
 		return true;
 	} else {
 		return false;
@@ -4662,6 +4643,7 @@ UpdateUI.displayUI = function(evolution) {
 		$("#marketButton").removeClass("hidden");
 	}
 	if(evolution >= 0) {
+		haxe_Log.trace(evolution,{ fileName : "UpdateUI.hx", lineNumber : 98, className : "UpdateUI", methodName : "displayUI"});
 		Main.food.setupBar();
 		Main.wood.setupBar();
 	}
@@ -4716,19 +4698,6 @@ UpdateUI.displayUI = function(evolution) {
 		$("#cropHarvesterResearch").removeClass("hidden");
 		$("#woodHarvesterResearch").removeClass("hidden");
 		$("#metalHarvesterResearch").removeClass("hidden");
-	}
-	if(evolution >= 6) {
-		$("#manufacturingResearch").removeClass("hidden");
-	}
-	if(evolution >= 7) {
-		$("#electricityResearch").removeClass("hidden");
-		$("#upgradeCostResearch").removeClass("hidden");
-		$("#breakthroughResearch").removeClass("hidden");
-	}
-	if(evolution >= 8) {
-		$("#singularityGenerationResearch").removeClass("hidden");
-		$("#roboticsFactoryResearch").removeClass("hidden");
-		$("#internetResearch").removeClass("hidden");
 	}
 };
 UpdateUI.displayEvolveButton = function() {
@@ -4922,6 +4891,7 @@ Util.loadGame = function() {
 	while(_g4 < _g13.length) {
 		var i3 = _g13[_g4];
 		++_g4;
+		haxe_Log.trace(i3,{ fileName : "Util.hx", lineNumber : 89, className : "Util", methodName : "loadGame"});
 		if(i3.amount != null) {
 			i3.amount = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem(i3.name + "Amount"));
 		}
@@ -5016,7 +4986,7 @@ Util.addOfflineProduction = function() {
 	var oldTime = parseFloat(js_Browser.getLocalStorage().getItem("time"));
 	var newTime = new Date().getTime();
 	var secondsPassed = Math.floor((newTime - oldTime) / 1000);
-	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 160, className : "Util", methodName : "addOfflineProduction"});
+	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 161, className : "Util", methodName : "addOfflineProduction"});
 	var tmp = Main.money.amount.add(Util.getOfflineProduction(Main.money,secondsPassed));
 	Main.money.amount = tmp;
 	var tmp1 = Main.food.amount.add(Util.getOfflineProduction(Main.food,secondsPassed));
@@ -20716,14 +20686,14 @@ Main.house = new upgrades_RebuyableUpgrade("house",0,upgrades_UpgradeType.buildi
 Main.farm = new upgrades_RebuyableUpgrade("farm",1,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("20000"),thx_bigint_Decimals.parse("8000"),thx_bigint_Decimals.parse("5000"),thx_bigint_Decimals.parse("2000"));
 Main.lumberMill = new upgrades_RebuyableUpgrade("lumberMill",2,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("20000"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("8000"),thx_bigint_Decimals.parse("5000"));
 Main.metalMine = new upgrades_RebuyableUpgrade("metalMine",3,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("20000"),thx_bigint_Decimals.parse("2000"),thx_bigint_Decimals.parse("5000"),thx_bigint_Decimals.parse("8000"));
-Main.taxCollector = new upgrades_RebuyableUpgrade("tax",4,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2500"),thx_bigint_Decimals.parse("100"),thx_bigint_Decimals.parse("1500"),thx_bigint_Decimals.parse("1500"));
-Main.goldMine = new upgrades_RebuyableUpgrade("goldMine",5,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("5000"),thx_bigint_Decimals.parse("5000"));
-Main.cropHarvester = new upgrades_RebuyableUpgrade("cropHarvester",6,upgrades_UpgradeType.building);
-Main.woodHarvester = new upgrades_RebuyableUpgrade("woodHarvester",7,upgrades_UpgradeType.building);
-Main.metalHarvester = new upgrades_RebuyableUpgrade("metalHarvester",8,upgrades_UpgradeType.building);
-Main.gatheringSchool = new upgrades_RebuyableUpgrade("gatheringSchool",9,upgrades_UpgradeType.building);
-Main.toolForge = new upgrades_RebuyableUpgrade("toolForge",10,upgrades_UpgradeType.building);
-Main.woodBurner = new upgrades_RebuyableUpgrade("woodBurner",11,upgrades_UpgradeType.building);
+Main.goldMine = new upgrades_RebuyableUpgrade("goldMine",4,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("10000"),thx_bigint_Decimals.parse("500"),thx_bigint_Decimals.parse("5000"),thx_bigint_Decimals.parse("5000"));
+Main.taxCollector = new upgrades_RebuyableUpgrade("tax",5,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("2500"),thx_bigint_Decimals.parse("100"),thx_bigint_Decimals.parse("1500"),thx_bigint_Decimals.parse("1500"));
+Main.cropHarvester = new upgrades_RebuyableUpgrade("cropHarvester",6,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.woodHarvester = new upgrades_RebuyableUpgrade("woodHarvester",7,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.metalHarvester = new upgrades_RebuyableUpgrade("metalHarvester",8,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.gatheringSchool = new upgrades_RebuyableUpgrade("gatheringSchool",9,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.toolForge = new upgrades_RebuyableUpgrade("toolForge",10,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
+Main.woodBurner = new upgrades_RebuyableUpgrade("woodBurner",11,upgrades_UpgradeType.building,thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"),thx_bigint_Decimals.parse("0"));
 Main.electrostaticGenerator = new upgrades_RebuyableUpgrade("electrostaticGenerator",12,upgrades_UpgradeType.building);
 Main.solarPanel = new upgrades_RebuyableUpgrade("solarPanel",13,upgrades_UpgradeType.building);
 Main.nuclearGenerator = new upgrades_RebuyableUpgrade("nuclearGenerator",14,upgrades_UpgradeType.building);
@@ -20820,7 +20790,7 @@ Main.electricityResearch = new upgrades_OneTimeUpgrade("electricityResearch",75,
 Main.resourceArray = [Main.money,Main.food,Main.wood,Main.metal,Main.population,Main.populationMax];
 Main.upgradeArray = [Main.newFarmer,Main.farmerUpgrade1,Main.farmerUpgrade2,Main.newWoodcutter,Main.woodcutterUpgrade1,Main.woodcutterUpgrade2,Main.newMiner,Main.minerUpgrade1,Main.minerUpgrade2];
 Main.buildingArray = [Main.house,Main.farm,Main.lumberMill,Main.metalMine,Main.taxCollector,Main.goldMine,Main.cropHarvester,Main.woodHarvester,Main.metalHarvester,Main.gatheringSchool,Main.toolForge,Main.woodBurner,Main.electrostaticGenerator,Main.solarPanel,Main.nuclearGenerator];
-Main.researchArray = [Main.newFormal,Main.newPhysical,Main.newLife,Main.newApplied,Main.newSocial,Main.formalTheory,Main.physicalTheory,Main.lifeTheory,Main.appliedTheory,Main.socialTheory,Main.house2,Main.house3,Main.house4,Main.house5,Main.farm2,Main.farm3,Main.farm4,Main.farm5,Main.lumberMill2,Main.lumberMill3,Main.lumberMill4,Main.lumberMill5,Main.metalMine2,Main.metalMine3,Main.metalMine4,Main.metalMine5,Main.goldMine2,Main.goldMine3,Main.goldMine4,Main.goldMine5,Main.taxCollector2,Main.taxCollector3,Main.taxCollector4,Main.taxCollector5,Main.cropHarvesterResearch,Main.woodHarvesterResearch,Main.metalHarvesterResearch,Main.gatheringSchoolResearch,Main.toolForgeResearch,Main.electricityResearch,Main.breakthrough,Main.upgradeCost];
+Main.researchArray = [Main.newFormal,Main.newPhysical,Main.newLife,Main.newApplied,Main.newSocial,Main.formalTheory,Main.physicalTheory,Main.lifeTheory,Main.appliedTheory,Main.socialTheory,Main.house2,Main.house3,Main.house4,Main.house5,Main.house6,Main.house7,Main.house8,Main.house9,Main.house10,Main.farm2,Main.farm3,Main.farm4,Main.farm5,Main.farm6,Main.farm7,Main.farm8,Main.farm9,Main.farm10,Main.lumberMill2,Main.lumberMill3,Main.lumberMill4,Main.lumberMill5,Main.lumberMill6,Main.lumberMill7,Main.lumberMill8,Main.lumberMill9,Main.lumberMill10,Main.metalMine2,Main.metalMine3,Main.metalMine4,Main.metalMine5,Main.metalMine6,Main.metalMine7,Main.metalMine8,Main.metalMine9,Main.metalMine10,Main.goldMine2,Main.goldMine3,Main.goldMine4,Main.goldMine5,Main.goldMine6,Main.goldMine7,Main.goldMine8,Main.goldMine9,Main.goldMine10,Main.taxCollector2,Main.taxCollector3,Main.taxCollector4,Main.taxCollector5,Main.taxCollector6,Main.taxCollector7,Main.taxCollector8,Main.taxCollector9,Main.taxCollector10,Main.cropHarvesterResearch,Main.woodHarvesterResearch,Main.metalHarvesterResearch,Main.gatheringSchoolResearch,Main.toolForgeResearch,Main.electricityResearch,Main.breakthrough,Main.upgradeCost];
 Main.skillArray = [Main.skill0,Main.skill1];
 Main.perkArray = [Main.perk0,Main.perk1];
 Main.upgradeAmountMult = thx_bigint_Decimals.fromFloat(1.1);

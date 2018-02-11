@@ -57,12 +57,12 @@ class Main {
 	public static var metalMine = new RebuyableUpgrade("metalMine", 3, building, "0", "20000", "2000", "5000", "8000");
 	public static var goldMine = new RebuyableUpgrade("goldMine", 4, building, "0", "10000", "500", "5000", "5000");
 	public static var taxCollector = new RebuyableUpgrade("tax", 5, building, "0", "2500", "100", "1500", "1500");
-	public static var cropHarvester = new RebuyableUpgrade("cropHarvester", 6, building);
-	public static var woodHarvester = new RebuyableUpgrade("woodHarvester", 7, building);
-	public static var metalHarvester = new RebuyableUpgrade("metalHarvester", 8, building);
-	public static var gatheringSchool = new RebuyableUpgrade("gatheringSchool", 9, building);
-	public static var toolForge = new RebuyableUpgrade("toolForge", 10, building);
-	public static var woodBurner = new RebuyableUpgrade("woodBurner", 11, building);
+	public static var cropHarvester = new RebuyableUpgrade("cropHarvester", 6, building, "0", "0", "0", "0", "0");
+	public static var woodHarvester = new RebuyableUpgrade("woodHarvester", 7, building, "0", "0", "0", "0", "0");
+	public static var metalHarvester = new RebuyableUpgrade("metalHarvester", 8, building, "0", "0", "0", "0", "0");
+	public static var gatheringSchool = new RebuyableUpgrade("gatheringSchool", 9, building, "0", "0", "0", "0", "0");
+	public static var toolForge = new RebuyableUpgrade("toolForge", 10, building, "0", "0", "0", "0", "0");
+	public static var woodBurner = new RebuyableUpgrade("woodBurner", 11, building, "0", "0", "0", "0", "0");
 	public static var electrostaticGenerator = new RebuyableUpgrade("electrostaticGenerator", 12, building);
 	public static var solarPanel = new RebuyableUpgrade("solarPanel", 13, building);
 	public static var nuclearGenerator = new RebuyableUpgrade("nuclearGenerator", 14, building);
@@ -187,14 +187,14 @@ class Main {
 	static function main(){
 		
 		//uncomment to delete local storage
-		//Browser.getLocalStorage().clear();
+		Browser.getLocalStorage().clear();
 		
 		Browser.document.getElementById("evolveButton").onclick = Util.dialogs.bind("evolve");
 		Browser.document.getElementById("evolutionButton").onclick = Main.evolve;
 		Browser.document.getElementById("saveButton").onclick = Util.saveGame;
 		Browser.document.getElementById("resourcesButton").onclick = Util.getResources;
 		//Browser.document.getElementById("deleteButton").onclick = untyped __js__('function(){localStorage.clear(); alert("deleted");}'); <-- does not work
-		Browser.document.getElementById("achievementsButton").onclick = Util.dialogs.bind("achievements");
+		//Browser.document.getElementById("achievementsButton").onclick = Util.dialogs.bind("achievements");
 		Browser.document.getElementById("optionsButton").onclick = Util.dialogs.bind("options");
 		Browser.document.getElementById("resetButton").onclick = Util.dialogs.bind("reset1");
 		Browser.document.getElementById("skillsButton").onclick = Util.dialogs.bind("skills1", Std.int(Browser.window.innerWidth * 0.98), Std.int(Browser.window.innerHeight * 0.98));
@@ -264,10 +264,10 @@ class Main {
 		} else {
 			trace("load game");
 			Util.loadGame();
-			UpdateUI.displayUI(evolution);
 			Util.addOfflineProduction();
 			UpdateUI.updateAll();
 		}
+		UpdateUI.displayUI(evolution);
 		populationTimer.run = addPopulation;
 		updateUITimer.run = UpdateUI.updateAll;
 	}
@@ -295,29 +295,34 @@ class Main {
 		}
 	}
 	
+	//TODO evolution
 	public static function checkEvolveRequirements(): Bool{
 		if (evolution == 0 && food.amount >= "2000" && wood.amount >= "2000"){
 			return true;
 		} else if (evolution == 1 && farmerUpgrade1.amount >= "2" && woodcutterUpgrade1.amount >= "2" && minerUpgrade1.amount >= "2"){
 			return true;
-		} else if (evolution == 2 && food.amount >= "500000" && wood.amount >= "500000" && metal.amount >= "500000" && population.amount >= "20"
+		} else if (evolution == 2 && food.amount >= "500000" && wood.amount >= "500000" && metal.amount >= "500000" && population.amount >= "10"
 			&& newFarmer.amount >= "5" && farmerUpgrade1.amount >= "5" && farmerUpgrade2.amount >= "5" && newWoodcutter.amount >= "5"
 			&& woodcutterUpgrade1.amount >= "5" && woodcutterUpgrade2.amount >= "5" && newMiner.amount >= "5" && minerUpgrade1.amount >= "5"
 			&& minerUpgrade2.amount >= "5"){
 			return true;
-		//TODO evolution
-		} else if (evolution == 3 && false){
+		} else if (evolution == 3 && false && food.amount >= "10000000" && wood.amount >= "10000000" && metal.amount >= "10000000"
+			&& population.amount >= "25" && newFarmer.amount >= "10" && farmerUpgrade1.amount >= "10" && farmerUpgrade2.amount >= "10" && newWoodcutter.amount >= "10"
+			&& woodcutterUpgrade1.amount >= "10" && woodcutterUpgrade2.amount >= "10" && newMiner.amount >= "10" && minerUpgrade1.amount >= "10"
+			&& minerUpgrade2.amount >= "10" && house.amount >= "7" && farm.amount >= "7" && lumberMill.amount >= "7" && metalMine.amount >= "7"
+			&& goldMine.amount >= "7" && taxCollector.amount >= "7" && skill40.amount >= "1"){
 			return true;
 		} else if (evolution == 4 && false){
 			return true;
 		} else if (evolution == 5 && false){
 			return true;
-		} else if (evolution == 6 && false){
+		//TODO new features
+		/*} else if (evolution == 6 && false){
 			return true;
 		} else if (evolution == 7 && false){
 			return true;
 		} else if (evolution == 8 && false){
-			return true;
+			return true;*/
 		} else {
 			return false;
 		}

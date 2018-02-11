@@ -86,6 +86,7 @@ class Util {
 			if(i.electricityCost != null) i.electricityCost = Browser.getLocalStorage().getItem(i.getName() + "Electricity");
 		}
 		for (i in Main.researchArray){
+			trace(i);
 			if(i.amount != null) i.amount = Browser.getLocalStorage().getItem(i.getName() + "Amount");
 			if(i.moneyCost != null) i.moneyCost = Browser.getLocalStorage().getItem(i.getName() + "Money");
 			if(i.foodCost != null) i.foodCost = Browser.getLocalStorage().getItem(i.getName() + "Food");

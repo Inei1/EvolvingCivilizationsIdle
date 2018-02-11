@@ -29,6 +29,7 @@ class Resource {
 		this.plus = plus;
 		this.autoCost = autoCost;
 		this.otherBonus = 1.0;
+		this.baseBonus = 0;
 	}
 	
 	public function setupBar(): Resource{

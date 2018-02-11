@@ -5,44 +5,33 @@ On the roadmap:
     	--earth, fire, water, air mana
 	-Make dialog pages dynamic with upgrades changing position when others are bought, instead of having each upgrade on a given page
 	-add more buildings/research/skills/perks
+	-random events
+	-achievement system
 	
 needed to get to where I was before:
 	-implementations of buildings and research
 	-reset
 	-skills
-	-random events
 	-production overviews
 
 Required before release:
 *****get to previous progress with javascript
 
-****Add achievement system
-
-****Implement skills system, where the user gains exp to put towards different skills that enhance gameplay
-	-allow resetting for free
-    -5% food/wood/metal increase
-    -implement everything
-	
-***Implement random events, that pop up as a dialogue and have multiple options, which make the player gain or lose resources
-
 ***Add a tutorial
+
+Next in implementation:
 	
 ***Add a new progress bar whenever the old one reaches maximum speed
     -Multiple tiers, replace bar and tool upgrade with the new bar and tool upgrade
 	
 *Implement manufacturing system
     -Come up with names for components
-        -Tractors
-        -Chainsaws
-        -Drills
         -
     -Come up with ways to obtain basic components
         -Always get some when the progress bar fills
         -Chance to get some whenever the progress bar fills
+		-Separate progress bars for other components
 	
-*Improve research system, give the game some longevity
-    -Things for manufacturing
-	
-*Implement prestige system, allow players to restart with a bonus, require a ton of singularities to unlock
+*Implement prestige system, allow players to hard reset with a bonus, require a ton of singularities to unlock
 
 Last thing: Playtesting to look for bugs and set costs for upgrades

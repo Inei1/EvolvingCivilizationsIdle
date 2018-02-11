@@ -95,6 +95,7 @@ class UpdateUI {
 			new JQuery("#marketButton").removeClass("hidden");
 		}
 		if (evolution >= 0){ //unlocked by default
+			trace(evolution);
 			Main.food.setupBar();
 			Main.wood.setupBar();
 		}
@@ -153,7 +154,8 @@ class UpdateUI {
 			new JQuery("#metalHarvesterResearch").removeClass("hidden");
 			//up to building 5 is available
 		}
-		if (evolution >= 6){ //unlocked by early modern period
+		//TODO new features
+		/*if (evolution >= 6){ //unlocked by early modern period
 			new JQuery("#manufacturingResearch").removeClass("hidden");
 			//up to building 7 is available
 		}
@@ -173,7 +175,7 @@ class UpdateUI {
 			//more manufacturing make the internet grant massive boosts to all production
 			
 			//up to building 10 is available
-		}
+		}*/
 	}
 	
 	public static function displayEvolveButton(){
