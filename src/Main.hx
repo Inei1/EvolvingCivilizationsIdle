@@ -187,7 +187,7 @@ class Main {
 	static function main(){
 		
 		//uncomment to delete local storage
-		Browser.getLocalStorage().clear();
+		//Browser.getLocalStorage().clear();
 		
 		Browser.document.getElementById("evolveButton").onclick = Util.dialogs.bind("evolve");
 		Browser.document.getElementById("evolutionButton").onclick = Main.evolve;
@@ -208,7 +208,7 @@ class Main {
 		Browser.document.getElementById("manufacturingUpgradesButton").onclick = Util.dialogs.bind("upgrades1");
 		Browser.document.getElementById("resetYes").onclick = Util.reset;
 		Browser.document.getElementById("resetNo").onclick = Util.closeDialog.bind("resetConfirmation");
-		Browser.document.getElementById("marketButton").onclick = Util.dialogs.bind("market");
+		//Browser.document.getElementById("marketButton").onclick = Util.dialogs.bind("market");
 		
 		for (i in resourceArray.slice(1, 4)){
 			Browser.document.getElementById(i.getName() + "ProdButton").onclick = Util.dialogs.bind(i.getName() + "Prod");

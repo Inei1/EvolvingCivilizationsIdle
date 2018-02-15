@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--Copyright 2017 Neil Moon-->
+<!--Copyright 2017-2018 Neil Moon-->
 
 <!--Warning: reading beyond this point will result in spoilers for the game.
 Proceed only if you are okay with spoilers.-->
@@ -232,13 +232,13 @@ Proceed only if you are okay with spoilers.-->
         
         <div class="miscButtons">
 			<span role="button" title="Evolve"><img src="Resources/Evolution.png" alt="Evolution" id="evolveButton"></span><div class="divider5w"></div>
-			<span role="button" title="Market"><img src="Resources/Market.png" alt="Market" id="marketButton"></span><div class="divider5w"></div>
+			<!--<span role="button" title="Market" class="hidden"<img src="Resources/Market.png" alt="Market" id="marketButton"></span><div class="divider5w"></div>-->
             <span role="button" title="Skills" id="skills" class="hidden"><img src="Resources/SkillTree.png" alt="Skill Tree" id="skillsButton"><span class="badge" id="skillsBadge">0</span><div class="divider5w"></div></span>
 			<span role="button" title="Reset" id="reset" class="hidden"><img src="Resources/Reset.png" alt="Reset" id="resetButton"><div class="divider5w"></div></span>
-            <span role="button" title="Acheivements"><img src="Resources/Achievements.png" alt="Achievements" id="achievementsButton"></span><div class="divider5w"></div>
+            <!--<span role="button" title="Acheivements"><img src="Resources/Achievements.png" alt="Achievements" id="achievementsButton"></span><div class="divider5w"></div>-->
             <span role="button" title="Options"><img src="Resources/Options.png" alt="Options" id="optionsButton"></span><div class="divider5w"></div>
             <span role="button" title="Save Game"><img src="Resources/SaveGame.png" alt="Save Game" id="saveButton"></span><div class="divider5w"></div>
-            <span role="button" title="Delete"><img src="Resources/Delete.png" alt="Delete Game" id="deleteButton"></span><div class="divider5w"></div>
+            <!--<span role="button" title="Delete"><img src="Resources/Delete.png" alt="Delete Game" id="deleteButton"></span><div class="divider5w"></div>-->
             <span role="button" title="Get Resources"><img src="Resources/GetResources.png" alt="Get Resources" id="resourcesButton"></span>
         </div>
 			
@@ -286,7 +286,51 @@ Proceed only if you are okay with spoilers.-->
 		<!--market-->
 		
 		<div id="market" hidden="" title="Market">
-			<!--TODO market-->
+			Trade
+			<fieldset>
+				<label for="marketRadioMoney0"><div id="moneyMarket0" style="display: inline-block;">
+					<img src="Resources/Dollar.png" alt="Money:" title="Money">
+				</div></label>
+				<input type="radio" name="marketRadioMoney0" id="marketRadioMoney0">
+				<div class="divider5w"></div>
+				<label for="marketRadioFood0"><div id="foodMarket0" style="display: inline-block;">
+					<img src="Resources/Food.png" alt="Food:" title="Food">
+				</div></label>
+				<input type="radio" name="marketRadioFood0" id="marketRadioFood0">
+				<div class="divider5w"></div>
+				<label for="marketRadioWood0"><div id="woodMarket0" style="display: inline-block;">
+					<img src="Resources/Wood.png" alt="Wood:" title="Wood">
+				</div></label>
+				<input type="radio" name="marketRadioWood0" id="marketRadioWood0">
+				<div class="divider5w"></div>
+				<label for="marketRadioMetal0"><div id="metalMarket0" style="display: inline-block;">
+					<img src="Resources/Metal.png" alt="Metal:" title="Metal">
+				</div></label>
+				<input type="radio" name="marketRadioMetal0" id="marketRadioMetal0">
+				<br><br>
+			</fieldset>
+			For
+			<fieldset>
+				<label for="marketRadioMoney1"><div id="moneyMarket1" style="display: inline-block;">
+					<img src="Resources/Dollar.png" alt="Money:" title="Money">
+				</div></label>
+				<input type="radio" name="marketRadioMoney1" id="marketRadioMoney1">
+				<div class="divider5w"></div>
+				<label for="marketRadioFood1"><div id="foodMarket1" style="display: inline-block;">
+					<img src="Resources/Food.png" alt="Food:" title="Food">
+				</div></label>
+				<input type="radio" name="marketRadioFood1" id="marketRadioFood1">
+				<div class="divider5w"></div>
+				<label for="marketRadioWood1"><div id="woodMarket1" style="display: inline-block;">
+					<img src="Resources/Wood.png" alt="Wood:" title="Wood">
+				</div></label>
+				<input type="radio" name="marketRadioWood1" id="marketRadioWood1">
+				<div class="divider5w"></div>
+				<label for="marketRadioMetal1"><div id="metalMarket1" style="display: inline-block;">
+					<img src="Resources/Metal.png" alt="Metal:" title="Metal">
+				</div></label>
+				<input type="radio" name="marketRadioMetal1" id="marketRadioMetal1">
+			</fieldset>
 		</div>
         
         <!--skills-->

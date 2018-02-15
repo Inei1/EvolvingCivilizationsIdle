@@ -3549,6 +3549,9 @@ Resource.prototype = {
 	,getUpgrades: function() {
 		return this.upgrades;
 	}
+	,getId: function() {
+		return this.id;
+	}
 	,format: function() {
 		return Util.formatDecimal(this.amount);
 	}
@@ -4134,7 +4137,6 @@ upgrades_ResourceUpgrade.prototype = $extend(upgrades_Buyable.prototype,{
 var Main = function() { };
 Main.__name__ = ["Main"];
 Main.main = function() {
-	js_Browser.getLocalStorage().clear();
 	window.document.getElementById("evolveButton").onclick = function() {
 		Util.dialogs("evolve");
 	};
@@ -4183,9 +4185,6 @@ Main.main = function() {
 	window.document.getElementById("resetYes").onclick = Util.reset;
 	window.document.getElementById("resetNo").onclick = function() {
 		Util.closeDialog("resetConfirmation");
-	};
-	window.document.getElementById("marketButton").onclick = function() {
-		Util.dialogs("market");
 	};
 	var _g = 0;
 	var _g1 = Main.resourceArray.slice(1,4);
@@ -4554,6 +4553,7 @@ UpdateUI.updateAll = function() {
 	UpdateUI.updateAllResourceUpgrades();
 	UpdateUI.updateAllBuildingUpgrades();
 	UpdateUI.updateAllResearchUpgrades();
+	UpdateUI.updateAllProductionOverviews();
 	UpdateUI.displayEvolveButton();
 };
 UpdateUI.updateAllResources = function() {
@@ -4568,6 +4568,23 @@ UpdateUI.updateAllResources = function() {
 UpdateUI.updateResource = function(resource) {
 	$("#" + resource.name + "Amount").text(resource.format());
 	$("#" + resource.name + "Second").text(Util.formatDecimal(resource.plus.subtract(resource.autoCost).multiply(resource.upgrades[1] != null ? thx_bigint_Decimals.fromFloat(Math.pow(Main.upgradeAmountMult.toFloat(),resource.upgrades[2].amount.toFloat())) : thx__$Decimal_Decimal_$Impl_$.fromInt(1))));
+};
+UpdateUI.updateAllProductionOverviews = function() {
+	var _g = 0;
+	var _g1 = Main.resourceArray.slice(1,4);
+	while(_g < _g1.length) {
+		var i = _g1[_g];
+		++_g;
+		UpdateUI.updateProductionOverview(i);
+	}
+};
+UpdateUI.updateProductionOverview = function(resource) {
+	if(window.document.readyState == "complete") {
+		haxe_Log.trace(resource.upgrades[0],{ fileName : "UpdateUI.hx", lineNumber : 50, className : "UpdateUI", methodName : "updateProductionOverview"});
+		$("#" + resource.name + "ProdBase").text(resource.upgrades[0].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(1 + Main.buildingArray[resource.id].amount.toInt())).multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(resource.buildingBonus)).toFloat());
+		$("#" + resource.name + "ProdWorkers").text(resource.upgrades[0].amount.multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(100)).toFloat());
+		$("#" + resource.name + "ProdBuilding1").text(resource.upgrades[0].amount.multiply(Main.buildingArray[resource.id].amount).multiply(thx__$Decimal_Decimal_$Impl_$.fromInt(resource.buildingBonus)).toFloat());
+	}
 };
 UpdateUI.updateAllResourceUpgrades = function() {
 	var _g = 0;
@@ -4643,7 +4660,6 @@ UpdateUI.displayUI = function(evolution) {
 		$("#marketButton").removeClass("hidden");
 	}
 	if(evolution >= 0) {
-		haxe_Log.trace(evolution,{ fileName : "UpdateUI.hx", lineNumber : 98, className : "UpdateUI", methodName : "displayUI"});
 		Main.food.setupBar();
 		Main.wood.setupBar();
 	}
@@ -4891,7 +4907,6 @@ Util.loadGame = function() {
 	while(_g4 < _g13.length) {
 		var i3 = _g13[_g4];
 		++_g4;
-		haxe_Log.trace(i3,{ fileName : "Util.hx", lineNumber : 89, className : "Util", methodName : "loadGame"});
 		if(i3.amount != null) {
 			i3.amount = thx_bigint_Decimals.parse(js_Browser.getLocalStorage().getItem(i3.name + "Amount"));
 		}
@@ -4986,7 +5001,11 @@ Util.addOfflineProduction = function() {
 	var oldTime = parseFloat(js_Browser.getLocalStorage().getItem("time"));
 	var newTime = new Date().getTime();
 	var secondsPassed = Math.floor((newTime - oldTime) / 1000);
-	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 161, className : "Util", methodName : "addOfflineProduction"});
+	haxe_Log.trace("time passed: " + secondsPassed,{ fileName : "Util.hx", lineNumber : 160, className : "Util", methodName : "addOfflineProduction"});
+	if(isNaN(secondsPassed)) {
+		haxe_Log.trace("ERROR: seconds passed is NaN!!",{ fileName : "Util.hx", lineNumber : 162, className : "Util", methodName : "addOfflineProduction"});
+		return;
+	}
 	var tmp = Main.money.amount.add(Util.getOfflineProduction(Main.money,secondsPassed));
 	Main.money.amount = tmp;
 	var tmp1 = Main.food.amount.add(Util.getOfflineProduction(Main.food,secondsPassed));

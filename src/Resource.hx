@@ -63,6 +63,10 @@ class Resource {
 		return this.upgrades;
 	}
 	
+	public inline function getId(): Int{
+		return this.id;
+	}
+	
 	public function format(): String{
 		return Util.formatDecimal(this.amount);
 	}

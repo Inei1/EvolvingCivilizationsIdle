@@ -1,4 +1,5 @@
 import js.jquery.JQuery;
+import js.Browser;
 import upgrades.OneTimeUpgrade;
 import upgrades.RebuyableUpgrade;
 import upgrades.ResourceUpgrade;
@@ -10,6 +11,7 @@ class UpdateUI {
 		updateAllResourceUpgrades();
 		updateAllBuildingUpgrades();
 		updateAllResearchUpgrades();
+		updateAllProductionOverviews();
 		displayEvolveButton();
 	}
 	
@@ -23,6 +25,36 @@ class UpdateUI {
 		new JQuery("#" + resource.getName() + "Amount").text(resource.format());
 		new JQuery("#" + resource.getName() + "Second").text(Util.formatDecimal((resource.plus - resource.autoCost).multiply(
 			(resource.getUpgrades()[1] != null) ? Math.pow(Main.upgradeAmountMult, resource.getUpgrades()[2].amount) : 1)));
+	}
+	
+	public static function updateAllProductionOverviews(): Void{
+		for (i in Main.resourceArray.slice(1, 4)){
+			updateProductionOverview(i);
+		}
+	}
+	
+	public static function updateProductionOverview(resource: Resource): Void{
+		/*$("#" + resource.name + "ProdBase").text(numberFormat(Number(((resource.upgrades[0].amount) 
+            * 100 * (1 + (buildingsArr[resource.number + 3].amount * (resource.buildingBonus/100)))))));
+    $("#" + resource.name + "ProdWorkers").text(resource.upgrades[0].amount * 100);
+    $("#" + resource.name + "ProdBuilding1").text(numberFormat(resource.upgrades[0].amount * buildingsArr[resource.number + 3].amount * resource.buildingBonus));
+    $("#" + resource.name + "ProdMultipliers").text((Math.max((Math.pow(upgradeAmountMult, resource.upgrades[1].amount - 1)), 1) 
+            * Math.max((Math.pow(upgradeSpeedMult,resource.upgrades[2].amount - 1)), 1)).toFixed(2) * (1 + perkArr[resource.number + 1].amount * 0.1).toFixed(2));
+    $("#" + resource.name + "ProdMultipliersAmount").text((Math.max((Math.pow(upgradeAmountMult, resource.upgrades[1].amount - 1)), 1)).toFixed(2));
+    $("#" + resource.name + "ProdMultipliersSpeed").text((Math.max((Math.pow(upgradeSpeedMult, resource.upgrades[2].amount - 1)), 1)).toFixed(2));
+    $("#" + resource.name + "ProdMultipliersPerks").text((1 + (perkArr[resource.number + 1].amount * 0.1)).toFixed(2));
+    $("#" + resource.name + "ProdConsumption").text(numberFormat(resource.autoCost));
+    $("#" + resource.name + "ProdPopulationConsumption").text(numberFormat(resource.autoCost));
+    $("#" + resource.name + "ProdTotal").text(numberFormat(Resource.currentProduction(resource)));*/
+		//TODO base is wrong number
+		if (Browser.document.readyState == "complete"){
+			trace(resource.getUpgrades()[0]);
+			new JQuery("#" + resource.getName() + "ProdBase").text(resource.getUpgrades()[0].amount
+						* (1 + Main.buildingArray[resource.getId()].amount.toInt()) * resource.buildingBonus);
+			new JQuery("#" + resource.getName() + "ProdWorkers").text(resource.getUpgrades()[0].amount * 100);
+			new JQuery("#" + resource.getName() + "ProdBuilding1").text(resource.getUpgrades()[0].amount *
+						Main.buildingArray[resource.getId()].amount * resource.buildingBonus);
+		}
 	}
 	
 	public static function updateAllResourceUpgrades(): Void{
@@ -95,7 +127,6 @@ class UpdateUI {
 			new JQuery("#marketButton").removeClass("hidden");
 		}
 		if (evolution >= 0){ //unlocked by default
-			trace(evolution);
 			Main.food.setupBar();
 			Main.wood.setupBar();
 		}

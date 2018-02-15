@@ -86,7 +86,6 @@ class Util {
 			if(i.electricityCost != null) i.electricityCost = Browser.getLocalStorage().getItem(i.getName() + "Electricity");
 		}
 		for (i in Main.researchArray){
-			trace(i);
 			if(i.amount != null) i.amount = Browser.getLocalStorage().getItem(i.getName() + "Amount");
 			if(i.moneyCost != null) i.moneyCost = Browser.getLocalStorage().getItem(i.getName() + "Money");
 			if(i.foodCost != null) i.foodCost = Browser.getLocalStorage().getItem(i.getName() + "Food");
@@ -159,6 +158,10 @@ class Util {
 		//fun fact: this int will overflow if someone comes back to the game after 69 years
 		var secondsPassed: Int = Math.floor((newTime - oldTime) / 1000);
 		trace("time passed: " + secondsPassed);
+		if (Math.isNaN(secondsPassed)){
+			trace("ERROR: seconds passed is NaN!!");
+			return;
+		}
 		Main.money.amount += getOfflineProduction(Main.money, secondsPassed);
 		Main.food.amount += getOfflineProduction(Main.food, secondsPassed);
 		Main.wood.amount += getOfflineProduction(Main.wood, secondsPassed);
